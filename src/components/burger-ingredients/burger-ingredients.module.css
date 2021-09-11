@@ -1,0 +1,46 @@
+.box {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    height: 700px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.tabs {
+    display: flex;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 24px;
+    justify-content: space-around;
+    padding: 0;
+    text-align: center;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+}
+
+.info {
+    display: flex;
+}
+
+.scroll::-webkit-scrollbar {
+	width: 8px;
+}
+.scroll::-webkit-scrollbar-track {
+	background: #2F2F37;
+}
+.scroll::-webkit-scrollbar-thumb {
+	background: #8585AD;
+}
