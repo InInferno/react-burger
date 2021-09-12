@@ -1,0 +1,9 @@
+.box {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+}
