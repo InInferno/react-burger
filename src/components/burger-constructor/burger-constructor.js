@@ -2,12 +2,13 @@ import React from 'react';
 import styles from './burger-constructor.module.css';
 import { ConstructorElement, CurrencyIcon, Button, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import PropTypes from 'prop-types';
+import { cardPropTypes } from '../types/types';
 import imgBun from '@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png'
 
 
 export default function BurgerConstructor(props) {
 
-  const cardsData = props.data;
+  const cardsData = props.data.filter(ing => ing.type !== 'bun');
 
   return (
     <section className={styles.box}>
@@ -60,21 +61,6 @@ export default function BurgerConstructor(props) {
   )
 }
 
-const cardPropTypes = PropTypes.shape({
-  _id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  proteins: PropTypes.number.isRequired,
-  fat: PropTypes.number.isRequired,
-  carbohydrates: PropTypes.number.isRequired,
-  calories: PropTypes.number.isRequired,
-  price: PropTypes.number.isRequired,
-  image: PropTypes.string.isRequired,
-  image_mobile: PropTypes.string.isRequired,
-  image_large: PropTypes.string.isRequired,
-  __v: PropTypes.number.isRequired
-});
-
 BurgerConstructor.propTypes = {
-  props: PropTypes.arrayOf(cardPropTypes.isRequired)
+  data: PropTypes.arrayOf(cardPropTypes.isRequired).isRequired
 };
