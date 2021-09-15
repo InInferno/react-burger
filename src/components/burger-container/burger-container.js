@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './burger-container.module.css';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients'
 import BurgerConstructor from '../burger-constructor/burger-constructor'
-import { url } from '../../utils/config'
+import { url } from '../../utils/constants'
 
 export default function BurgerContainer() {
 
@@ -18,7 +18,6 @@ export default function BurgerContainer() {
       })
       .then(res => {
         setData(res.data);
-        console.log(res.data)
       })
       .catch((err) => {
         console.log(err);
