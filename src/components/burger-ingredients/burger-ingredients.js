@@ -4,25 +4,26 @@ import { Tab, Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger
 import PropTypes from 'prop-types';
 import { cardPropTypes } from '../types/types';
 
-export default function BurgerIngredients(props) {
+export default function BurgerIngredients({data, openModal, setModalData}) {
 
   const dataFilter = type => {
-    return props.data.filter(item => item.type === type)
+    return data.filter(item => item.type === type)
   }
   const [current, setCurrent] = React.useState('bun');
   const [dataIng, setData] = React.useState(dataFilter(current));
   const [title, setTitle] = React.useState('Булки');
   
   useEffect(() => {
-    setData(props.data.filter(item => item.type === current))
-    if(current === 'bun') {
-      setTitle('Булки')
-    } else if (current === 'sauce') {
-      setTitle('Соусы')
-    } else if(current === 'main') {
-      setTitle('Начинки')
-    }
-  }, [current, props.data]);
+    setData(data.filter(item => item.type === current))
+    if (current === 'bun') return setTitle('Булки')
+    if (current === 'sauce') return setTitle('Соусы')
+    if(current === 'main') return setTitle('Начинки')
+  }, [current, data]);
+
+  const isOpenModal = (cardData) => {
+    openModal();
+    setModalData(cardData);
+  }
 
   return (
     <section className={styles.box}>
@@ -46,6 +47,7 @@ export default function BurgerIngredients(props) {
             {dataIng.map((card, index)=> {
               return <li 
                 className={`${styles.card} mb-8`}
+                onClick={() => isOpenModal(card)}
                 key={index}
               >
                 <Counter count={1} size="default" />
@@ -67,5 +69,7 @@ export default function BurgerIngredients(props) {
 }
 
 BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(cardPropTypes.isRequired).isRequired
+  data: PropTypes.arrayOf(cardPropTypes.isRequired).isRequired,
+  openModal: PropTypes.func.isRequired,
+  setModalData: PropTypes.func.isRequired
 };

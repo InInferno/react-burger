@@ -1,18 +1,24 @@
 import React from 'react';
 import styles from './modal.module.css';
+import PropTypes from 'prop-types';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import ModalOverlay from '../modal-overlay/modal-overlay'
+import { ModalOverlay } from '../modal-overlay/modal-overlay'
 
-export default function Modal(props) {
+export default function Modal({children, closeModal}) {
   return (
     <>
-      <ModalOverlay />
-      <section className={styles.modal}>
-          <div className={styles.icon}>
+      <ModalOverlay closeModal={closeModal}/>
+      <div className={styles.modal}>
+          <div className={styles.icon} onClick={closeModal}>
               <CloseIcon type="primary"/>
           </div>
-          {props.children}
-      </section>
+          {children}
+      </div>
     </>
   )
 }
+
+Modal.propTypes = {
+  children: PropTypes.object.isRequired,
+  closeModal: PropTypes.func.isRequired
+};

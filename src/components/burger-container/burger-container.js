@@ -12,7 +12,8 @@ export default function BurgerContainer() {
   const [data, setData] = useState([]);
   const [isModalIngr, setIsModalIngr] = useState(false);
   const [isModalOrder, setIsModalOrder] = useState(false);
-
+  const [modalData, setModalData] = useState(null);
+  
   useEffect(() => {
     fetch(url)
       .then(res => {
@@ -29,20 +30,33 @@ export default function BurgerContainer() {
       });
   }, [])
 
+  const openIngr = () => {
+    setIsModalIngr(true);
+  }
+
+  const openOrder = () => {
+    setIsModalOrder(true);
+  }
+
+  const closeModal = () => {
+    setIsModalIngr(false);
+    setIsModalOrder(false);
+  }
+
   return (
     <main className={styles.box}>
       {isModalIngr &&
-        <Modal children={<IngredientDetails />}/>
+        <Modal children={<IngredientDetails data={modalData} />} closeModal={closeModal}/>
       }
       {isModalOrder &&
-        <Modal children={<OrderDetails />}/>
+        <Modal children={<OrderDetails data={modalData}/>} closeModal={closeModal}/>
       }
       <h1 className="text text_type_main-large mt-10 mb-5">
         Соберите бургер
       </h1>
       <div className={styles.container}>
-          <BurgerIngredients data={data}/>
-          <BurgerConstructor data={data}/>
+          <BurgerIngredients data={data} openModal={openIngr} setModalData={setModalData}/>
+          <BurgerConstructor data={data} openModal={openOrder} setModalData={setModalData}/>
       </div>
     </main>
   )
