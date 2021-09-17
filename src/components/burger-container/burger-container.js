@@ -43,13 +43,19 @@ export default function BurgerContainer() {
     setIsModalOrder(false);
   }
 
+  const escButtonHandler = (e) => {
+    if(e.key === 'Escape') {
+      closeModal()
+    }
+  }
+
   return (
     <main className={styles.box}>
       {isModalIngr &&
-        <Modal children={<IngredientDetails data={modalData} />} closeModal={closeModal}/>
+        <Modal children={<IngredientDetails data={modalData} />} closeModal={closeModal} escButtonHandler={escButtonHandler}/>
       }
       {isModalOrder &&
-        <Modal children={<OrderDetails data={modalData}/>} closeModal={closeModal}/>
+        <Modal children={<OrderDetails data={modalData}/>} closeModal={closeModal} escButtonHandler={escButtonHandler}/>
       }
       <h1 className="text text_type_main-large mt-10 mb-5">
         Соберите бургер
