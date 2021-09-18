@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './burger-ingredients.module.css';
-import { Tab, Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
+import IngredientCard from '../ingredient-card/ingredient-card'
 import PropTypes from 'prop-types';
 import { cardPropTypes } from '../types/types';
 
@@ -50,22 +51,8 @@ export default function BurgerIngredients({data, openModal, setModalData}) {
               {item.title}
             </p>
             <ul className={`${styles.cards} ml-4 mr-4`}>
-              {dataFilter(item.type).map((card, index) => {
-                return <li 
-                  className={`${styles.card} mb-8`}
-                  onClick={() => isOpenModal(card)}
-                  key={index}
-                >
-                  <Counter count={1} size="default" />
-                  <img src={card.image} alt="ingredient"/>
-                  <div className={`${styles.info} mt-1 mb-1`}>
-                    <p className="text text_type_digits-default mr-2">{card.price}</p>
-                    <CurrencyIcon type="primary"/>
-                  </div>
-                  <p className="text text_type_main-default pb-6">
-                    {card.name}
-                  </p>
-                </li>
+              {dataFilter(item.type).map((card) => {
+                return <IngredientCard key={card._id} card={card} isOpenModal={isOpenModal}/>
                 })
               }
             </ul>
