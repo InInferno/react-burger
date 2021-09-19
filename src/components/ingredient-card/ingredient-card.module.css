@@ -1,0 +1,10 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+}
+
+.info {
+    display: flex;
+}

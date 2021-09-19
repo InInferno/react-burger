@@ -4,11 +4,16 @@ import { ConstructorElement, CurrencyIcon, Button, DragIcon } from '@ya.praktiku
 import PropTypes from 'prop-types';
 import { cardPropTypes } from '../types/types';
 import imgBun from '@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png'
+import { orderData } from '../../utils/data';
 
+export default function BurgerConstructor({data, openModal, setModalData}) {
 
-export default function BurgerConstructor(props) {
-
-  const cardsData = props.data.filter(ing => ing.type !== 'bun');
+  const cardsData = data.filter(ing => ing.type !== 'bun');
+  
+  const isOpenModal = (cardData) => {
+    openModal();
+    setModalData(cardData);
+  }
 
   return (
     <section className={styles.box}>
@@ -52,9 +57,11 @@ export default function BurgerConstructor(props) {
       <div className={`${styles.info} mt-10`}>
         <p className="text text_type_digits-medium mr-2">610</p>
         <CurrencyIcon type="primary"/>
-        <Button type="primary" size="medium">
-          Оформить заказ
-        </Button>
+        <div onClick={() => isOpenModal(orderData)}>
+          <Button type="primary" size="medium">
+            Оформить заказ
+          </Button>
+        </div>
       </div>
 
     </section>
@@ -62,5 +69,7 @@ export default function BurgerConstructor(props) {
 }
 
 BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(cardPropTypes.isRequired).isRequired
+  data: PropTypes.arrayOf(cardPropTypes.isRequired).isRequired,
+  openModal: PropTypes.func.isRequired,
+  setModalData: PropTypes.func.isRequired
 };
