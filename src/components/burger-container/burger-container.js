@@ -6,16 +6,18 @@ import { url } from '../../utils/constants';
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import OrderDetails from '../order-details/order-details';
+import { DataBurgersContext } from '../../context/data-burgers-context'
 
 export default function BurgerContainer() {
-
   const [data, setData] = useState([]);
+  const [isIngrs, setIsIngrs] = useState([]);
+  const [bunBurger, setBun] = useState(null);
   const [isModalIngr, setIsModalIngr] = useState(false);
   const [isModalOrder, setIsModalOrder] = useState(false);
   const [modalData, setModalData] = useState(null);
-  
+
   useEffect(() => {
-    fetch(url)
+    fetch(`${url}/ingredients`)
       .then(res => {
         if (res.status !== 200) {
           throw new Error(res.status)
@@ -24,6 +26,8 @@ export default function BurgerContainer() {
       })
       .then(res => {
         setData(res.data);
+        setIsIngrs(res.data.filter(ing => ing.type !== 'bun'));
+        setBun(res.data.filter(ing => ing.type === 'bun')[0])
       })
       .catch((err) => {
         console.log(err);
@@ -43,26 +47,30 @@ export default function BurgerContainer() {
     setIsModalOrder(false);
   }
 
-  const escButtonHandler = (e) => {
-    if(e.key === 'Escape') {
-      closeModal()
-    }
-  }
-
   return (
     <main className={styles.box}>
       {isModalIngr &&
-        <Modal children={<IngredientDetails data={modalData} />} closeModal={closeModal} escButtonHandler={escButtonHandler}/>
+        <Modal children={<IngredientDetails data={modalData} />} closeModal={closeModal} />
       }
       {isModalOrder &&
-        <Modal children={<OrderDetails data={modalData}/>} closeModal={closeModal} escButtonHandler={escButtonHandler}/>
+        <Modal children={<OrderDetails data={modalData}/>} closeModal={closeModal} />
       }
       <h1 className="text text_type_main-large mt-10 mb-5">
         Соберите бургер
       </h1>
       <div className={styles.container}>
-          <BurgerIngredients data={data} openModal={openIngr} setModalData={setModalData}/>
-          <BurgerConstructor data={data} openModal={openOrder} setModalData={setModalData}/>
+        <DataBurgersContext.Provider value={data}>
+          <BurgerIngredients 
+            openModal={openIngr} 
+            setModalData={setModalData}
+          />
+          <BurgerConstructor 
+            dataIngs={isIngrs} 
+            bunBurger={bunBurger}
+            setModalData={setModalData}
+            openModal={openOrder}
+          />
+        </DataBurgersContext.Provider>
       </div>
     </main>
   )
