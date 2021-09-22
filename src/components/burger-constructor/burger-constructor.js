@@ -1,34 +1,51 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './burger-constructor.module.css';
 import { ConstructorElement, CurrencyIcon, Button, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { ModalBurgersContext } from '../../context/modal-burgers-context';
-import { OpenModalContext } from '../../context/open-modal-context';
-import { BunContext } from '../../context/bun-context';
-import { OrderDataContext } from '../../context/order-data-context';
-import { IngredientsContext } from '../../context/ingredients-context';
+import PropTypes from 'prop-types';
+import { cardPropTypes } from '../types/types';
+import { url } from '../../utils/constants';
 
-export default function BurgerConstructor() {
-  
-  const [setModalData] = useContext(ModalBurgersContext);
-  const openModal = useContext(OpenModalContext);
-  const dataIngs = useContext(IngredientsContext);
-  const bunBurger = useContext(BunContext);
-  const orderData = useContext(OrderDataContext);
+export default function BurgerConstructor({dataIngs, bunBurger, setModalData, openModal}) {
 
+  const [orderIds, setOrderIds] = useState(null);
   const [totalPrice, setTotalPrice] = useState(0);
+
   useEffect(() => {
+
     if (bunBurger !== null) {
       let count = bunBurger.price * 2;
       for (let key in dataIngs) {
         count += dataIngs[key].price;
       };
       setTotalPrice(count);
+
+      let totalArr = dataIngs;
+      totalArr.push(bunBurger);
+      setOrderIds(totalArr.map((item) => item._id))
     }
   }, [dataIngs, bunBurger])
 
-  const isOpenModal = (cardData) => {
-    openModal();
-    setModalData(cardData);
+  const isOpenModal = () => {
+    fetch(`${url}/orders`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify({"ingredients": orderIds})
+    })
+    .then(res => {
+      if (res.status !== 200) {
+        throw new Error(res.status)
+      }
+      return res.json()
+    })
+    .then(res => {
+      setModalData(res);
+      openModal();
+    })
+    .catch((err) => {
+      console.log('err', err);
+    });
   }
 
   return (
@@ -77,7 +94,7 @@ export default function BurgerConstructor() {
       <div className={`${styles.info} mt-10`}>
         <p className="text text_type_digits-medium mr-2">{totalPrice}</p>
         <CurrencyIcon type="primary"/>
-        <div onClick={() => isOpenModal(orderData)}>
+        <div onClick={isOpenModal}>
           <Button type="primary" size="medium">
             Оформить заказ
           </Button>
@@ -87,3 +104,10 @@ export default function BurgerConstructor() {
     </section>
   )
 }
+
+BurgerConstructor.propTypes = {
+  openModal: PropTypes.func.isRequired,
+  setModalData: PropTypes.func.isRequired,
+  dataIngs: PropTypes.arrayOf(cardPropTypes.isRequired).isRequired,
+  bunBurger: cardPropTypes
+};

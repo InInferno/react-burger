@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { ModalOverlay } from '../modal-overlay/modal-overlay'
 
-export default function Modal({children, closeModal, escButtonHandler}) {
+export default function Modal({children, closeModal}) {
 
   useEffect(() => {
     document.addEventListener('keydown', escButtonHandler)
@@ -12,6 +12,12 @@ export default function Modal({children, closeModal, escButtonHandler}) {
       document.removeEventListener('keydown', escButtonHandler)
     }
   })
+
+  const escButtonHandler = (e) => {
+    if(e.key === 'Escape') {
+      closeModal()
+    }
+  }
 
   return (
     <>
@@ -28,6 +34,5 @@ export default function Modal({children, closeModal, escButtonHandler}) {
 
 Modal.propTypes = {
   children: PropTypes.object.isRequired,
-  closeModal: PropTypes.func.isRequired,
-  escButtonHandler: PropTypes.func.isRequired
+  closeModal: PropTypes.func.isRequired
 };

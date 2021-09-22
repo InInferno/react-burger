@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import styles from './burger-ingredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientCard from '../ingredient-card/ingredient-card'
 import PropTypes from 'prop-types';
-import { cardPropTypes } from '../types/types';
+import { DataBurgersContext } from '../../context/data-burgers-context'
 
-export default function BurgerIngredients({data, openModal, setModalData}) {
+export default function BurgerIngredients({ openModal, setModalData}) {
   
-  const [current, setCurrent] = React.useState('bun');
+  const data = useContext(DataBurgersContext);
+  const [current, setCurrent] = useState('bun');
   const typesIng = [
     {type: 'bun', title: 'Булки'}, 
     {type: 'sauce', title: 'Соусы'},
@@ -64,7 +65,6 @@ export default function BurgerIngredients({data, openModal, setModalData}) {
 }
 
 BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(cardPropTypes.isRequired).isRequired,
   openModal: PropTypes.func.isRequired,
   setModalData: PropTypes.func.isRequired
 };
