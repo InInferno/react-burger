@@ -16,22 +16,21 @@ export default function BurgerConstructor() {
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
-    if(dataIngs.length >= 1 || bunBurger._id) {
+    if(dataIngs.length >= 1 || bunBurger.data) {
       let totalArr = [...dataIngs];
-      if(bunBurger._id) {
+      if(bunBurger.data) {
         totalArr.push(bunBurger);
       }
-      setOrderIds(totalArr.map((item) => item._id))
-
+      setOrderIds(totalArr.map((item) => item.data._id))
     
       setTotalPrice(
         () => {
         let sum = 0;
         for (let i = 0; i < totalArr.length; i++){
           if(totalArr[i].type === 'bun') {
-            sum += totalArr[i].price * 2
+            sum += totalArr[i].data.price * 2
           } else {
-            sum += totalArr[i].price
+            sum += totalArr[i].data.price
           }
         }
           return sum
@@ -46,14 +45,14 @@ export default function BurgerConstructor() {
 
   return (
     <section className={styles.box}>
-      {bunBurger._id && 
+      {bunBurger.data && 
         <div className="ml-10 pl-9">
         <ConstructorElement
         type="top"
         isLocked={true}
-        text={`${bunBurger.name} (верх)`}
-        price={bunBurger.price}
-        thumbnail={bunBurger.image}
+        text={`${bunBurger.data.name} (верх)`}
+        price={bunBurger.data.price}
+        thumbnail={bunBurger.data.image}
         />
         </div>
       }
@@ -62,14 +61,14 @@ export default function BurgerConstructor() {
         <ul className={ `${styles.container} ${styles.scroll} mt-4 mb-4`}>
           {dataIngs.map((card, index)=> {
             return <li
-              key={index}
+              key={card.id}
               className={`${styles.card}`}
             >
               <DragIcon type="primary" />
               <ConstructorElement
-                text={card.name}
-                price={card.price}
-                thumbnail={card.image}
+                text={card.data.name}
+                price={card.data.price}
+                thumbnail={card.data.image}
             />
             </li>
             })
@@ -81,14 +80,14 @@ export default function BurgerConstructor() {
         </p>
       }
       
-      {bunBurger._id && 
+      {bunBurger.data && 
         <div className="ml-10 pl-9">
         <ConstructorElement
         type="bottom"
         isLocked={true}
-        text={`${bunBurger.name} (низ)`}
-        price={bunBurger.price}
-        thumbnail={bunBurger.image}
+        text={`${bunBurger.data.name} (низ)`}
+        price={bunBurger.data.price}
+        thumbnail={bunBurger.data.image}
         />
         </div>
       }

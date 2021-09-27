@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 export const GET_INGREDIENTS_REQUEST = 'GET_INGREDIENTS_REQ';
 export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';
 export const GET_INGREDIENTS_ERROR = 'GET_INGREDIENTS_ERROR';
@@ -50,7 +51,10 @@ export function addIngredient(res) {
     return function(dispatch) {
         dispatch({
             type: ADD_INGREDIENT,
-            ingredientsInConstructor: res
+            ingredientsInConstructor: {
+                id: uuidv4(),
+                data: res
+            }
         });
     }
 }
@@ -59,7 +63,10 @@ export function addBun(res) {
     return function(dispatch) {
         dispatch({
             type: ADD_BUN,
-            bunInConstructor: res
+            bunInConstructor: {
+                id: uuidv4(),
+                data: res
+            }
         });
     }
 }
