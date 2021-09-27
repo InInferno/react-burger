@@ -1,9 +1,11 @@
 import React from 'react';
 import styles from './ingredient-details.module.css';
-import PropTypes from 'prop-types';
-import { cardPropTypes } from '../types/types';
+import { useSelector } from 'react-redux';
 
-export default function IngredientDetails({data}) {
+export default function IngredientDetails() {
+
+  const data = useSelector(store => store.modalReducer.viewedIngredient)
+
   return (
     <div className={`${styles.container} pt-10 pr-10 pb-15 pl-10`}>
         <p className="text text_type_main-medium">
@@ -50,7 +52,3 @@ export default function IngredientDetails({data}) {
     </div>
   )
 }
-
-IngredientDetails.propTypes = {
-    data: PropTypes.shape(cardPropTypes.isRequired).isRequired
-};

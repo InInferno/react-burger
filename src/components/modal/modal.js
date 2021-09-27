@@ -3,8 +3,12 @@ import styles from './modal.module.css';
 import PropTypes from 'prop-types';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { ModalOverlay } from '../modal-overlay/modal-overlay'
+import { deleteCartModal, deleteOrderModal } from '../../services/actions';
+import { useDispatch } from 'react-redux';
 
-export default function Modal({children, closeModal}) {
+export default function Modal({children}) {
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     document.addEventListener('keydown', escButtonHandler)
@@ -13,9 +17,16 @@ export default function Modal({children, closeModal}) {
     }
   })
 
+  const closeModal = () => {
+    dispatch(deleteCartModal());
+    dispatch(deleteOrderModal());
+  }
+
   const escButtonHandler = (e) => {
+    e.preventDefault();
     if(e.key === 'Escape') {
-      closeModal()
+      dispatch(deleteCartModal());
+      dispatch(deleteOrderModal());
     }
   }
 
@@ -34,5 +45,4 @@ export default function Modal({children, closeModal}) {
 
 Modal.propTypes = {
   children: PropTypes.object.isRequired,
-  closeModal: PropTypes.func.isRequired
 };

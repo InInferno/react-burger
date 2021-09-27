@@ -1,13 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './burger-ingredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientCard from '../ingredient-card/ingredient-card'
-import PropTypes from 'prop-types';
-import { DataBurgersContext } from '../../context/data-burgers-context'
+import { useSelector } from 'react-redux';
 
-export default function BurgerIngredients({ openModal, setModalData}) {
+export default function BurgerIngredients() {
+
+  const data = useSelector(store => store.ingredientsReducer.listAllIngredients.data);
   
-  const data = useContext(DataBurgersContext);
   const [current, setCurrent] = useState('bun');
   const typesIng = [
     {type: 'bun', title: 'Булки'}, 
@@ -17,11 +17,6 @@ export default function BurgerIngredients({ openModal, setModalData}) {
 
   const dataFilter = type => {
     return data.filter(item => item.type === type)
-  }
-
-  const isOpenModal = (cardData) => {
-    openModal();
-    setModalData(cardData);
   }
 
   const setTab = (tab) => {
@@ -52,8 +47,9 @@ export default function BurgerIngredients({ openModal, setModalData}) {
               {item.title}
             </p>
             <ul className={`${styles.cards} ml-4 mr-4`}>
-              {dataFilter(item.type).map((card) => {
-                return <IngredientCard key={card._id} card={card} isOpenModal={isOpenModal}/>
+              {data && 
+                dataFilter(item.type).map((card) => {
+                  return <IngredientCard key={card._id} card={card} />
                 })
               }
             </ul>
@@ -63,8 +59,3 @@ export default function BurgerIngredients({ openModal, setModalData}) {
     </section>
   )
 }
-
-BurgerIngredients.propTypes = {
-  openModal: PropTypes.func.isRequired,
-  setModalData: PropTypes.func.isRequired
-};

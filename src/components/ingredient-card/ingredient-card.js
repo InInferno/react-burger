@@ -1,14 +1,27 @@
 import React from 'react';
 import styles from './ingredient-card.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import PropTypes from 'prop-types';
 import { cardPropTypes } from '../types/types';
+import { useDispatch } from 'react-redux';
+import { addIngredient, addBun, addCartModal } from '../../services/actions';
 
-export default function IngredientCard({card, isOpenModal}) {
+export default function IngredientCard({ card }) {
+
+  const dispatch = useDispatch();
+
+  const addIngredientInConstructor = (card) => {
+    if(card.type === 'bun') {
+      dispatch(addBun(card))
+    } else {
+      dispatch(addIngredient(card))
+    }
+    dispatch(addCartModal(card))
+  }
+
   return (
     <li 
-        className={`${styles.card} mb-8`}
-        onClick={() => isOpenModal(card)}
+      className={`${styles.card} mb-8`}
+      onClick={() => addIngredientInConstructor(card)}
     >
         <Counter count={1} size="default" />
         <img src={card.image} alt="ingredient"/>
@@ -24,6 +37,5 @@ export default function IngredientCard({card, isOpenModal}) {
 }
 
 IngredientCard.propTypes = {
-    card: cardPropTypes,
-    isOpenModal: PropTypes.func.isRequired,
+    card: cardPropTypes
 };

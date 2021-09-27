@@ -1,56 +1,52 @@
 import React, { useEffect, useState } from 'react';
 import styles from './burger-constructor.module.css';
 import { ConstructorElement, CurrencyIcon, Button, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import PropTypes from 'prop-types';
-import { cardPropTypes } from '../types/types';
+import { useDispatch, useSelector } from 'react-redux';
 import { url } from '../../utils/constants';
+import { orderFetchData } from '../../services/actions';
 
-export default function BurgerConstructor({dataIngs, bunBurger, setModalData, openModal}) {
+export default function BurgerConstructor() {
+
+  const dispatch = useDispatch();
+  
+  const dataIngs = useSelector(store => store.constructorReducer.ingredientsInConstructor);
+  const bunBurger = useSelector(store => store.bunReducer.bunInConstructor)
 
   const [orderIds, setOrderIds] = useState(null);
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
-
-    if (bunBurger !== null) {
-      let count = bunBurger.price * 2;
-      for (let key in dataIngs) {
-        count += dataIngs[key].price;
-      };
-      setTotalPrice(count);
-
-      let totalArr = dataIngs;
-      totalArr.push(bunBurger);
+    if(dataIngs.length >= 1 || bunBurger._id) {
+      let totalArr = [...dataIngs];
+      if(bunBurger._id) {
+        totalArr.push(bunBurger);
+      }
       setOrderIds(totalArr.map((item) => item._id))
+
+    
+      setTotalPrice(
+        () => {
+        let sum = 0;
+        for (let i = 0; i < totalArr.length; i++){
+          if(totalArr[i].type === 'bun') {
+            sum += totalArr[i].price * 2
+          } else {
+            sum += totalArr[i].price
+          }
+        }
+          return sum
+        }
+      )
     }
   }, [dataIngs, bunBurger])
 
   const isOpenModal = () => {
-    fetch(`${url}/orders`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify({"ingredients": orderIds})
-    })
-    .then(res => {
-      if (res.status !== 200) {
-        throw new Error(res.status)
-      }
-      return res.json()
-    })
-    .then(res => {
-      setModalData(res);
-      openModal();
-    })
-    .catch((err) => {
-      console.log('err', err);
-    });
+    dispatch(orderFetchData(url, orderIds))
   }
 
   return (
     <section className={styles.box}>
-      {bunBurger && 
+      {bunBurger._id && 
         <div className="ml-10 pl-9">
         <ConstructorElement
         type="top"
@@ -62,24 +58,30 @@ export default function BurgerConstructor({dataIngs, bunBurger, setModalData, op
         </div>
       }
 
-      <ul className={ `${styles.container} ${styles.scroll} mt-4 mb-4`}>
-        {dataIngs.map((card, index)=> {
-          return <li
-            key={index}
-            className={`${styles.card}`}
-          >
-            <DragIcon type="primary" />
-            <ConstructorElement
-              text={card.name}
-              price={card.price}
-              thumbnail={card.image}
-          />
-          </li>
-          })
-        }
-      </ul>
+      {dataIngs.length >= 1 ?
+        <ul className={ `${styles.container} ${styles.scroll} mt-4 mb-4`}>
+          {dataIngs.map((card, index)=> {
+            return <li
+              key={index}
+              className={`${styles.card}`}
+            >
+              <DragIcon type="primary" />
+              <ConstructorElement
+                text={card.name}
+                price={card.price}
+                thumbnail={card.image}
+            />
+            </li>
+            })
+          }
+        </ul>
+        :
+        <p className={`${styles.container} text text_type_main-default pt-30 pb-30`}>
+          Добавьте ингредиенты
+        </p>
+      }
       
-      {bunBurger && 
+      {bunBurger._id && 
         <div className="ml-10 pl-9">
         <ConstructorElement
         type="bottom"
@@ -104,10 +106,3 @@ export default function BurgerConstructor({dataIngs, bunBurger, setModalData, op
     </section>
   )
 }
-
-BurgerConstructor.propTypes = {
-  openModal: PropTypes.func.isRequired,
-  setModalData: PropTypes.func.isRequired,
-  dataIngs: PropTypes.arrayOf(cardPropTypes.isRequired).isRequired,
-  bunBurger: cardPropTypes
-};

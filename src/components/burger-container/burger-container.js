@@ -1,76 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from './burger-container.module.css';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
-import { url } from '../../utils/constants';
+// import { url } from '../../utils/constants';
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import OrderDetails from '../order-details/order-details';
-import { DataBurgersContext } from '../../context/data-burgers-context'
+import { useSelector } from 'react-redux';
 
 export default function BurgerContainer() {
-  const [data, setData] = useState([]);
-  const [isIngrs, setIsIngrs] = useState([]);
-  const [bunBurger, setBun] = useState(null);
-  const [isModalIngr, setIsModalIngr] = useState(false);
-  const [isModalOrder, setIsModalOrder] = useState(false);
-  const [modalData, setModalData] = useState(null);
 
-  useEffect(() => {
-    fetch(`${url}/ingredients`)
-      .then(res => {
-        if (res.status !== 200) {
-          throw new Error(res.status)
-        }
-        return res.json()
-      })
-      .then(res => {
-        setData(res.data);
-        setIsIngrs(res.data.filter(ing => ing.type !== 'bun'));
-        setBun(res.data.filter(ing => ing.type === 'bun')[0])
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [])
-
-  const openIngr = () => {
-    setIsModalIngr(true);
-  }
-
-  const openOrder = () => {
-    setIsModalOrder(true);
-  }
-
-  const closeModal = () => {
-    setIsModalIngr(false);
-    setIsModalOrder(false);
-  }
+  const isModalIngr = useSelector(store => store.modalReducer.viewedIngredient)
+  const isModalOrder = useSelector(store => store.orderReducer.createdOrder)
 
   return (
     <main className={styles.box}>
-      {isModalIngr &&
-        <Modal children={<IngredientDetails data={modalData} />} closeModal={closeModal} />
+      {isModalIngr._id &&
+        <Modal children={<IngredientDetails />} />
       }
-      {isModalOrder &&
-        <Modal children={<OrderDetails data={modalData}/>} closeModal={closeModal} />
+      {isModalOrder.success &&
+        <Modal children={<OrderDetails />} />
       }
       <h1 className="text text_type_main-large mt-10 mb-5">
         Соберите бургер
       </h1>
       <div className={styles.container}>
-        <DataBurgersContext.Provider value={data}>
-          <BurgerIngredients 
-            openModal={openIngr} 
-            setModalData={setModalData}
-          />
-          <BurgerConstructor 
-            dataIngs={isIngrs} 
-            bunBurger={bunBurger}
-            setModalData={setModalData}
-            openModal={openOrder}
-          />
-        </DataBurgersContext.Provider>
+          <BurgerIngredients />
+          <BurgerConstructor />
       </div>
     </main>
   )
