@@ -8,8 +8,7 @@ import {
   orderFetchData, 
   addOrderIds, 
   addIngredient, 
-  addBun, 
-  addCartModal
+  addBun
 } from '../../services/actions';
 import { useDrop } from "react-dnd";
 import update from 'immutability-helper';
@@ -25,7 +24,6 @@ export default function BurgerConstructor() {
     } else {
       dispatch(addIngredient(card.card))
     }
-    dispatch(addCartModal(card.card))
   }
 
   const [, dropTarget] = useDrop({
@@ -52,9 +50,8 @@ export default function BurgerConstructor() {
         const totalPrice = [
           ...Array(2).fill(bunBurger.price),
           ...dataIngs.map(item => item.price)
-        ].reduce(( a, b ) => a + b);
-        if (totalPrice) return totalPrice
-        return 0;
+        ].reduce((acc, price) => price ? acc + price : acc, 0);
+        return totalPrice;
       }
     )
   }, [dataIngs, bunBurger, dispatch])
@@ -97,7 +94,7 @@ export default function BurgerConstructor() {
             constructorCard={card} 
             key={card.uuid} 
             index={index} 
-            id={card.id} 
+            id={card._id} 
             moveCard={moveCard}
             />
             })
@@ -124,11 +121,15 @@ export default function BurgerConstructor() {
       <div className={`${styles.info} mt-10`}>
         <p className="text text_type_digits-medium mr-2">{totalPrice}</p>
         <CurrencyIcon type="primary"/>
-        <div onClick={isOpenModal}>
-          <Button type="primary" size="medium">
-            Оформить заказ
-          </Button>
-        </div>
+        {bunBurger._id ?
+          <div onClick={isOpenModal}>
+            <Button type="primary" size="medium">
+              Оформить заказ
+            </Button>
+          </div>
+          :
+          <p className={`text text_type_main-default ml-5 ${styles.choice}`}>Выберите булку, чтобы сделать заказ</p>
+        }
       </div>
 
     </section>

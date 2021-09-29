@@ -37,3 +37,7 @@
 .scroll::-webkit-scrollbar-thumb {
 	background: #8585AD;
 }
+
+.choice {
+	width: 150px;
+}

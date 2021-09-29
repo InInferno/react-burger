@@ -25,11 +25,14 @@ export function getIngredients(res) {
                 type: GET_INGREDIENTS_SUCCESS,
                 listAllIngredients: res
             });
-        } else {
-            dispatch({
-                type: GET_INGREDIENTS_ERROR
-            });
         }
+    }
+}
+export function getIngredientsError() {
+    return function(dispatch) {
+        dispatch({
+            type: GET_INGREDIENTS_ERROR
+        });
     }
 }
 export function ingredientsFetchData(url) { 
@@ -46,6 +49,7 @@ export function ingredientsFetchData(url) {
             })
             .catch((err) => {
                 console.log(err)
+                dispatch(getIngredientsError())
             });
     }
 }
@@ -116,11 +120,14 @@ export function getOrder(res) {
                 type: GET_ORDER_SUCCESS,
                 createdOrder: res
             });
-        } else {
-            dispatch({
-                type: GET_ORDER_ERROR
-            });
         }
+    }
+}
+export function getOrderError() {
+    return function(dispatch) {
+        dispatch({
+            type: GET_ORDER_ERROR
+        });
     }
 }
 export function orderFetchData(url, orderIds) { 
@@ -140,9 +147,12 @@ export function orderFetchData(url, orderIds) {
             })
             .then(ings => {
                 dispatch(getOrder(ings))
+                dispatch((updateIngredients([])));
+                dispatch(addBun({}));
             })
             .catch((err) => {
                 console.log(err)
+                dispatch(getOrderError())
             });
     }
 }

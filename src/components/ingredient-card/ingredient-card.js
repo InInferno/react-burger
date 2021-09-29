@@ -3,7 +3,7 @@ import styles from './ingredient-card.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { cardPropTypes } from '../types/types';
 import { useDispatch, useSelector } from 'react-redux';
-import { addIngredient, addBun, addCartModal } from '../../services/actions';
+import { addCartModal } from '../../services/actions';
 import { useDrag } from "react-dnd";
 
 export default function IngredientCard({ card }) {
@@ -19,12 +19,7 @@ export default function IngredientCard({ card }) {
   const dispatch = useDispatch();
   const orderIds = useSelector(store => store.orderReducer.orderIds);
 
-  const addIngredientInConstructor = (card) => {
-    if(card.type === 'bun') {
-      dispatch(addBun(card))
-    } else {
-      dispatch(addIngredient(card))
-    }
+  const openModal = (card) => {
     dispatch(addCartModal(card))
   }
 
@@ -39,7 +34,7 @@ export default function IngredientCard({ card }) {
   return (
     <li 
       className={`${styles.card} mb-8`}
-      onClick={() => addIngredientInConstructor(card)}
+      onClick={() => openModal(card)}
       ref={dragRef}
       style={{opacity: `${opacity}`}}
     >
