@@ -24,12 +24,6 @@
     margin-left: 41px;
 }
 
-.card {
-	display: flex;
-	width: 100%;
-	align-items: center;
-}
-
 .card svg {
 	margin-right: 12px;
 }

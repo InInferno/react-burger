@@ -4,13 +4,16 @@ import {
   GET_INGREDIENTS_SUCCESS, 
   GET_INGREDIENTS_ERROR,
   ADD_INGREDIENT,
+  DELETE_INGREDIENT,
+  UPDATE_INGREDIENTS,
   ADD_BUN,
   ADD_CART_MODAL,
   DELETE_CART_MODAL,
   GET_ORDER_REQUEST,
   GET_ORDER_SUCCESS,
   GET_ORDER_ERROR,
-  DELETE_ORDER_MODAL
+  DELETE_ORDER_MODAL,
+  ADD_ORDER_IDS
 } from '../actions';
 
 const initialStateIngredients = {
@@ -61,6 +64,18 @@ export const constructorReducer = (state = initialStateConstructor, action) => {
           action.ingredientsInConstructor
         ] 
       };
+    case DELETE_INGREDIENT:
+      return {
+        ...state, 
+        ingredientsInConstructor: [
+          ...state.ingredientsInConstructor.filter(ingredient => ingredient.uuid !== action.ingredient.uuid)
+        ]
+      }; 
+    case UPDATE_INGREDIENTS:
+      return {
+        ...state, 
+        ingredientsInConstructor: action.ingredientsInConstructor
+      }; 
     default: {
       return state;
     }
@@ -109,7 +124,8 @@ export const modalReducer = (state = initialStateModal, action) => {
 const initialStateOrder = {
   orderReq: false,
   orderError: false,
-  createdOrder: {}
+  createdOrder: {},
+  orderIds: []
 };
 
 export const orderReducer = (state = initialStateOrder, action) => {
@@ -139,6 +155,12 @@ export const orderReducer = (state = initialStateOrder, action) => {
         return { 
           ...state,
           createdOrder: initialStateOrder.createdOrder
+        };
+      }
+      case ADD_ORDER_IDS: {
+        return { 
+          ...state,
+          orderIds: action.orderIds
         };
       }
       default: {

@@ -25,6 +25,20 @@ export default function BurgerIngredients() {
     if (element) element.scrollIntoView({ behavior: "smooth" });
   };
 
+  const updateTabs = () => {
+    const containerTop = document.getElementById('container').getBoundingClientRect().top;
+    const bunTop = document.getElementById('bun').getBoundingClientRect().top;
+    const sauceTop = document.getElementById('sauce').getBoundingClientRect().top;
+    const mainTop = document.getElementById('main').getBoundingClientRect().top;
+    if (bunTop >= containerTop && containerTop < sauceTop) {
+      setCurrent('bun')
+    } else if (sauceTop <= containerTop && containerTop < mainTop) {
+      setCurrent('sauce')
+    } else if (mainTop <= containerTop) {
+      setCurrent('main')
+    }
+  }
+
   return (
     <section className={styles.box}>
       <div className={`${styles.tabs} mt-5 mb-10`}>
@@ -38,24 +52,24 @@ export default function BurgerIngredients() {
           Начинки
         </Tab>
       </div>
-      <div className={`${styles.container} ${styles.scroll} mt-10`}>
-        {typesIng.map((item, index) => {
-          return <div
-            key={index}
-          >
-            <p id={item.type} className="text text_type_main-medium mb-6">
-              {item.title}
-            </p>
-            <ul className={`${styles.cards} ml-4 mr-4`}>
-              {data && 
-                dataFilter(item.type).map((card) => {
-                  return <IngredientCard key={card._id} card={card} />
-                })
-              }
-            </ul>
-          </div>
-        })}
-      </div>  
+        <div onScroll={updateTabs} id='container' className={`${styles.container} ${styles.scroll} mt-10`}>
+          {typesIng.map((item, index) => {
+            return <div
+              key={index}
+            >
+              <p id={item.type} className="text text_type_main-medium mb-6">
+                {item.title}
+              </p>
+              <ul className={`${styles.cards} ml-4 mr-4`}>
+                {data && 
+                  dataFilter(item.type).map((card) => {
+                    return <IngredientCard key={card._id} card={card} />
+                  })
+                }
+              </ul>
+            </div>
+          })}
+        </div>
     </section>
   )
 }

@@ -1,58 +1,91 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styles from './burger-constructor.module.css';
-import { ConstructorElement, CurrencyIcon, Button, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { url } from '../../utils/constants';
-import { orderFetchData } from '../../services/actions';
+import { 
+  updateIngredients, 
+  orderFetchData, 
+  addOrderIds, 
+  addIngredient, 
+  addBun, 
+  addCartModal
+} from '../../services/actions';
+import { useDrop } from "react-dnd";
+import update from 'immutability-helper';
+import ConstructorCard from '../constructor-card/constructor-card';
 
 export default function BurgerConstructor() {
 
   const dispatch = useDispatch();
-  
-  const dataIngs = useSelector(store => store.constructorReducer.ingredientsInConstructor);
-  const bunBurger = useSelector(store => store.bunReducer.bunInConstructor)
 
-  const [orderIds, setOrderIds] = useState(null);
+  const addIngredientInConstructor = (card) => {
+    if(card.card.type === 'bun') {
+      dispatch(addBun(card.card))
+    } else {
+      dispatch(addIngredient(card.card))
+    }
+    dispatch(addCartModal(card.card))
+  }
+
+  const [, dropTarget] = useDrop({
+    accept: "ingredient",
+    drop(item) {
+      addIngredientInConstructor(item);
+    },
+  });
+
+  const dataIngs = useSelector(store => store.constructorReducer.ingredientsInConstructor);
+  const bunBurger = useSelector(store => store.bunReducer.bunInConstructor);
+  const orderIds = useSelector(store => store.orderReducer.orderIds);
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
-    if(dataIngs.length >= 1 || bunBurger.data) {
-      let totalArr = [...dataIngs];
-      if(bunBurger.data) {
-        totalArr.push(bunBurger);
+    dispatch(addOrderIds([
+      bunBurger._id,
+      ...dataIngs.map(item => item._id),
+      bunBurger._id
+    ]))
+
+    setTotalPrice(
+      () => {
+        const totalPrice = [
+          ...Array(2).fill(bunBurger.price),
+          ...dataIngs.map(item => item.price)
+        ].reduce(( a, b ) => a + b);
+        if (totalPrice) return totalPrice
+        return 0;
       }
-      setOrderIds(totalArr.map((item) => item.data._id))
-    
-      setTotalPrice(
-        () => {
-        let sum = 0;
-        for (let i = 0; i < totalArr.length; i++){
-          if(totalArr[i].type === 'bun') {
-            sum += totalArr[i].data.price * 2
-          } else {
-            sum += totalArr[i].data.price
-          }
-        }
-          return sum
-        }
-      )
-    }
-  }, [dataIngs, bunBurger])
+    )
+  }, [dataIngs, bunBurger, dispatch])
 
   const isOpenModal = () => {
     dispatch(orderFetchData(url, orderIds))
   }
 
+  const moveCard = useCallback((dragIndex, hoverIndex) => {
+    const dragCard = dataIngs[dragIndex];
+    dispatch(updateIngredients(
+      update(dataIngs, {
+        $splice: [
+            [dragIndex, 1],
+            [hoverIndex, 0, dragCard],
+        ],
+      })
+    ))
+
+  }, [dataIngs, dispatch]);
+
   return (
-    <section className={styles.box}>
-      {bunBurger.data && 
+    <section ref={dropTarget} className={styles.box}>
+      {bunBurger._id && 
         <div className="ml-10 pl-9">
         <ConstructorElement
         type="top"
         isLocked={true}
-        text={`${bunBurger.data.name} (верх)`}
-        price={bunBurger.data.price}
-        thumbnail={bunBurger.data.image}
+        text={`${bunBurger.name} (верх)`}
+        price={bunBurger.price}
+        thumbnail={bunBurger.image}
         />
         </div>
       }
@@ -60,17 +93,13 @@ export default function BurgerConstructor() {
       {dataIngs.length >= 1 ?
         <ul className={ `${styles.container} ${styles.scroll} mt-4 mb-4`}>
           {dataIngs.map((card, index)=> {
-            return <li
-              key={card.id}
-              className={`${styles.card}`}
-            >
-              <DragIcon type="primary" />
-              <ConstructorElement
-                text={card.data.name}
-                price={card.data.price}
-                thumbnail={card.data.image}
+            return <ConstructorCard 
+            constructorCard={card} 
+            key={card.uuid} 
+            index={index} 
+            id={card.id} 
+            moveCard={moveCard}
             />
-            </li>
             })
           }
         </ul>
@@ -80,14 +109,14 @@ export default function BurgerConstructor() {
         </p>
       }
       
-      {bunBurger.data && 
+      {bunBurger._id && 
         <div className="ml-10 pl-9">
         <ConstructorElement
         type="bottom"
         isLocked={true}
-        text={`${bunBurger.data.name} (низ)`}
-        price={bunBurger.data.price}
-        thumbnail={bunBurger.data.image}
+        text={`${bunBurger.name} (низ)`}
+        price={bunBurger.price}
+        thumbnail={bunBurger.image}
         />
         </div>
       }

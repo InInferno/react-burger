@@ -3,9 +3,12 @@ export const GET_INGREDIENTS_REQUEST = 'GET_INGREDIENTS_REQ';
 export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';
 export const GET_INGREDIENTS_ERROR = 'GET_INGREDIENTS_ERROR';
 export const ADD_INGREDIENT = 'ADD_INGREDIENT';
+export const DELETE_INGREDIENT = 'DELETE_INGREDIENT';
+export const UPDATE_INGREDIENTS = 'UPDATE_INGREDIENTS';
 export const ADD_BUN = 'ADD_BUN';
 export const ADD_CART_MODAL = 'ADD_CART_MODAL';
 export const DELETE_CART_MODAL = 'DELETE_CART_MODAL';
+export const ADD_ORDER_IDS = 'ADD_ORDER_IDS';
 export const GET_ORDER_REQUEST = 'GET_ORDER_REQUEST';
 export const GET_ORDER_SUCCESS = 'GET_ORDER_SUCCESS';
 export const GET_ORDER_ERROR = 'GET_ORDER_ERROR';
@@ -48,47 +51,59 @@ export function ingredientsFetchData(url) {
 }
 
 export function addIngredient(res) {
-    return function(dispatch) {
-        dispatch({
-            type: ADD_INGREDIENT,
-            ingredientsInConstructor: {
-                id: uuidv4(),
-                data: res
-            }
-        });
+    return {
+        type: ADD_INGREDIENT,
+        ingredientsInConstructor: {
+            ...res,
+            uuid: uuidv4()
+        }
+    }
+}
+
+export function deteleIngredient(ingredient) {
+    return {
+        type: DELETE_INGREDIENT,
+        ingredient
+    }
+}
+
+export function updateIngredients(res) {
+    return {
+        type: UPDATE_INGREDIENTS,
+        ingredientsInConstructor: res
     }
 }
 
 export function addBun(res) {
-    return function(dispatch) {
-        dispatch({
-            type: ADD_BUN,
-            bunInConstructor: {
-                id: uuidv4(),
-                data: res
-            }
-        });
+    return {
+        type: ADD_BUN,
+        bunInConstructor: {
+            ...res,
+            uuid: uuidv4()
+        }
     }
 }
 
 export function addCartModal(res) {
-    return function(dispatch) {
-        dispatch({
-            type: ADD_CART_MODAL,
-            viewedIngredient: res
-        });
+    return {
+        type: ADD_CART_MODAL,
+        viewedIngredient: res
     }
 }
 
 export function deleteCartModal() {
-    return function(dispatch) {
-        dispatch({
-            type: DELETE_CART_MODAL,
-            viewedIngredient: {}
-        });
+    return {
+        type: DELETE_CART_MODAL,
+        viewedIngredient: {}
     }
 }
 
+export function addOrderIds(res) {
+    return {
+        type: ADD_ORDER_IDS,
+        orderIds: res
+    }
+}
 
 export function getOrder(res) {
     return function(dispatch) {
@@ -133,10 +148,8 @@ export function orderFetchData(url, orderIds) {
 }
 
 export function deleteOrderModal() {
-    return function(dispatch) {
-        dispatch({
-            type: DELETE_ORDER_MODAL,
-            createdOrder: {}
-        });
+    return {
+        type: DELETE_ORDER_MODAL,
+        createdOrder: {}
     }
 }
