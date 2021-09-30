@@ -1,9 +1,12 @@
 import React from 'react';
 import styles from './order-details.module.css';
-import PropTypes from 'prop-types';
 import orderAccepted from '../../images/order-accepted.gif'
+import { useSelector } from 'react-redux';
 
-export default function OrderDetails({data}) {
+export default function OrderDetails() {
+
+  const data = useSelector(store => store.orderReducer.createdOrder)
+
   return (
     <div className={`${styles.container} pt-30 pr-25 pb-30 pl-25`}>
         <p className={`${styles.shadow} text text_type_digits-large`}>{data.order.number}</p>
@@ -14,17 +17,12 @@ export default function OrderDetails({data}) {
         <p className="text text_type_main-default mt-15">
             Ваш заказ начали готовить
         </p>
+        <p className="text text_type_main-default">
+          {data.name}
+        </p>
         <p className="text text_type_main-default text_color_inactive mt-2">
             Дождитесь готовности на орбитальной станции
         </p>
     </div> 
   )
 }
-
-OrderDetails.propTypes = {
-  data: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    order: PropTypes.object.isRequired,
-    success: PropTypes.bool.isRequired
-  }).isRequired
-};

@@ -1,13 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './burger-ingredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientCard from '../ingredient-card/ingredient-card'
-import PropTypes from 'prop-types';
-import { DataBurgersContext } from '../../context/data-burgers-context'
+import { useSelector } from 'react-redux';
 
-export default function BurgerIngredients({ openModal, setModalData}) {
+export default function BurgerIngredients() {
+
+  const data = useSelector(store => store.ingredientsReducer.listAllIngredients.data);
   
-  const data = useContext(DataBurgersContext);
   const [current, setCurrent] = useState('bun');
   const typesIng = [
     {type: 'bun', title: 'Булки'}, 
@@ -19,16 +19,25 @@ export default function BurgerIngredients({ openModal, setModalData}) {
     return data.filter(item => item.type === type)
   }
 
-  const isOpenModal = (cardData) => {
-    openModal();
-    setModalData(cardData);
-  }
-
   const setTab = (tab) => {
     setCurrent(tab);
     const element = document.getElementById(tab);
     if (element) element.scrollIntoView({ behavior: "smooth" });
   };
+
+  const updateTabs = () => {
+    const containerTop = document.getElementById('container').getBoundingClientRect().top;
+    const bunTop = document.getElementById('bun').getBoundingClientRect().top;
+    const sauceTop = document.getElementById('sauce').getBoundingClientRect().top;
+    const mainTop = document.getElementById('main').getBoundingClientRect().top;
+    if (bunTop >= containerTop && containerTop < sauceTop) {
+      setCurrent('bun')
+    } else if (sauceTop <= containerTop && containerTop < mainTop) {
+      setCurrent('sauce')
+    } else if (mainTop <= containerTop) {
+      setCurrent('main')
+    }
+  }
 
   return (
     <section className={styles.box}>
@@ -43,28 +52,24 @@ export default function BurgerIngredients({ openModal, setModalData}) {
           Начинки
         </Tab>
       </div>
-      <div className={`${styles.container} ${styles.scroll} mt-10`}>
-        {typesIng.map((item, index) => {
-          return <div
-            key={index}
-          >
-            <p id={item.type} className="text text_type_main-medium mb-6">
-              {item.title}
-            </p>
-            <ul className={`${styles.cards} ml-4 mr-4`}>
-              {dataFilter(item.type).map((card) => {
-                return <IngredientCard key={card._id} card={card} isOpenModal={isOpenModal}/>
-                })
-              }
-            </ul>
-          </div>
-        })}
-      </div>  
+        <div onScroll={updateTabs} id='container' className={`${styles.container} ${styles.scroll} mt-10`}>
+          {typesIng.map((item, index) => {
+            return <div
+              key={index}
+            >
+              <p id={item.type} className="text text_type_main-medium mb-6">
+                {item.title}
+              </p>
+              <ul className={`${styles.cards} ml-4 mr-4`}>
+                {data && 
+                  dataFilter(item.type).map((card) => {
+                    return <IngredientCard key={card._id} card={card} />
+                  })
+                }
+              </ul>
+            </div>
+          })}
+        </div>
     </section>
   )
 }
-
-BurgerIngredients.propTypes = {
-  openModal: PropTypes.func.isRequired,
-  setModalData: PropTypes.func.isRequired
-};

@@ -14,8 +14,9 @@ export default function Modal({children, closeModal}) {
   })
 
   const escButtonHandler = (e) => {
+    e.preventDefault();
     if(e.key === 'Escape') {
-      closeModal()
+      closeModal();
     }
   }
 

@@ -24,12 +24,6 @@
     margin-left: 41px;
 }
 
-.card {
-	display: flex;
-	width: 100%;
-	align-items: center;
-}
-
 .card svg {
 	margin-right: 12px;
 }
@@ -42,4 +36,8 @@
 }
 .scroll::-webkit-scrollbar-thumb {
 	background: #8585AD;
+}
+
+.choice {
+	width: 150px;
 }
