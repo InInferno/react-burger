@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import styles from './register-form.module.css';
 import { Link } from 'react-router-dom';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 function RegisterForm() {
 
-    const [value, setValue] = React.useState('')
-    const inputRef = React.useRef(null)
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    const inputRef = useRef(null)
     const onIconClick = () => {
         setTimeout(() => inputRef.current.focus(), 0)
         alert('Icon Click Callback')
     }
     
-
   return (
     <div className={styles.container}>
         <p className="text text_type_main-medium mt-20">
@@ -22,9 +24,9 @@ function RegisterForm() {
             <Input
                 type={'text'}
                 placeholder={'Имя'}
-                onChange={e => setValue(e.target.value)}
+                onChange={e => setName(e.target.value)}
                 icon={undefined}
-                value={value}
+                value={name}
                 name={'name'}
                 error={false}
                 ref={inputRef}
@@ -35,9 +37,9 @@ function RegisterForm() {
             <Input
                 type={'text'}
                 placeholder={'E-mail'}
-                onChange={e => setValue(e.target.value)}
+                onChange={e => setEmail(e.target.value)}
                 icon={undefined}
-                value={value}
+                value={email}
                 name={'email'}
                 error={false}
                 ref={inputRef}
@@ -49,9 +51,9 @@ function RegisterForm() {
                 <Input
                     type={'text'}
                     placeholder={'Пароль'}
-                    onChange={e => setValue(e.target.value)}
+                    onChange={e => setPassword(e.target.value)}
                     icon={'ShowIcon'}
-                    value={value}
+                    value={password}
                     name={'password'}
                     error={false}
                     ref={inputRef}
