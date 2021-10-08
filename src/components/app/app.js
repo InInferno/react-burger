@@ -7,6 +7,7 @@ import RegisterPage from '../../pages/register-page'
 import LoginPage from '../../pages/login-page';
 import MainPage from '../../pages/main-page';
 import ForgotPasswordPage from '../../pages/forgot-password-page';
+import ResetPasswordPage from '../../pages/reset-password-page';
 
 function App() {
 
@@ -26,10 +27,13 @@ function App() {
           <RegisterPage />
         </Route>
         <Route path='/login'>
-         <LoginPage /> 
+          <LoginPage /> 
         </Route>
         <Route path='/forgot-password'>
-         <ForgotPasswordPage /> 
+          <ForgotPasswordPage /> 
+        </Route>
+        <Route path='/reset-password'>
+          <ResetPasswordPage /> 
         </Route>
       </Switch>
     </Router>  

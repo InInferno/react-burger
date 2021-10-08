@@ -1,12 +1,12 @@
 import React, { useRef, useState } from 'react';
-import styles from './login-form.module.css';
+import styles from './reset-password-form.module.css';
 import { Link } from 'react-router-dom';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
-function LoginForm() {
+function ResetPasswordForm() {
 
-    const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [code, setCode] = useState('')
 
     const inputRef = useRef(null)
     const onIconClick = () => {
@@ -21,21 +21,8 @@ function LoginForm() {
         </p>
         <form className={`${styles.form} mt-6`}>
             <Input
-                type={'email'}
-                placeholder={'E-mail'}
-                onChange={e => setEmail(e.target.value)}
-                icon={undefined}
-                value={email}
-                name={'email'}
-                error={false}
-                ref={inputRef}
-                onIconClick={onIconClick}
-                errorText={'Ошибка'}
-                size={'default'}
-            />
-            <Input
                 type={'password'}
-                placeholder={'Пароль'}
+                placeholder={'Введите новый пароль'}
                 onChange={e => setPassword(e.target.value)}
                 icon={'ShowIcon'}
                 value={password}
@@ -46,32 +33,34 @@ function LoginForm() {
                 errorText={'Ошибка'}
                 size={'default'}
             />
+            <Input
+                type={'text'}
+                placeholder={'Введите код из письма'}
+                onChange={e => setCode(e.target.value)}
+                icon={undefined}
+                value={code}
+                name={'code'}
+                error={false}
+                ref={inputRef}
+                onIconClick={onIconClick}
+                errorText={'Ошибка'}
+                size={'default'}
+            />
         </form>
         
         <div className={`mt-6`}>
             <Button type="primary" size="medium">
-                Войти
+                Сохранить
             </Button>
         </div>
 
-
         <div className={`${styles.info} mt-20`}>
             <p className="text text_type_main-default text_color_inactive pt-4">
-                Вы - новый пользователь?
+                Вспомнили пароль?
             </p>
-            <Link to='/register'>
+            <Link to='/login'>
                 <Button type="secondary" size="medium">
-                    Зарегистрироваться
-                </Button>
-            </Link>
-        </div>
-        <div className={`${styles.info}`}>
-            <p className="text text_type_main-default text_color_inactive pt-4">
-                Забыли пароль?
-            </p>
-            <Link to='/forgot-password'>
-                <Button type="secondary" size="medium">
-                    Восстановить пароль
+                    Войти
                 </Button>
             </Link>
         </div>
@@ -80,4 +69,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default ResetPasswordForm;
