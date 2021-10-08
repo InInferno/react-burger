@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import AppHeader from '../app-header/app-header'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+// import AppHeader from '../app-header/app-header'
 // import BurgerContainer from '../burger-container/burger-container'
 import { useDispatch } from 'react-redux';
 import { ingredientsFetchData } from '../../services/actions';
@@ -16,11 +16,15 @@ function App() {
   }, [dispatch])
   
   return (
-    <>
-      {/* <AppHeader /> */}
-      {/* <BurgerContainer /> */}
-      <RegisterPage />
-    </>
+    <Router>
+      <Switch>
+        {/* <AppHeader /> */}
+        {/* <BurgerContainer /> */}
+        <Route path='/register'>
+          <RegisterPage />
+        </Route>
+      </Switch>
+    </Router>  
   );
 }
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './register-form.module.css';
+import { Link } from 'react-router-dom';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 function RegisterForm() {
@@ -14,12 +15,10 @@ function RegisterForm() {
 
   return (
     <div className={styles.container}>
-
-    
-        <form className={styles.form}>
-            <p className="text text_type_main-medium mt-20">
-                Регистрация
-            </p>
+        <p className="text text_type_main-medium mt-20">
+            Регистрация
+        </p>
+        <form className={`${styles.form} mt-6`}>
             <Input
                 type={'text'}
                 placeholder={'Имя'}
@@ -46,35 +45,42 @@ function RegisterForm() {
                 errorText={'Ошибка'}
                 size={'default'}
             />
-            <Input
-                type={'text'}
-                placeholder={'Пароль'}
-                onChange={e => setValue(e.target.value)}
-                icon={'ShowIcon'}
-                value={value}
-                name={'password'}
-                error={false}
-                ref={inputRef}
-                onIconClick={onIconClick}
-                errorText={'Ошибка'}
-                size={'default'}
-            />
+            <div className={styles.input}>
+                <Input
+                    type={'text'}
+                    placeholder={'Пароль'}
+                    onChange={e => setValue(e.target.value)}
+                    icon={'ShowIcon'}
+                    value={value}
+                    name={'password'}
+                    error={false}
+                    ref={inputRef}
+                    onIconClick={onIconClick}
+                    errorText={'Ошибка'}
+                    size={'default'}
+                />
+            </div>
         </form>
-
-        <Button type="primary" size="medium">
-            Зарегистрироваться
-        </Button>
-
-        <div className={styles.info}>
-        <p className="text text_type_main-default text_color_inactive">
-            Уже зарегистрированы?
-        </p>
-        <Button type="secondary" size="medium">
-            Войти
-        </Button>
+        
+        <div className={`mt-6`}>
+            <Button type="primary" size="medium">
+                    Зарегистрироваться
+            </Button>
         </div>
 
+
+        <div className={`${styles.info} mt-20`}>
+            <p className="text text_type_main-default text_color_inactive pt-4">
+                Уже зарегистрированы?
+            </p>
+            <Link to='/login'>
+                <Button type="secondary" size="medium">
+                    Войти
+                </Button>
+            </Link>
+        </div>
     </div>
+
   );
 }
 
