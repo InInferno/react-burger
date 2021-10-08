@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { ingredientsFetchData } from '../../services/actions';
 import { url } from '../../utils/constants';
 import RegisterPage from '../../pages/register-page'
+import LoginPage from '../../pages/login-page';
 
 function App() {
 
@@ -22,6 +23,9 @@ function App() {
         {/* <BurgerContainer /> */}
         <Route path='/register'>
           <RegisterPage />
+        </Route>
+        <Route path='/login'>
+         <LoginPage /> 
         </Route>
       </Switch>
     </Router>  

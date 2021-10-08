@@ -1,11 +1,10 @@
 import React, { useRef, useState } from 'react';
-import styles from './register-form.module.css';
+import styles from './login-form.module.css';
 import { Link } from 'react-router-dom';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
-function RegisterForm() {
+function LoginForm() {
 
-    const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -18,22 +17,9 @@ function RegisterForm() {
   return (
     <div className={styles.container}>
         <p className="text text_type_main-medium mt-20">
-            Регистрация
+            Вход
         </p>
         <form className={`${styles.form} mt-6`}>
-            <Input
-                type={'text'}
-                placeholder={'Имя'}
-                onChange={e => setName(e.target.value)}
-                icon={undefined}
-                value={name}
-                name={'name'}
-                error={false}
-                ref={inputRef}
-                onIconClick={onIconClick}
-                errorText={'Ошибка'}
-                size={'default'}
-            />
             <Input
                 type={'email'}
                 placeholder={'E-mail'}
@@ -47,35 +33,45 @@ function RegisterForm() {
                 errorText={'Ошибка'}
                 size={'default'}
             />
-            <Input
-                type={'password'}
-                placeholder={'Пароль'}
-                onChange={e => setPassword(e.target.value)}
-                icon={'ShowIcon'}
-                value={password}
-                name={'password'}
-                error={false}
-                ref={inputRef}
-                onIconClick={onIconClick}
-                errorText={'Ошибка'}
-                size={'default'}
-            />
+                <Input
+                    type={'password'}
+                    placeholder={'Пароль'}
+                    onChange={e => setPassword(e.target.value)}
+                    icon={'ShowIcon'}
+                    value={password}
+                    name={'password'}
+                    error={false}
+                    ref={inputRef}
+                    onIconClick={onIconClick}
+                    errorText={'Ошибка'}
+                    size={'default'}
+                />
         </form>
         
         <div className={`mt-6`}>
             <Button type="primary" size="medium">
-                    Зарегистрироваться
+                Войти
             </Button>
         </div>
 
 
         <div className={`${styles.info} mt-20`}>
             <p className="text text_type_main-default text_color_inactive pt-4">
-                Уже зарегистрированы?
+                Вы - новый пользователь?
             </p>
-            <Link to='/login'>
+            <Link to='/register'>
                 <Button type="secondary" size="medium">
-                    Войти
+                    Зарегистрироваться
+                </Button>
+            </Link>
+        </div>
+        <div className={`${styles.info}`}>
+            <p className="text text_type_main-default text_color_inactive pt-4">
+                Забыли пароль?
+            </p>
+            <Link to='/forgot-password'>
+                <Button type="secondary" size="medium">
+                    Восстановить пароль
                 </Button>
             </Link>
         </div>
@@ -84,4 +80,4 @@ function RegisterForm() {
   );
 }
 
-export default RegisterForm;
+export default LoginForm;
