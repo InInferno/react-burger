@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { ingredientsFetchData } from '../../services/actions';
 import { url } from '../../utils/constants';
+import AppHeader from '../app-header/app-header';
 import RegisterPage from '../../pages/register-page'
 import LoginPage from '../../pages/login-page';
 import MainPage from '../../pages/main-page';
@@ -19,6 +20,7 @@ function App() {
   
   return (
     <Router>
+      <AppHeader />
       <Switch>
         <Route path="/" exact>
           <MainPage />
