@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-// import AppHeader from '../app-header/app-header'
-// import BurgerContainer from '../burger-container/burger-container'
 import { useDispatch } from 'react-redux';
 import { ingredientsFetchData } from '../../services/actions';
 import { url } from '../../utils/constants';
 import RegisterPage from '../../pages/register-page'
 import LoginPage from '../../pages/login-page';
+import MainPage from '../../pages/main-page';
+import ForgotPasswordPage from '../../pages/forgot-password-page';
 
 function App() {
 
@@ -19,13 +19,17 @@ function App() {
   return (
     <Router>
       <Switch>
-        {/* <AppHeader /> */}
-        {/* <BurgerContainer /> */}
+        <Route path="/" exact>
+          <MainPage />
+        </Route>
         <Route path='/register'>
           <RegisterPage />
         </Route>
         <Route path='/login'>
          <LoginPage /> 
+        </Route>
+        <Route path='/forgot-password'>
+         <ForgotPasswordPage /> 
         </Route>
       </Switch>
     </Router>  

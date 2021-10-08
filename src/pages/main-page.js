@@ -1,7 +1,7 @@
-import AppHeader from '../app-header/app-header'
-import BurgerContainer from '../burger-container/burger-container'
+import AppHeader from '../components/app-header/app-header'
+import BurgerContainer from '../components/burger-container/burger-container'
 
-function mainPage() {  
+function MainPage() {  
   return (
     <>
       <AppHeader />
@@ -10,4 +10,4 @@ function mainPage() {
   );
 }
 
-export default mainPage;
+export default MainPage;
