@@ -1,11 +1,12 @@
 import React, { useRef, useState } from 'react';
-import styles from './forgot-password-form.module.css';
+import styles from './reset-password.module.css';
 import { Link } from 'react-router-dom';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
-function ForgorPasswordForm() {
+function ResetPassword() {
 
-    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [code, setCode] = useState('')
 
     const inputRef = useRef(null)
     const onIconClick = () => {
@@ -16,16 +17,29 @@ function ForgorPasswordForm() {
   return (
     <div className={styles.container}>
         <p className="text text_type_main-medium mt-20">
-            Восстановление пароля
+            Вход
         </p>
         <form className={`${styles.form} mt-6`}>
             <Input
-                type={'email'}
-                placeholder={'Укажите e-mail'}
-                onChange={e => setEmail(e.target.value)}
+                type={'password'}
+                placeholder={'Введите новый пароль'}
+                onChange={e => setPassword(e.target.value)}
+                icon={'ShowIcon'}
+                value={password}
+                name={'password'}
+                error={false}
+                ref={inputRef}
+                onIconClick={onIconClick}
+                errorText={'Ошибка'}
+                size={'default'}
+            />
+            <Input
+                type={'text'}
+                placeholder={'Введите код из письма'}
+                onChange={e => setCode(e.target.value)}
                 icon={undefined}
-                value={email}
-                name={'email'}
+                value={code}
+                name={'code'}
                 error={false}
                 ref={inputRef}
                 onIconClick={onIconClick}
@@ -36,10 +50,9 @@ function ForgorPasswordForm() {
         
         <div className={`mt-6`}>
             <Button type="primary" size="medium">
-                Восстановить
+                Сохранить
             </Button>
         </div>
-
 
         <div className={`${styles.info} mt-20`}>
             <p className="text text_type_main-default text_color_inactive pt-4">
@@ -56,4 +69,4 @@ function ForgorPasswordForm() {
   );
 }
 
-export default ForgorPasswordForm;
+export default ResetPassword;

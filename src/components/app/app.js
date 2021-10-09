@@ -4,11 +4,11 @@ import { useDispatch } from 'react-redux';
 import { ingredientsFetchData } from '../../services/actions';
 import { url } from '../../utils/constants';
 import AppHeader from '../app-header/app-header';
-import RegisterPage from '../../pages/register-page'
-import LoginPage from '../../pages/login-page';
-import MainPage from '../../pages/main-page';
-import ForgotPasswordPage from '../../pages/forgot-password-page';
-import ResetPasswordPage from '../../pages/reset-password-page';
+import BurgerContainer from '../../pages/burger-container/burger-container';
+import Register from '../../pages/register/register';
+import Login from '../../pages/login/login';
+import ForgorPassword from '../../pages/forgot-password/forgot-password';
+import ResetPassword from '../../pages/reset-password/reset-password';
 
 function App() {
 
@@ -23,19 +23,19 @@ function App() {
       <AppHeader />
       <Switch>
         <Route path="/" exact>
-          <MainPage />
+          <BurgerContainer />
         </Route>
         <Route path='/register'>
-          <RegisterPage />
+          <Register />
         </Route>
         <Route path='/login'>
-          <LoginPage /> 
+          <Login /> 
         </Route>
         <Route path='/forgot-password'>
-          <ForgotPasswordPage /> 
+          <ForgorPassword /> 
         </Route>
         <Route path='/reset-password'>
-          <ResetPasswordPage /> 
+          <ResetPassword /> 
         </Route>
       </Switch>
     </Router>  

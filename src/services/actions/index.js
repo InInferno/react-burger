@@ -13,6 +13,9 @@ export const GET_ORDER_REQUEST = 'GET_ORDER_REQUEST';
 export const GET_ORDER_SUCCESS = 'GET_ORDER_SUCCESS';
 export const GET_ORDER_ERROR = 'GET_ORDER_ERROR';
 export const DELETE_ORDER_MODAL = 'DELETE_ORDER_MODAL';
+export const GET_RESET_PASSWORD_REQUEST = 'GET_RESET_PASSWORD_REQUEST';
+export const GET_RESET_PASSWORD_SUCCESS = 'GET_RESET_PASSWORD_SUCCESS';
+export const GET_RESET_PASSWORD_ERROR = 'GET_RESET_PASSWORD_ERROR';
 
 export function getIngredients(res) {
     return function(dispatch) {
@@ -161,5 +164,51 @@ export function deleteOrderModal() {
     return {
         type: DELETE_ORDER_MODAL,
         createdOrder: {}
+    }
+}
+
+export function getResetPassword(res) {
+    return function(dispatch) {
+        dispatch({
+            type: GET_RESET_PASSWORD_REQUEST,
+            resetPasswordReq: true
+        });
+        if (res && res.success) {
+            dispatch({
+                type: GET_RESET_PASSWORD_SUCCESS,
+                resetPassword: res
+            });
+        }
+    }
+}
+export function getResetPasswordError() {
+    return function(dispatch) {
+        dispatch({
+            type: GET_RESET_PASSWORD_ERROR
+        });
+    }
+}
+export function resetPasswordFetch(url, email) { 
+    return (dispatch) => {
+        fetch(`${url}/password-reset`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({"email": email})
+        })
+            .then(res => {
+                if (res.status !== 200) {
+                    throw new Error(res.status)
+                }
+                return res.json()
+            })
+            .then(res => {
+                dispatch(getResetPassword(res))
+            })
+            .catch((err) => {
+                console.log(err)
+                dispatch(getResetPasswordError())
+            });
     }
 }

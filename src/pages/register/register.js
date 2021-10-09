@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react';
-import styles from './register-form.module.css';
+import styles from './register.module.css';
 import { Link } from 'react-router-dom';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
-function RegisterForm() {
+function Register() {
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -84,4 +84,4 @@ function RegisterForm() {
   );
 }
 
-export default RegisterForm;
+export default Register;
