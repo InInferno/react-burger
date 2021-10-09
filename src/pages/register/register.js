@@ -10,9 +10,14 @@ function Register() {
     const [password, setPassword] = useState('')
 
     const inputRef = useRef(null)
+
+    const [passwordType, setPasswordType] = useState('password')
     const onIconClick = () => {
-        setTimeout(() => inputRef.current.focus(), 0)
-        alert('Icon Click Callback')
+        if(passwordType === 'password') {
+            setPasswordType('text')
+        } else {
+            setPasswordType('password')
+        }
     }
     
   return (
@@ -30,7 +35,7 @@ function Register() {
                 name={'name'}
                 error={false}
                 ref={inputRef}
-                onIconClick={onIconClick}
+                //onIconClick={onIconClick}
                 errorText={'Ошибка'}
                 size={'default'}
             />
@@ -43,12 +48,12 @@ function Register() {
                 name={'email'}
                 error={false}
                 ref={inputRef}
-                onIconClick={onIconClick}
+                //onIconClick={onIconClick}
                 errorText={'Ошибка'}
                 size={'default'}
             />
             <Input
-                type={'password'}
+                type={passwordType}
                 placeholder={'Пароль'}
                 onChange={e => setPassword(e.target.value)}
                 icon={'ShowIcon'}

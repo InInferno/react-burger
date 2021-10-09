@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import styles from './reset-password.module.css';
 import { Link } from 'react-router-dom';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { url } from '../../utils/constants';
 
 function ResetPassword() {
 
@@ -9,9 +10,39 @@ function ResetPassword() {
     const [code, setCode] = useState('')
 
     const inputRef = useRef(null)
+
+    const [passwordType, setPasswordType] = useState('password')
     const onIconClick = () => {
-        setTimeout(() => inputRef.current.focus(), 0)
-        alert('Icon Click Callback')
+        if(passwordType === 'password') {
+            setPasswordType('text')
+        } else {
+            setPasswordType('password')
+        }
+    }
+
+
+    function resetPasswordFetch(url, password, code) { 
+        return () => {
+            fetch(`${url}/password-reset/reset`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify({"password": password, "token": code})
+            })
+                .then(res => {
+                    if (res.status !== 200) {
+                        throw new Error(res.status)
+                    }
+                    return res.json()
+                })
+                .then(res => {
+                    console.log('res', res)
+                })
+                .catch((err) => {
+                    console.log('err', err)
+                });
+        }
     }
     
   return (
@@ -21,7 +52,7 @@ function ResetPassword() {
         </p>
         <form className={`${styles.form} mt-6`}>
             <Input
-                type={'password'}
+                type={passwordType}
                 placeholder={'Введите новый пароль'}
                 onChange={e => setPassword(e.target.value)}
                 icon={'ShowIcon'}
@@ -49,7 +80,7 @@ function ResetPassword() {
         </form>
         
         <div className={`mt-6`}>
-            <Button type="primary" size="medium">
+            <Button type="primary" size="medium" onClick={resetPasswordFetch(url, password, code)}>
                 Сохранить
             </Button>
         </div>

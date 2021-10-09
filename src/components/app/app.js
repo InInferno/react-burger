@@ -9,6 +9,7 @@ import Register from '../../pages/register/register';
 import Login from '../../pages/login/login';
 import ForgorPassword from '../../pages/forgot-password/forgot-password';
 import ResetPassword from '../../pages/reset-password/reset-password';
+import Profile from '../../pages/profile/profile';
 
 function App() {
 
@@ -36,6 +37,9 @@ function App() {
         </Route>
         <Route path='/reset-password'>
           <ResetPassword /> 
+        </Route>
+        <Route path='/profile'>
+          <Profile />
         </Route>
       </Switch>
     </Router>  

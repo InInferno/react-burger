@@ -9,9 +9,8 @@ import { useDispatch } from 'react-redux';
 function ForgorPassword() {
 
     const dispatch = useDispatch();
-    
-    const [email, setEmail] = useState('')
 
+    const [email, setEmail] = useState('')
     const inputRef = useRef(null)
     const onIconClick = () => {
         setTimeout(() => inputRef.current.focus(), 0)
