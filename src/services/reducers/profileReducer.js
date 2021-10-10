@@ -16,7 +16,14 @@ import {
     GET_LOGOUT_ERROR,
     GET_TOKEN_REQUEST,
     GET_TOKEN_SUCCESS,
-    GET_TOKEN_ERROR
+    GET_TOKEN_ERROR,
+    GET_USER_REQUEST,
+    GET_USER_SUCCESS,
+    GET_USER_ERROR,
+    GET_UPD_USER_REQUEST,
+    GET_UPD_USER_SUCCESS,
+    GET_UPD_USER_ERROR,
+
 } from '../actions';
 
 const initialStateProfile = {
@@ -29,9 +36,14 @@ const initialStateProfile = {
     resetPasswordReq: false,
     resetPasswordError: false,
     logoutReq: false,
-    logoutError: false, 
+    logoutError: false,
+    isAuthenticated: false, 
     tokenReq: false,
     tokenError: false,
+    userReq: false,
+    userError: false,
+    updateUserReq: false,
+    updateUserError: false,
     name: '',
     email: ''
 };
@@ -137,7 +149,9 @@ export const profileReducer = (state = initialStateProfile, action) => {
             return { 
                 ...state, 
                 logoutError: false,
-                logoutReq: false 
+                logoutReq: false,
+                name: '',
+                email: '' 
             };
         }
         case GET_LOGOUT_ERROR: {
@@ -166,6 +180,52 @@ export const profileReducer = (state = initialStateProfile, action) => {
                 ...state, 
                 tokenError: true, 
                 tokenReq: false 
+            };
+        }
+
+        case GET_USER_REQUEST: {
+            return {
+                ...state,
+                userReq: true
+            };
+        }
+        case GET_USER_SUCCESS: {
+            return { 
+                ...state, 
+                userError: false,
+                userReq: false,
+                name: action.name,
+                email: action.email,
+                isAuthenticated: true 
+            };
+        }
+        case GET_USER_ERROR: {
+            return { 
+                ...state, 
+                userError: true, 
+                userReq: false,
+                isAuthenticated: false
+            };
+        }
+
+        case GET_UPD_USER_REQUEST: {
+            return {
+                ...state,
+                updateUserReq: true
+            };
+        }
+        case GET_UPD_USER_SUCCESS: {
+            return { 
+                ...state, 
+                updateUserError: false,
+                updateUserReq: false
+            };
+        }
+        case GET_UPD_USER_ERROR: {
+            return { 
+                ...state, 
+                updateUserError: true, 
+                updateUserReq: false 
             };
         }
 

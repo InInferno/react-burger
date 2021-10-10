@@ -8,18 +8,18 @@ export default function AppHeader() {
     <header className={styles.header}>
         <div className={styles.container}>
             <nav className={styles.navigation}>
-                <a href="##" className={`${styles.link} mb-4 mt-4 mr-2 pl-5 pr-5 pb-5 pt-5`}>
+                <Link to='/' className={`${styles.link} mb-4 mt-4 mr-2 pl-5 pr-5 pb-5 pt-5`}>
                     <BurgerIcon type="primary" />
                     <p className="text text_type_main-default ml-2">
                         Конструктор
                     </p>
-                </a>
-                <a href="##" className={`${styles.link} mb-4 mt-4 pl-5 pr-5 pb-5 pt-5`}>
+                </Link>
+                <Link to='/profile/orders' className={`${styles.link} mb-4 mt-4 pl-5 pr-5 pb-5 pt-5`}>
                     <ListIcon type="secondary" />
                     <p className="text text_type_main-default text_color_inactive ml-2">
                         Лента заказов
                     </p>
-                </a>
+                </Link> 
             </nav>
 
             <Logo />

@@ -1,10 +1,10 @@
 import React, { useRef, useState } from 'react';
 import styles from './forgot-password.module.css';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { url } from '../../utils/constants';
 import { resetForgotFetch } from '../../services/actions/index';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function ForgorPassword() {
 
@@ -19,6 +19,17 @@ function ForgorPassword() {
 
     const onClickResetPassword = (url, email) => {
         dispatch(resetForgotFetch(url, email));
+    }
+
+    const userName = useSelector(store => store.profileReducer.name)
+    if (userName) {
+        return (
+          <Redirect
+            to={{
+              pathname: '/'
+            }}
+          />
+        );
     }
     
   return (

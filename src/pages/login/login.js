@@ -1,10 +1,10 @@
 import React, { useRef, useState } from 'react';
 import styles from './login.module.css';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { url } from '../../utils/constants';
 import { loginFetch } from '../../services/actions/index'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Login() {
     const dispatch = useDispatch();
@@ -24,7 +24,18 @@ function Login() {
 
     const onClickLogin = (url, email, password) => {
         dispatch(loginFetch(url, email, password));
-    } 
+    }
+    
+    const userName = useSelector(store => store.profileReducer.name)
+    if (userName) {
+        return (
+          <Redirect
+            to={{
+              pathname: '/'
+            }}
+          />
+        );
+    }
 
   return (
     <div className={styles.container}>

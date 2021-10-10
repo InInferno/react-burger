@@ -39,6 +39,13 @@ export const GET_LOGOUT_REQUEST = 'GET_LOGOUT_REQUEST';
 export const GET_LOGOUT_SUCCESS = 'GET_LOGOUT_SUCCESS';
 export const GET_LOGOUT_ERROR = 'GET_LOGOUT_ERROR';
 
+export const GET_USER_REQUEST = 'GET_USER_REQUEST';
+export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
+export const GET_USER_ERROR = 'GET_USER_ERROR';
+
+export const GET_UPD_USER_REQUEST = 'GET_UPD_USER_REQUEST';
+export const GET_UPD_USER_SUCCESS = 'GET_UPD_USER_SUCCESS';
+export const GET_UPD_USER_ERROR = 'GET_UPD_USER_ERROR';
 
 export function getIngredients(res) {
     return function(dispatch) {
@@ -393,6 +400,8 @@ export function logout(res) {
         if (res && res.success) {
             dispatch({
                 type: GET_LOGOUT_SUCCESS,
+                name: '',
+                email: ''
             });
         }
     }
@@ -476,6 +485,113 @@ export function tokenFetch(url) {
             .catch((err) => {
                 console.log(err)
                 dispatch(tokenError(err))
+            });
+    }
+}
+
+export function user(res) {
+    return function(dispatch) {
+        dispatch({
+            type: GET_USER_REQUEST,
+            tokenReq: true
+        });
+        if (res && res.success) {
+            dispatch({
+                type: GET_USER_SUCCESS,
+                name: res.user.name,
+                email: res.user.email,
+                isAuthenticated: true
+            });
+        }
+    }
+}
+export function userError() {
+    return function(dispatch) {
+        dispatch({
+            type: GET_USER_ERROR,
+            isAuthenticated: false
+        });
+    }
+}
+export function userFetch(url) { 
+    return (dispatch) => {
+        fetch(`${url}/auth/user`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8',
+              "authorization": getCookie('accessToken')
+            }
+        })
+            .then(res => {
+                if (res.status !== 200) {
+                    throw new Error(res.status)
+                }
+                return res.json()
+            })
+            .then(res => {
+                console.log(res)
+                dispatch(user(res))
+            })
+            .catch((err) => {
+                console.log(err)
+                dispatch(userError(err))
+            });
+    }
+}
+
+export function updateUserInfo(res) {
+    return function(dispatch) {
+        dispatch({
+            type: GET_UPD_USER_REQUEST,
+            updateUserReq: true
+        });
+        if (res && res.success) {
+            dispatch({
+                type: GET_UPD_USER_SUCCESS,
+            });
+        }
+    }
+}
+export function updateUserInfoError() {
+    return function(dispatch) {
+        dispatch({
+            type: GET_UPD_USER_ERROR
+        });
+    }
+}
+export function updateUserInfoFetch(url, email, name, password) {
+    
+    return (dispatch) => {
+        let body = {};
+        if(email) {
+            body.email = email;
+        } if(name) {
+            body.name = name;
+        } if(password) {
+            body.password = password;
+        }
+
+        fetch(`${url}/auth/user`, {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8',
+              "authorization": getCookie('accessToken')
+            },
+            body: JSON.stringify(body)
+        })
+            .then(res => {
+                if (res.status !== 200) {
+                    throw new Error(res.status)
+                }
+                return res.json()
+            })
+            .then(res => {
+                console.log(res)
+                dispatch(updateUserInfo(res))
+            })
+            .catch((err) => {
+                console.log(err)
+                dispatch(updateUserInfoError(err))
             });
     }
 }

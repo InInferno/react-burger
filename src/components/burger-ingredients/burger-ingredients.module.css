@@ -33,3 +33,8 @@
 .scroll::-webkit-scrollbar-thumb {
 	background: #8585AD;
 }
+
+.link {
+    text-decoration: none;
+    color: #fff;
+}

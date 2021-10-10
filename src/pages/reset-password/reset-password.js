@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react';
 import styles from './reset-password.module.css';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { url } from '../../utils/constants';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { resetPasswordFetch } from '../../services/actions/index'
 
 function ResetPassword() {
@@ -27,6 +27,17 @@ function ResetPassword() {
     const onClickReset = (url, password, token) => {
         dispatch(resetPasswordFetch(url, password, token));
     } 
+
+    const userName = useSelector(store => store.profileReducer.name)
+    if (userName) {
+        return (
+          <Redirect
+            to={{
+              pathname: '/'
+            }}
+          />
+        );
+    }
     
   return (
     <div className={styles.container}>

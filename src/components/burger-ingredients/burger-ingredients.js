@@ -3,6 +3,7 @@ import styles from './burger-ingredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientCard from '../ingredient-card/ingredient-card'
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 export default function BurgerIngredients() {
 
@@ -63,7 +64,9 @@ export default function BurgerIngredients() {
               <ul className={`${styles.cards} ml-4 mr-4`}>
                 {data && 
                   dataFilter(item.type).map((card) => {
-                    return <IngredientCard key={card._id} card={card} />
+                    return <Link key={card._id} to={`/ingredients/${card._id}`} className={styles.link}>
+                              <IngredientCard key={card._id} card={card} />
+                            </Link>
                   })
                 }
               </ul>

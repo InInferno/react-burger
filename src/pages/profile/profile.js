@@ -1,18 +1,24 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './profile.module.css';
 import { Link } from 'react-router-dom';
-import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { url } from '../../utils/constants';
-import { logoutFetch } from '../../services/actions/index'
-import { useDispatch } from 'react-redux';
-
+import { logoutFetch, updateUserInfoFetch } from '../../services/actions/index'
+import { useDispatch, useSelector } from 'react-redux';
 
 function Profile() {
     const dispatch = useDispatch();
+    const profileName = useSelector(store => store.profileReducer.name)
+    const profileEmail = useSelector(store => store.profileReducer.email)
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
+    useEffect(() => {
+        setName(`${profileName}`);
+        setEmail(`${profileEmail}`);
+    }, [setName, setEmail, profileName, profileEmail])
 
     const inputNameRef = useRef(null)
     const inputLoginRef = useRef(null)
@@ -32,6 +38,16 @@ function Profile() {
 
     const onClickLogout = (url) => {
         dispatch(logoutFetch(url))
+    }
+
+    const onClickSave = (url, email, name, password) => {
+        dispatch(updateUserInfoFetch(url, email, name, password))
+        setPassword('');
+    }
+
+    const onClickCancel = () => {
+        setName(`${profileName}`);
+        setEmail(`${profileEmail}`);
     }
     
   return (
@@ -62,7 +78,7 @@ function Profile() {
 
             <form className={`${styles.form} mt-20`}>
                 <Input
-                    disabled={true}
+                    disabled
                     type={'text'}
                     placeholder={'Имя'}
                     onChange={e => setName(e.target.value)}
@@ -104,10 +120,33 @@ function Profile() {
                     size={'default'}
                 />
             </form>
-        </div>    
-        <p className={`${styles.description} text text_type_main-default text_color_inactive mt-20`}>
-            В этом разделе вы можете изменить свои персональные данные
-        </p>
+
+        </div>
+        <div className={`${styles.info} mt-20`}>
+            <p className={`${styles.description} text text_type_main-default text_color_inactive`}>
+                В этом разделе вы можете изменить свои персональные данные
+            </p>
+            <div className={styles.buttons}>
+                <div className="ml-15">
+                    <Button 
+                        type="primary" 
+                        size="medium"
+                        onClick={(() => onClickSave(url, email, name, password))
+                    }>
+                        Сохранить
+                    </Button>
+                </div>
+                <div className="ml-15">
+                <Button 
+                    type="primary" 
+                    size="medium" 
+                    onClick={(() => onClickCancel())
+                }>
+                    Отмена
+                </Button>
+                </div>
+            </div>
+        </div>     
     </div>
 
   );
