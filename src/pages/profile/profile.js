@@ -2,8 +2,13 @@ import React, { useRef, useState } from 'react';
 import styles from './profile.module.css';
 import { Link } from 'react-router-dom';
 import { Input } from '@ya.praktikum/react-developer-burger-ui-components';
+import { url } from '../../utils/constants';
+import { logoutFetch } from '../../services/actions/index'
+import { useDispatch } from 'react-redux';
+
 
 function Profile() {
+    const dispatch = useDispatch();
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -24,6 +29,10 @@ function Profile() {
     const onIconClickPassword = () => {
         inputPasswordRef.current.disabled = !inputPasswordRef.current.disabled
     }
+
+    const onClickLogout = (url) => {
+        dispatch(logoutFetch(url))
+    }
     
   return (
     <div className={styles.container}>
@@ -40,11 +49,15 @@ function Profile() {
                         История заказов
                     </p>
                 </Link>
-                <Link to='/profile' className={`${styles.link}`}>
+                <div 
+                    to='/profile' 
+                    className={`${styles.link}`}
+                    onClick={(() => onClickLogout(url))}
+                >
                     <p className={`${styles.text}text text_type_main-medium text_color_inactive`}>
                         Выход
                     </p>
-                </Link>
+                </div>
             </nav>
 
             <form className={`${styles.form} mt-20`}>

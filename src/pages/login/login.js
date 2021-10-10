@@ -2,8 +2,12 @@ import React, { useRef, useState } from 'react';
 import styles from './login.module.css';
 import { Link } from 'react-router-dom';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { url } from '../../utils/constants';
+import { loginFetch } from '../../services/actions/index'
+import { useDispatch } from 'react-redux';
 
 function Login() {
+    const dispatch = useDispatch();
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -17,7 +21,11 @@ function Login() {
             setPasswordType('password')
         }
     }
-    
+
+    const onClickLogin = (url, email, password) => {
+        dispatch(loginFetch(url, email, password));
+    } 
+
   return (
     <div className={styles.container}>
         <p className="text text_type_main-medium mt-20">
@@ -53,7 +61,11 @@ function Login() {
         </form>
         
         <div className={`mt-6`}>
-            <Button type="primary" size="medium">
+            <Button 
+                type="primary" 
+                size="medium"
+                onClick={(() => onClickLogin(url, email, password))}
+            >
                 Войти
             </Button>
         </div>

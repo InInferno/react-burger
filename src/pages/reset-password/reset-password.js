@@ -3,11 +3,15 @@ import styles from './reset-password.module.css';
 import { Link } from 'react-router-dom';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { url } from '../../utils/constants';
+import { useDispatch } from 'react-redux';
+import { resetPasswordFetch } from '../../services/actions/index'
 
 function ResetPassword() {
 
+    const dispatch = useDispatch();
+
     const [password, setPassword] = useState('')
-    const [code, setCode] = useState('')
+    const [token, setToken] = useState('')
 
     const inputRef = useRef(null)
 
@@ -20,30 +24,9 @@ function ResetPassword() {
         }
     }
 
-
-    function resetPasswordFetch(url, password, code) { 
-        return () => {
-            fetch(`${url}/password-reset/reset`, {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json;charset=utf-8'
-                },
-                body: JSON.stringify({"password": password, "token": code})
-            })
-                .then(res => {
-                    if (res.status !== 200) {
-                        throw new Error(res.status)
-                    }
-                    return res.json()
-                })
-                .then(res => {
-                    console.log('res', res)
-                })
-                .catch((err) => {
-                    console.log('err', err)
-                });
-        }
-    }
+    const onClickReset = (url, password, token) => {
+        dispatch(resetPasswordFetch(url, password, token));
+    } 
     
   return (
     <div className={styles.container}>
@@ -67,10 +50,10 @@ function ResetPassword() {
             <Input
                 type={'text'}
                 placeholder={'Введите код из письма'}
-                onChange={e => setCode(e.target.value)}
+                onChange={e => setToken(e.target.value)}
                 icon={undefined}
-                value={code}
-                name={'code'}
+                value={token}
+                name={'token'}
                 error={false}
                 ref={inputRef}
                 onIconClick={onIconClick}
@@ -80,7 +63,11 @@ function ResetPassword() {
         </form>
         
         <div className={`mt-6`}>
-            <Button type="primary" size="medium" onClick={resetPasswordFetch(url, password, code)}>
+            <Button 
+                onClick={() => onClickReset(url, password, token)}
+                type="primary" 
+                size="medium" 
+            >
                 Сохранить
             </Button>
         </div>

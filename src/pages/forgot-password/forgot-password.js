@@ -3,7 +3,7 @@ import styles from './forgot-password.module.css';
 import { Link } from 'react-router-dom';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { url } from '../../utils/constants';
-import { resetPasswordFetch } from '../../services/actions/index';
+import { resetForgotFetch } from '../../services/actions/index';
 import { useDispatch } from 'react-redux';
 
 function ForgorPassword() {
@@ -17,8 +17,8 @@ function ForgorPassword() {
         alert('Icon Click Callback')
     }
 
-    const onClickResetPassword = () => {
-        dispatch(resetPasswordFetch(url, email));
+    const onClickResetPassword = (url, email) => {
+        dispatch(resetForgotFetch(url, email));
     }
     
   return (
@@ -43,7 +43,11 @@ function ForgorPassword() {
         </form>
         
         <div className={`mt-6`}>
-            <Button onClick={onClickResetPassword} type="primary" size="medium">
+            <Button 
+                type="primary" 
+                size="medium"
+                onClick={(() => onClickResetPassword(url, email))}     
+            >
                 Восстановить
             </Button>
         </div>

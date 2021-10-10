@@ -2,8 +2,13 @@ import React, { useRef, useState } from 'react';
 import styles from './register.module.css';
 import { Link } from 'react-router-dom';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { url } from '../../utils/constants';
+import { registerFetch } from '../../services/actions/index'
+import { useDispatch } from 'react-redux';
 
 function Register() {
+
+    const dispatch = useDispatch();
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -19,7 +24,11 @@ function Register() {
             setPasswordType('password')
         }
     }
-    
+
+    const onClickRegister = (url, email, password, name) => {
+        dispatch(registerFetch(url, email, password, name));
+    } 
+
   return (
     <div className={styles.container}>
         <p className="text text_type_main-medium mt-20">
@@ -35,7 +44,6 @@ function Register() {
                 name={'name'}
                 error={false}
                 ref={inputRef}
-                //onIconClick={onIconClick}
                 errorText={'Ошибка'}
                 size={'default'}
             />
@@ -48,7 +56,6 @@ function Register() {
                 name={'email'}
                 error={false}
                 ref={inputRef}
-                //onIconClick={onIconClick}
                 errorText={'Ошибка'}
                 size={'default'}
             />
@@ -68,7 +75,11 @@ function Register() {
         </form>
         
         <div className={`mt-6`}>
-            <Button type="primary" size="medium">
+            <Button 
+                type="primary" 
+                size="medium" 
+                onClick={(() => onClickRegister(url, email, password, name))
+            }>
                     Зарегистрироваться
             </Button>
         </div>
