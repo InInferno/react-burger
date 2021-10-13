@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import styles from './ingredient-details.module.css';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import {
+    useParams
+  } from "react-router-dom";
 
 export default function IngredientDetails() {
-    // const data = useSelector(store => store.modalReducer.viewedIngredient)
-    // const cards = useSelector(store => store.ingredientsReducer.listAllIngredients)
     
     const [data, setData] = useState('');
     const { id } = useParams();
@@ -33,7 +33,7 @@ export default function IngredientDetails() {
         {data &&
         <>
         <img src={data.image} alt='ingredient'/>
-        <p className="text text_type_main-default mt-4">
+        <p className={`${styles.name} text text_type_main-default mt-4`}>
             {data.name}
         </p>
         <div className={`${styles.info} mt-8`}> 

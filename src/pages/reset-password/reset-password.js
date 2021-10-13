@@ -28,8 +28,8 @@ function ResetPassword() {
         dispatch(resetPasswordFetch(url, password, token));
     } 
 
-    const userName = useSelector(store => store.profileReducer.name)
-    if (userName) {
+    const { name } = useSelector(store => store.profileReducer);
+    if (name) {
         return (
           <Redirect
             to={{

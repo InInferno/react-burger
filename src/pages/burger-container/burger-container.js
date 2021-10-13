@@ -3,7 +3,6 @@ import styles from './burger-container.module.css';
 import BurgerIngredients from '../../components/burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../../components/burger-constructor/burger-constructor';
 import Modal from '../../components/modal/modal';
-import IngredientDetails from '../../components/ingredient-details/ingredient-details';
 import OrderDetails from '../../components/order-details/order-details';
 import { useSelector } from 'react-redux';
 import { DndProvider } from "react-dnd";
@@ -15,7 +14,6 @@ export default function BurgerContainer() {
 
   const dispatch = useDispatch();
 
-  const isModalIngr = useSelector(store => store.modalReducer.viewedIngredient)
   const isModalOrder = useSelector(store => store.orderReducer.createdOrder)
 
   const closeModal = () => {
@@ -24,10 +22,7 @@ export default function BurgerContainer() {
   }
 
   return (
-    <main className={styles.box}>
-      {isModalIngr._id &&
-        <Modal children={<IngredientDetails />} closeModal={closeModal}/>
-      }
+    <main className={styles.box}>      
       {isModalOrder.success &&
         <Modal children={<OrderDetails />} closeModal={closeModal}/>
       }

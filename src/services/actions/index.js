@@ -168,7 +168,8 @@ export function orderFetchData(url, orderIds) {
         fetch(`${url}/orders`, {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json;charset=utf-8'
+              'Content-Type': 'application/json;charset=utf-8',
+              "authorization": getCookie('accessToken')
             },
             body: JSON.stringify({"ingredients": orderIds})
         })
@@ -307,7 +308,8 @@ export function getForgotPassword(res) {
         });
         if (res && res.success) {
             dispatch({
-                type: GET_FORGOT_SUCCESS
+                type: GET_FORGOT_SUCCESS,
+                emailSent: true
             });
         }
     }
@@ -477,13 +479,14 @@ export function tokenFetch(url) {
                 return res.json()
             })
             .then(res => {
-                console.log(res)
-                dispatch(token(res))
                 setCookie('accessToken', res.accessToken);
                 setCookie('refreshToken', res.refreshToken);
+                dispatch(token(res))
+            }).then(res => {
+                dispatch(userFetch(url))
             })
             .catch((err) => {
-                console.log(err)
+                console.log('Пользователь не авторизован', err)
                 dispatch(tokenError(err))
             });
     }
@@ -523,7 +526,9 @@ export function userFetch(url) {
             }
         })
             .then(res => {
-                if (res.status !== 200) {
+                if (res.status === 403) {
+                    throw dispatch(tokenFetch(url))
+                } else if (res.status !== 200) {
                     throw new Error(res.status)
                 }
                 return res.json()

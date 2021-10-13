@@ -33,6 +33,7 @@ const initialStateProfile = {
     registerError: false,
     forgotReq: false,
     forgotError: false,
+    emailSent: false,
     resetPasswordReq: false,
     resetPasswordError: false,
     logoutReq: false,
@@ -105,7 +106,8 @@ export const profileReducer = (state = initialStateProfile, action) => {
         }
         case GET_FORGOT_SUCCESS: {
             return { 
-                ...state, 
+                ...state,
+                emailSent: true, 
                 forgotError: false,
                 forgotReq: false 
             };

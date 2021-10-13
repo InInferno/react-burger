@@ -1,7 +1,8 @@
 import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
-function ProtectedRoute({ children, ...rest }) {
+export default function ProtectedRoute({ children, ...rest }) {
   const userName = useSelector(store => store.profileReducer.name)
 
   return (
@@ -20,4 +21,7 @@ function ProtectedRoute({ children, ...rest }) {
   );
 }
 
-export default ProtectedRoute;
+ProtectedRoute.propTypes = {
+  children: PropTypes.object.isRequired,
+  rest: PropTypes.object
+};

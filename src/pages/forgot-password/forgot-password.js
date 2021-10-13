@@ -18,11 +18,21 @@ function ForgorPassword() {
     }
 
     const onClickResetPassword = (url, email) => {
-        dispatch(resetForgotFetch(url, email));
+        dispatch(resetForgotFetch(url, email))
     }
 
-    const userName = useSelector(store => store.profileReducer.name)
-    if (userName) {
+    const { emailSent, name } = useSelector(store => store.profileReducer);
+    if (emailSent) {
+        return (
+          <Redirect
+            to={{
+              pathname: '/reset-password'
+            }}
+          />
+        );
+    }
+
+    if (name) {
         return (
           <Redirect
             to={{

@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import styles from './burger-constructor.module.css';
 import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { url } from '../../utils/constants';
 import { 
   updateIngredients, 
@@ -17,6 +18,7 @@ import ConstructorCard from '../constructor-card/constructor-card';
 export default function BurgerConstructor() {
 
   const dispatch = useDispatch();
+  let history = useHistory();
 
   const addIngredientInConstructor = (card) => {
     if(card.card.type === 'bun') {
@@ -56,8 +58,13 @@ export default function BurgerConstructor() {
     )
   }, [dataIngs, bunBurger, dispatch])
 
+
+  const { name } = useSelector(store => store.profileReducer);
+
   const isOpenModal = () => {
-    dispatch(orderFetchData(url, orderIds))
+    name 
+    ? dispatch(orderFetchData(url, orderIds))
+    : history.push('/login')
   }
 
   const moveCard = useCallback((dragIndex, hoverIndex) => {

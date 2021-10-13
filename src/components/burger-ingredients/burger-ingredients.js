@@ -64,9 +64,17 @@ export default function BurgerIngredients() {
               <ul className={`${styles.cards} ml-4 mr-4`}>
                 {data && 
                   dataFilter(item.type).map((card) => {
-                    return <Link key={card._id} to={`/ingredients/${card._id}`} className={styles.link}>
-                              <IngredientCard key={card._id} card={card} />
-                            </Link>
+                    return (
+                      <Link
+                        className={styles.link}
+                        key={card._id}
+                        to={{
+                          pathname: `/ingredients/${card._id}`,
+                        }}
+                      >
+                        <IngredientCard key={card._id} card={card} />
+                      </Link>
+                    )
                   })
                 }
               </ul>

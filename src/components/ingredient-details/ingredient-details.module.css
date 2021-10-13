@@ -2,9 +2,15 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 .info {
     display: flex;
     gap: 20px;
+}
+
+.name {
+    text-align: center;
 }
