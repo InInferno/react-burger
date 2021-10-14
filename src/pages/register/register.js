@@ -25,7 +25,8 @@ function Register() {
         }
     }
 
-    const onClickRegister = (url, email, password, name) => {
+    const registerHandler = (e) => {
+        e.preventDefault();
         dispatch(registerFetch(url, email, password, name));
     }
     
@@ -45,7 +46,10 @@ function Register() {
         <p className="text text_type_main-medium mt-20">
             Регистрация
         </p>
-        <form className={`${styles.form} mt-6`}>
+        <form 
+            className={`${styles.form} mt-6`}
+            onSubmit={registerHandler}
+        >
             <Input
                 type={'text'}
                 placeholder={'Имя'}
@@ -83,19 +87,13 @@ function Register() {
                 errorText={'Ошибка'}
                 size={'default'}
             />
+
+            <div className={`mt-6 ${styles.button}`}>
+                <Button type="primary" size="medium">
+                        Зарегистрироваться
+                </Button>
+            </div>
         </form>
-        
-        <div className={`mt-6`}>
-            <Button 
-                type="primary" 
-                size="medium" 
-                onClick={(() => onClickRegister(url, email, password, name))
-            }>
-                    Зарегистрироваться
-            </Button>
-        </div>
-
-
         <div className={`${styles.info} mt-20`}>
             <p className="text text_type_main-default text_color_inactive pt-4">
                 Уже зарегистрированы?
@@ -107,7 +105,6 @@ function Register() {
             </Link>
         </div>
     </div>
-
   );
 }
 

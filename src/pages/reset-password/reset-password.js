@@ -24,16 +24,35 @@ function ResetPassword() {
         }
     }
 
-    const onClickReset = (url, password, token) => {
+    const resetHandler = (e) => {
+        e.preventDefault();
         dispatch(resetPasswordFetch(url, password, token));
     } 
 
-    const { name } = useSelector(store => store.profileReducer);
+    const { name, passwordReseted, emailSent } = useSelector(store => store.profileReducer);
     if (name) {
         return (
           <Redirect
             to={{
               pathname: '/'
+            }}
+          />
+        );
+    }
+    if (!emailSent) {
+        return (
+          <Redirect
+            to={{
+              pathname: '/forgot-password'
+            }}
+          />
+        );
+    }
+    if (passwordReseted) {
+        return (
+          <Redirect
+            to={{
+              pathname: '/login'
             }}
           />
         );
@@ -44,7 +63,10 @@ function ResetPassword() {
         <p className="text text_type_main-medium mt-20">
             Вход
         </p>
-        <form className={`${styles.form} mt-6`}>
+        <form 
+            className={`${styles.form} mt-6`}
+            onSubmit={resetHandler}
+        >
             <Input
                 type={passwordType}
                 placeholder={'Введите новый пароль'}
@@ -71,18 +93,12 @@ function ResetPassword() {
                 errorText={'Ошибка'}
                 size={'default'}
             />
+            <div className={`${styles.button} mt-6`}>
+                <Button type="primary" size="medium">
+                    Сохранить
+                </Button>
+            </div>
         </form>
-        
-        <div className={`mt-6`}>
-            <Button 
-                onClick={() => onClickReset(url, password, token)}
-                type="primary" 
-                size="medium" 
-            >
-                Сохранить
-            </Button>
-        </div>
-
         <div className={`${styles.info} mt-20`}>
             <p className="text text_type_main-default text_color_inactive pt-4">
                 Вспомнили пароль?

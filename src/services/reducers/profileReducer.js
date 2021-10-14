@@ -34,6 +34,7 @@ const initialStateProfile = {
     forgotReq: false,
     forgotError: false,
     emailSent: false,
+    passwordReseted: false,
     resetPasswordReq: false,
     resetPasswordError: false,
     logoutReq: false,
@@ -130,7 +131,8 @@ export const profileReducer = (state = initialStateProfile, action) => {
             return { 
                 ...state, 
                 resetPasswordError: false,
-                resetPasswordReq: false 
+                resetPasswordReq: false,
+                passwordReseted: true 
             };
         }
         case GET_RESET_PASSWORD_ERROR: {

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './profile.module.css';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { url } from '../../utils/constants';
 import { logoutFetch, updateUserInfoFetch } from '../../services/actions/index'
@@ -10,7 +10,6 @@ function Profile() {
     const dispatch = useDispatch();
     const profileName = useSelector(store => store.profileReducer.name)
     const profileEmail = useSelector(store => store.profileReducer.email)
-
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -40,7 +39,8 @@ function Profile() {
         dispatch(logoutFetch(url))
     }
 
-    const onClickSave = (url, email, name, password) => {
+    const saveHandled = (e) => {
+        e.preventDefault();
         dispatch(updateUserInfoFetch(url, email, name, password))
         setPassword('');
     }
@@ -52,19 +52,23 @@ function Profile() {
     
   return (
     <div className={styles.container}>
-
         <div className={styles.box}>
             <nav className={`${styles.nav} mr-15 mt-20`}>
-                <Link to='/profile' className={`${styles.link}`}>
-                    <p className={`${styles.text}text text_type_main-medium`}>
-                        Профиль
-                    </p>
-                </Link>
-                <Link to='/profile/orders' className={`${styles.link}`}>
-                    <p className={`${styles.text}text text_type_main-medium text_color_inactive`}>
-                        История заказов
-                    </p>
-                </Link>
+                <NavLink 
+                    exact
+                    to='/profile' 
+                    className={`${styles.text} text text_type_main-medium text_color_inactive`}
+                    activeStyle={{color: "#fff"}}
+                >
+                    Профиль
+                </NavLink>
+                <NavLink 
+                    to='/profile/orders' 
+                    className={`${styles.text} text text_type_main-medium text_color_inactive`}
+                    activeStyle={{color: "#fff"}}
+                >
+                    История заказов
+                </NavLink>
                 <div 
                     to='/profile' 
                     className={`${styles.link}`}
@@ -75,8 +79,10 @@ function Profile() {
                     </p>
                 </div>
             </nav>
-
-            <form className={`${styles.form} mt-20`}>
+            <form 
+                className={`${styles.form} mt-20`}
+                onSubmit={saveHandled}
+            >
                 <Input
                     disabled
                     type={'text'}
@@ -119,36 +125,31 @@ function Profile() {
                     errorText={'Ошибка'}
                     size={'default'}
                 />
-            </form>
 
+                <div className={styles.buttons}>
+                    <div className={styles.button}>
+                        <Button type="primary" size="medium">
+                            Сохранить
+                        </Button>
+                    </div>
+                    <div className={styles.button}>
+                        <Button 
+                            type="primary" 
+                            size="medium" 
+                            onClick={(() => onClickCancel())}
+                        >
+                            Отмена
+                        </Button>
+                    </div>
+                </div>
+            </form>
         </div>
         <div className={`${styles.info} mt-20`}>
             <p className={`${styles.description} text text_type_main-default text_color_inactive`}>
                 В этом разделе вы можете изменить свои персональные данные
             </p>
-            <div className={styles.buttons}>
-                <div className="ml-15">
-                    <Button 
-                        type="primary" 
-                        size="medium"
-                        onClick={(() => onClickSave(url, email, name, password))
-                    }>
-                        Сохранить
-                    </Button>
-                </div>
-                <div className="ml-15">
-                <Button 
-                    type="primary" 
-                    size="medium" 
-                    onClick={(() => onClickCancel())
-                }>
-                    Отмена
-                </Button>
-                </div>
-            </div>
         </div>     
     </div>
-
   );
 }
 

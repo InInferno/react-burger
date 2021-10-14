@@ -17,8 +17,9 @@ function ForgorPassword() {
         alert('Icon Click Callback')
     }
 
-    const onClickResetPassword = (url, email) => {
-        dispatch(resetForgotFetch(url, email))
+    const resetHandler = (e) => {
+      e.preventDefault();
+      dispatch(resetForgotFetch(url, email))
     }
 
     const { emailSent, name } = useSelector(store => store.profileReducer);
@@ -47,33 +48,29 @@ function ForgorPassword() {
         <p className="text text_type_main-medium mt-20">
             Восстановление пароля
         </p>
-        <form className={`${styles.form} mt-6`}>
-            <Input
-                type={'email'}
-                placeholder={'Укажите e-mail'}
-                onChange={e => setEmail(e.target.value)}
-                icon={undefined}
-                value={email}
-                name={'email'}
-                error={false}
-                ref={inputRef}
-                onIconClick={onIconClick}
-                errorText={'Ошибка'}
-                size={'default'}
-            />
-        </form>
-        
-        <div className={`mt-6`}>
-            <Button 
-                type="primary" 
-                size="medium"
-                onClick={(() => onClickResetPassword(url, email))}     
-            >
+        <form 
+          className={`${styles.form} mt-6`}
+          onSubmit={resetHandler}
+        >
+          <Input
+              type={'email'}
+              placeholder={'Укажите e-mail'}
+              onChange={e => setEmail(e.target.value)}
+              icon={undefined}
+              value={email}
+              name={'email'}
+              error={false}
+              ref={inputRef}
+              onIconClick={onIconClick}
+              errorText={'Ошибка'}
+              size={'default'}
+          />
+          <div className={`${styles.button} mt-6`}>
+            <Button type="primary" size="medium">
                 Восстановить
             </Button>
-        </div>
-
-
+          </div>
+        </form>
         <div className={`${styles.info} mt-20`}>
             <p className="text text_type_main-default text_color_inactive pt-4">
                 Вспомнили пароль?

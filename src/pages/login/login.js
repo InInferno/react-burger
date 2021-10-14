@@ -22,7 +22,8 @@ function Login() {
         }
     }
 
-    const onClickLogin = (url, email, password) => {
+    const loginHandler = (e) => {
+        e.preventDefault();
         dispatch(loginFetch(url, email, password));
     }
     
@@ -42,7 +43,10 @@ function Login() {
         <p className="text text_type_main-medium mt-20">
             Вход
         </p>
-        <form className={`${styles.form} mt-6`}>
+        <form 
+            className={`${styles.form} mt-6`}
+            onSubmit={loginHandler}
+        >
             <Input
                 type={'email'}
                 placeholder={'E-mail'}
@@ -69,19 +73,12 @@ function Login() {
                 errorText={'Ошибка'}
                 size={'default'}
             />
+            <div className={`${styles.button} mt-6`}>
+                <Button type="primary" size="medium">
+                    Войти
+                </Button>
+            </div>
         </form>
-        
-        <div className={`mt-6`}>
-            <Button 
-                type="primary" 
-                size="medium"
-                onClick={(() => onClickLogin(url, email, password))}
-            >
-                Войти
-            </Button>
-        </div>
-
-
         <div className={`${styles.info} mt-20`}>
             <p className="text text_type_main-default text_color_inactive pt-4">
                 Вы - новый пользователь?

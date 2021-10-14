@@ -16,12 +16,8 @@
 }
 
 .text {
-    line-height: 30px;
-}
-
-.link {
+    line-height: 60px;
     text-decoration: none;
-    color: #fff;
 }
 
 .link:hover {
@@ -43,6 +39,10 @@
 }
 
 .buttons {
+    display: flex;
+}
+
+.button {
     display: flex;
 }
 

@@ -356,6 +356,7 @@ export function getResetPassword(res) {
         if (res && res.success) {
             dispatch({
                 type: GET_RESET_PASSWORD_SUCCESS,
+                passwordReseted: true
             });
         }
     }

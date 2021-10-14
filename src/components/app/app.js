@@ -50,7 +50,7 @@ function App() {
         <Route path='/reset-password'>
           <ResetPassword /> 
         </Route>
-        <ProtectedRoute path="/">
+        <ProtectedRoute path="/profile">
           <Route path='/profile'>
             <Profile />
           </Route>
