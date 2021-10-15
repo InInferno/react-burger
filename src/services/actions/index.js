@@ -474,6 +474,13 @@ export function tokenFetch(url) {
             body: JSON.stringify({"token": getCookie('refreshToken')})
         })
             .then(res => {
+                
+                // console.log(JSON.stringify({"token": getCookie('refreshToken')}))
+                
+                // console.log(
+                // `{"token":"0e2b2927a116a801a2c4a954555c872af56cf9284a67112aa444044587602c6e6f647a9c8662c0a0"}` ===
+                // JSON.stringify({"token": getCookie('refreshToken')}))
+
                 if (res.status !== 200) {
                     throw new Error(res.status)
                 }
