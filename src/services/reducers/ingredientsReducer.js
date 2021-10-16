@@ -2,7 +2,7 @@ import {
     GET_INGREDIENTS_REQUEST, 
     GET_INGREDIENTS_SUCCESS, 
     GET_INGREDIENTS_ERROR
-} from '../actions';
+} from '../actions/action-types';
 
 const initialStateIngredients = {
     listAllIngredientsReq: false,

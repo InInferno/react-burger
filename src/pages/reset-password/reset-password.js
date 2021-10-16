@@ -2,9 +2,8 @@ import React, { useRef, useState } from 'react';
 import styles from './reset-password.module.css';
 import { Link, Redirect } from 'react-router-dom';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { url } from '../../utils/constants';
 import { useDispatch, useSelector } from 'react-redux';
-import { resetPasswordFetch } from '../../services/actions/index'
+import { resetPasswordFetch } from '../../services/actions/profile-actions';
 
 function ResetPassword() {
 
@@ -26,7 +25,7 @@ function ResetPassword() {
 
     const resetHandler = (e) => {
         e.preventDefault();
-        dispatch(resetPasswordFetch(url, password, token));
+        dispatch(resetPasswordFetch(password, token));
     } 
 
     const { name, passwordReseted, emailSent } = useSelector(store => store.profileReducer);

@@ -1,203 +1,38 @@
+import {
+    GET_LOGIN_REQUEST,
+    GET_LOGIN_SUCCESS,
+    GET_LOGIN_ERROR,
+    
+    GET_REGISTER_REQUEST,
+    GET_REGISTER_SUCCESS,
+    GET_REGISTER_ERROR,
+    
+    GET_TOKEN_REQUEST,
+    GET_TOKEN_SUCCESS,
+    GET_TOKEN_ERROR,
+    
+    GET_FORGOT_REQUEST,
+    GET_FORGOT_SUCCESS,
+    GET_FORGOT_ERROR,
+    
+    GET_RESET_PASSWORD_REQUEST,
+    GET_RESET_PASSWORD_SUCCESS,
+    GET_RESET_PASSWORD_ERROR,
+    
+    GET_LOGOUT_REQUEST,
+    GET_LOGOUT_SUCCESS,
+    GET_LOGOUT_ERROR,
+    
+    GET_USER_REQUEST,
+    GET_USER_SUCCESS,
+    GET_USER_ERROR,
+    
+    GET_UPD_USER_REQUEST,
+    GET_UPD_USER_SUCCESS,
+    GET_UPD_USER_ERROR
+} from './action-types';
 import { setCookie, getCookie } from '../../utils/cookie';
-import { v4 as uuidv4 } from 'uuid';
-export const GET_INGREDIENTS_REQUEST = 'GET_INGREDIENTS_REQ';
-export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';
-export const GET_INGREDIENTS_ERROR = 'GET_INGREDIENTS_ERROR';
-export const ADD_INGREDIENT = 'ADD_INGREDIENT';
-export const DELETE_INGREDIENT = 'DELETE_INGREDIENT';
-export const UPDATE_INGREDIENTS = 'UPDATE_INGREDIENTS';
-export const ADD_BUN = 'ADD_BUN';
-export const ADD_CART_MODAL = 'ADD_CART_MODAL';
-export const DELETE_CART_MODAL = 'DELETE_CART_MODAL';
-export const ADD_ORDER_IDS = 'ADD_ORDER_IDS';
-export const GET_ORDER_REQUEST = 'GET_ORDER_REQUEST';
-export const GET_ORDER_SUCCESS = 'GET_ORDER_SUCCESS';
-export const GET_ORDER_ERROR = 'GET_ORDER_ERROR';
-export const DELETE_ORDER_MODAL = 'DELETE_ORDER_MODAL';
-
-export const GET_LOGIN_REQUEST = 'GET_LOGIN_REQUEST';
-export const GET_LOGIN_SUCCESS = 'GET_LOGIN_SUCCESS';
-export const GET_LOGIN_ERROR = 'GET_LOGIN_ERROR';
-
-export const GET_REGISTER_REQUEST = 'GET_REGISTER_REQUEST';
-export const GET_REGISTER_SUCCESS = 'GET_REGISTER_SUCCESS';
-export const GET_REGISTER_ERROR = 'GET_REGISTER_ERROR';
-
-export const GET_TOKEN_REQUEST = 'GET_TOKEN_REQUEST';
-export const GET_TOKEN_SUCCESS = 'GET_TOKEN_SUCCESS';
-export const GET_TOKEN_ERROR = 'GET_TOKEN_ERROR';
-
-export const GET_FORGOT_REQUEST = 'GET_FORGOT_REQUEST';
-export const GET_FORGOT_SUCCESS = 'GET_FORGOT_SUCCESS';
-export const GET_FORGOT_ERROR = 'GET_FORGOT_ERROR';
-
-export const GET_RESET_PASSWORD_REQUEST = 'GET_RESET_PASSWORD_REQUEST';
-export const GET_RESET_PASSWORD_SUCCESS = 'GET_RESET_PASSWORD_SUCCESS';
-export const GET_RESET_PASSWORD_ERROR = 'GET_RESET_PASSWORD_ERROR';
-
-export const GET_LOGOUT_REQUEST = 'GET_LOGOUT_REQUEST';
-export const GET_LOGOUT_SUCCESS = 'GET_LOGOUT_SUCCESS';
-export const GET_LOGOUT_ERROR = 'GET_LOGOUT_ERROR';
-
-export const GET_USER_REQUEST = 'GET_USER_REQUEST';
-export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
-export const GET_USER_ERROR = 'GET_USER_ERROR';
-
-export const GET_UPD_USER_REQUEST = 'GET_UPD_USER_REQUEST';
-export const GET_UPD_USER_SUCCESS = 'GET_UPD_USER_SUCCESS';
-export const GET_UPD_USER_ERROR = 'GET_UPD_USER_ERROR';
-
-export function getIngredients(res) {
-    return function(dispatch) {
-        dispatch({
-            type: GET_INGREDIENTS_REQUEST,
-            listAllIngredientsReq: true
-        });
-        if (res && res.success) {
-            dispatch({
-                type: GET_INGREDIENTS_SUCCESS,
-                listAllIngredients: res
-            });
-        }
-    }
-}
-export function getIngredientsError() {
-    return function(dispatch) {
-        dispatch({
-            type: GET_INGREDIENTS_ERROR
-        });
-    }
-}
-export function ingredientsFetchData(url) { 
-    return (dispatch) => {
-        fetch(url)
-            .then(res => {
-                if (res.status !== 200) {
-                    throw new Error(res.status)
-                }
-                return res.json()
-            })
-            .then(ings => {
-                dispatch(getIngredients(ings))
-            })
-            .catch((err) => {
-                console.log(err)
-                dispatch(getIngredientsError())
-            });
-    }
-}
-
-export function addIngredient(res) {
-    return {
-        type: ADD_INGREDIENT,
-        ingredientsInConstructor: {
-            ...res,
-            uuid: uuidv4()
-        }
-    }
-}
-
-export function deteleIngredient(ingredient) {
-    return {
-        type: DELETE_INGREDIENT,
-        ingredient
-    }
-}
-
-export function updateIngredients(res) {
-    return {
-        type: UPDATE_INGREDIENTS,
-        ingredientsInConstructor: res
-    }
-}
-
-export function addBun(res) {
-    return {
-        type: ADD_BUN,
-        bunInConstructor: {
-            ...res,
-            uuid: uuidv4()
-        }
-    }
-}
-
-export function addCartModal(res) {
-    return {
-        type: ADD_CART_MODAL,
-        viewedIngredient: res
-    }
-}
-
-export function deleteCartModal() {
-    return {
-        type: DELETE_CART_MODAL,
-        viewedIngredient: {}
-    }
-}
-
-export function addOrderIds(res) {
-    return {
-        type: ADD_ORDER_IDS,
-        orderIds: res
-    }
-}
-
-export function getOrder(res) {
-    return function(dispatch) {
-        dispatch({
-            type: GET_ORDER_REQUEST,
-            orderReq: true
-        });
-        if (res && res.success) {
-            dispatch({
-                type: GET_ORDER_SUCCESS,
-                createdOrder: res
-            });
-        }
-    }
-}
-export function getOrderError() {
-    return function(dispatch) {
-        dispatch({
-            type: GET_ORDER_ERROR
-        });
-    }
-}
-export function orderFetchData(url, orderIds) { 
-    return (dispatch) => {
-        fetch(`${url}/orders`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json;charset=utf-8',
-              "authorization": getCookie('accessToken')
-            },
-            body: JSON.stringify({"ingredients": orderIds})
-        })
-            .then(res => {
-                if (res.status !== 200) {
-                    throw new Error(res.status)
-                }
-                return res.json()
-            })
-            .then(ings => {
-                dispatch(getOrder(ings))
-                dispatch((updateIngredients([])));
-                dispatch(addBun({}));
-            })
-            .catch((err) => {
-                console.log(err)
-                dispatch(getOrderError())
-            });
-    }
-}
-
-export function deleteOrderModal() {
-    return {
-        type: DELETE_ORDER_MODAL,
-        createdOrder: {}
-    }
-}
-
+import { url } from '../../utils/constants';
 
 export function login(res) {
     return function(dispatch) {
@@ -221,7 +56,7 @@ export function loginError() {
         });
     }
 }
-export function loginFetch(url, email, password) { 
+export function loginFetch(email, password) { 
     return (dispatch) => {
         fetch(`${url}/auth/login`, {
             method: 'POST',
@@ -271,7 +106,7 @@ export function registerError() {
         });
     }
 }
-export function registerFetch(url, email, password, name) { 
+export function registerFetch(email, password, name) { 
     return (dispatch) => {
         fetch(`${url}/auth/register`, {
             method: 'POST',
@@ -321,7 +156,7 @@ export function getForgotError() {
         });
     }
 }
-export function resetForgotFetch(url, email) { 
+export function resetForgotFetch(email) { 
     return (dispatch) => {
         fetch(`${url}/password-reset`, {
             method: 'POST',
@@ -368,7 +203,7 @@ export function getResetPasswordError() {
         });
     }
 }
-export function resetPasswordFetch(url, password, token) { 
+export function resetPasswordFetch(password, token) { 
     return (dispatch) => {
         fetch(`${url}/password-reset/reset`, {
             method: 'POST',
@@ -416,7 +251,7 @@ export function logoutError() {
         });
     }
 }
-export function logoutFetch(url) { 
+export function logoutFetch() { 
     return (dispatch) => {
         fetch(`${url}/auth/logout`, {
             method: 'POST',
@@ -464,7 +299,7 @@ export function tokenError() {
         });
     }
 }
-export function tokenFetch(url) { 
+export function tokenFetch() { 
     return (dispatch) => {
         fetch(`${url}/auth/token`, {
             method: 'POST',
@@ -474,13 +309,6 @@ export function tokenFetch(url) {
             body: JSON.stringify({"token": getCookie('refreshToken')})
         })
             .then(res => {
-                
-                // console.log(JSON.stringify({"token": getCookie('refreshToken')}))
-                
-                // console.log(
-                // `{"token":"0e2b2927a116a801a2c4a954555c872af56cf9284a67112aa444044587602c6e6f647a9c8662c0a0"}` ===
-                // JSON.stringify({"token": getCookie('refreshToken')}))
-
                 if (res.status !== 200) {
                     throw new Error(res.status)
                 }
@@ -524,7 +352,7 @@ export function userError() {
         });
     }
 }
-export function userFetch(url) { 
+export function userFetch() { 
     return (dispatch) => {
         fetch(`${url}/auth/user`, {
             method: 'GET',
@@ -572,7 +400,7 @@ export function updateUserInfoError() {
         });
     }
 }
-export function updateUserInfoFetch(url, email, name, password) {
+export function updateUserInfoFetch(email, name, password) {
     
     return (dispatch) => {
         let body = {};

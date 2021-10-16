@@ -3,7 +3,7 @@ import styles from './ingredient-card.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { cardPropTypes } from '../types/types';
 import { useDispatch, useSelector } from 'react-redux';
-import { addCartModal } from '../../services/actions';
+import { addCartModal } from '../../services/actions/modal-actions';
 import { useDrag } from "react-dnd";
 
 export default function IngredientCard({ card }) {

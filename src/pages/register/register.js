@@ -2,8 +2,7 @@ import React, { useRef, useState } from 'react';
 import styles from './register.module.css';
 import { Link, Redirect } from 'react-router-dom';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { url } from '../../utils/constants';
-import { registerFetch } from '../../services/actions/index'
+import { registerFetch } from '../../services/actions/profile-actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 function Register() {
@@ -27,7 +26,7 @@ function Register() {
 
     const registerHandler = (e) => {
         e.preventDefault();
-        dispatch(registerFetch(url, email, password, name));
+        dispatch(registerFetch(email, password, name));
     }
     
     const userName = useSelector(store => store.profileReducer.name)

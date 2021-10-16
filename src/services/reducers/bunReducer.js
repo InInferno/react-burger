@@ -1,6 +1,6 @@
 import {
     ADD_BUN
-} from '../actions';
+} from '../actions/action-types';
 
 const initialStateBun = {
     bunInConstructor: {}

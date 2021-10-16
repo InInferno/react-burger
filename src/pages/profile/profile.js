@@ -2,8 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import styles from './profile.module.css';
 import { NavLink } from 'react-router-dom';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { url } from '../../utils/constants';
-import { logoutFetch, updateUserInfoFetch } from '../../services/actions/index'
+import { logoutFetch, updateUserInfoFetch } from '../../services/actions/profile-actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 function Profile() {
@@ -35,13 +34,13 @@ function Profile() {
         inputPasswordRef.current.disabled = !inputPasswordRef.current.disabled
     }
 
-    const onClickLogout = (url) => {
-        dispatch(logoutFetch(url))
+    const onClickLogout = () => {
+        dispatch(logoutFetch())
     }
 
     const saveHandled = (e) => {
         e.preventDefault();
-        dispatch(updateUserInfoFetch(url, email, name, password))
+        dispatch(updateUserInfoFetch(email, name, password))
         setPassword('');
     }
 
@@ -72,7 +71,7 @@ function Profile() {
                 <div 
                     to='/profile' 
                     className={`${styles.link}`}
-                    onClick={(() => onClickLogout(url))}
+                    onClick={(() => onClickLogout())}
                 >
                     <p className={`${styles.text}text text_type_main-medium text_color_inactive`}>
                         Выход

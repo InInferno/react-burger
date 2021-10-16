@@ -2,7 +2,7 @@ import {
     ADD_INGREDIENT,
     DELETE_INGREDIENT,
     UPDATE_INGREDIENTS
-} from '../actions';
+} from '../actions/action-types';
 
 const initialStateConstructor = {
     ingredientsInConstructor: []

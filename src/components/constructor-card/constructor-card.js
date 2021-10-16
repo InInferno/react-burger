@@ -2,7 +2,10 @@ import React, { useRef } from 'react';
 import styles from './constructor-card.module.css';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch } from 'react-redux';
-import {  deteleIngredient, UPDATE_INGREDIENTS } from '../../services/actions';
+import {  
+    UPDATE_INGREDIENTS 
+} from '../../services/actions/action-types';
+import { deleteIngredient } from '../../services/actions/constructor-actions';
 import { useDrag, useDrop } from "react-dnd";
 import PropTypes from 'prop-types';
 
@@ -10,7 +13,7 @@ export default function ConstructorCard({ id, index, moveCard, constructorCard }
     const dispatch = useDispatch();
 
     const removeIngredient = (card) => {
-        dispatch(deteleIngredient(card))
+        dispatch(deleteIngredient(card))
     }
 
     const ref = useRef(null);

@@ -6,10 +6,8 @@ import {
   useHistory
 } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { ingredientsFetchData,
-  tokenFetch 
-} from '../../services/actions';
-import { url } from '../../utils/constants';
+import { tokenFetch } from '../../services/actions/profile-actions';
+import { ingredientsFetchData } from '../../services/actions/ingredients-actions';
 import AppHeader from '../app-header/app-header';
 import Register from '../../pages/register/register';
 import Login from '../../pages/login/login';
@@ -30,8 +28,8 @@ function App() {
   const modalIngredientOpen = action && location.state && location.state.ingredientModal;
   
   useEffect(() => {
-    dispatch(ingredientsFetchData(`${url}/ingredients`));
-    dispatch(tokenFetch(url))
+    dispatch(ingredientsFetchData());
+    dispatch(tokenFetch())
   }, [dispatch])
 
   const closeModal = () => {
@@ -58,6 +56,9 @@ function App() {
           <ResetPassword /> 
         </Route>
         <ProtectedRoute path="/profile" exact>
+          <Profile />
+        </ProtectedRoute>
+        <ProtectedRoute path="/profile/orders" exact>
           <Profile />
         </ProtectedRoute>
         <Route 

@@ -7,7 +7,8 @@ import OrderDetails from '../../components/order-details/order-details';
 import { useSelector } from 'react-redux';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { deleteCartModal, deleteOrderModal } from '../../services/actions';
+import { deleteCartModal } from '../../services/actions/modal-actions';
+import { deleteOrderModal } from '../../services/actions/order-actions';
 import { useDispatch } from 'react-redux';
 
 export default function BurgerContainer() {

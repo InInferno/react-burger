@@ -2,8 +2,7 @@ import React, { useRef, useState } from 'react';
 import styles from './login.module.css';
 import { Link, Redirect } from 'react-router-dom';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { url } from '../../utils/constants';
-import { loginFetch } from '../../services/actions/index'
+import { loginFetch } from '../../services/actions/profile-actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 function Login() {
@@ -24,7 +23,7 @@ function Login() {
 
     const loginHandler = (e) => {
         e.preventDefault();
-        dispatch(loginFetch(url, email, password));
+        dispatch(loginFetch(email, password));
     }
     
     const userName = useSelector(store => store.profileReducer.name)

@@ -1,28 +1,28 @@
 import {
-    GET_LOGIN_REQUEST,
-    GET_LOGIN_SUCCESS,
-    GET_LOGIN_ERROR,
-    GET_REGISTER_REQUEST,
-    GET_REGISTER_SUCCESS,
-    GET_REGISTER_ERROR,
+    // GET_LOGIN_REQUEST,
+    // GET_LOGIN_SUCCESS,
+    // GET_LOGIN_ERROR,
+    // GET_REGISTER_REQUEST,
+    // GET_REGISTER_SUCCESS,
+    // GET_REGISTER_ERROR,
     GET_FORGOT_REQUEST,
     GET_FORGOT_SUCCESS,
     GET_FORGOT_ERROR,
-    GET_RESET_PASSWORD_REQUEST,
-    GET_RESET_PASSWORD_SUCCESS,
-    GET_RESET_PASSWORD_ERROR,
-    GET_LOGOUT_REQUEST,
-    GET_LOGOUT_SUCCESS,
-    GET_LOGOUT_ERROR,
-    GET_TOKEN_REQUEST,
-    GET_TOKEN_SUCCESS,
-    GET_TOKEN_ERROR,
-    GET_USER_REQUEST,
-    GET_USER_SUCCESS,
-    GET_USER_ERROR,
-    GET_UPD_USER_REQUEST,
-    GET_UPD_USER_SUCCESS,
-    GET_UPD_USER_ERROR
+    // GET_RESET_PASSWORD_REQUEST,
+    // GET_RESET_PASSWORD_SUCCESS,
+    // GET_RESET_PASSWORD_ERROR,
+    // GET_LOGOUT_REQUEST,
+    // GET_LOGOUT_SUCCESS,
+    // GET_LOGOUT_ERROR,
+    // GET_TOKEN_REQUEST,
+    // GET_TOKEN_SUCCESS,
+    // GET_TOKEN_ERROR,
+    // GET_USER_REQUEST,
+    // GET_USER_SUCCESS,
+    // GET_USER_ERROR,
+    // GET_UPD_USER_REQUEST,
+    // GET_UPD_USER_SUCCESS,
+    // GET_UPD_USER_ERROR
 } from '../actions/action-types';
 
 const initialStateProfile = {
@@ -52,51 +52,51 @@ const initialStateProfile = {
 export const profileReducer = (state = initialStateProfile, action) => {
     switch (action.type) {
 
-        case GET_REGISTER_REQUEST: {
-            return {
-                ...state,
-                registerReq: true
-            };
-        }
-        case GET_REGISTER_SUCCESS: {
-            return { 
-                ...state, 
-                registerError: false,
-                name: action.name,
-                email: action.email, 
-                registerReq: false 
-            };
-        }
-        case GET_REGISTER_ERROR: {
-            return { 
-                ...state, 
-                registerError: true, 
-                registerReq: false 
-            };
-        }
+        // case GET_REGISTER_REQUEST: {
+        //     return {
+        //         ...state,
+        //         registerReq: true
+        //     };
+        // }
+        // case GET_REGISTER_SUCCESS: {
+        //     return { 
+        //         ...state, 
+        //         registerError: false,
+        //         name: action.name,
+        //         email: action.email, 
+        //         registerReq: false 
+        //     };
+        // }
+        // case GET_REGISTER_ERROR: {
+        //     return { 
+        //         ...state, 
+        //         registerError: true, 
+        //         registerReq: false 
+        //     };
+        // }
 
-        case GET_LOGIN_REQUEST: {
-            return {
-                ...state,
-                loginReq: true
-            };
-        }
-        case GET_LOGIN_SUCCESS: {
-            return { 
-                ...state, 
-                loginError: false,
-                name: action.name,
-                email: action.email, 
-                loginReq: false 
-            };
-        }
-        case GET_LOGIN_ERROR: {
-            return { 
-                ...state, 
-                loginError: true, 
-                loginReq: false 
-            };
-        }
+        // case GET_LOGIN_REQUEST: {
+        //     return {
+        //         ...state,
+        //         loginReq: true
+        //     };
+        // }
+        // case GET_LOGIN_SUCCESS: {
+        //     return { 
+        //         ...state, 
+        //         loginError: false,
+        //         name: action.name,
+        //         email: action.email, 
+        //         loginReq: false 
+        //     };
+        // }
+        // case GET_LOGIN_ERROR: {
+        //     return { 
+        //         ...state, 
+        //         loginError: true, 
+        //         loginReq: false 
+        //     };
+        // }
 
         case GET_FORGOT_REQUEST: {
             return {
