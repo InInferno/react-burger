@@ -2,14 +2,10 @@ import React, { useCallback, useEffect, useState } from 'react';
 import styles from './burger-constructor.module.css';
 import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { url } from '../../utils/constants';
-import { 
-  updateIngredients, 
-  orderFetchData, 
-  addOrderIds, 
-  addIngredient, 
-  addBun
-} from '../../services/actions';
+import { useHistory } from 'react-router-dom';
+import { orderFetchData, addOrderIds } from '../../services/actions/order-actions';
+import { addBun } from '../../services/actions/bun-actions';
+import { addIngredient, updateIngredients } from '../../services/actions/constructor-actions';
 import { useDrop } from "react-dnd";
 import update from 'immutability-helper';
 import ConstructorCard from '../constructor-card/constructor-card';
@@ -17,6 +13,7 @@ import ConstructorCard from '../constructor-card/constructor-card';
 export default function BurgerConstructor() {
 
   const dispatch = useDispatch();
+  let history = useHistory();
 
   const addIngredientInConstructor = (card) => {
     if(card.card.type === 'bun') {
@@ -36,6 +33,7 @@ export default function BurgerConstructor() {
   const dataIngs = useSelector(store => store.constructorReducer.ingredientsInConstructor);
   const bunBurger = useSelector(store => store.bunReducer.bunInConstructor);
   const orderIds = useSelector(store => store.orderReducer.orderIds);
+  const orderReq = useSelector(store => store.orderReducer.orderReq);
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
@@ -56,8 +54,13 @@ export default function BurgerConstructor() {
     )
   }, [dataIngs, bunBurger, dispatch])
 
+
+  const { name } = useSelector(store => store.profileReducer);
+
   const isOpenModal = () => {
-    dispatch(orderFetchData(url, orderIds))
+    name 
+    ? dispatch(orderFetchData(orderIds))
+    : history.push('/login')
   }
 
   const moveCard = useCallback((dragIndex, hoverIndex) => {
@@ -121,15 +124,19 @@ export default function BurgerConstructor() {
       <div className={`${styles.info} mt-10`}>
         <p className="text text_type_digits-medium mr-2">{totalPrice}</p>
         <CurrencyIcon type="primary"/>
-        {bunBurger._id ?
-          <div onClick={isOpenModal}>
-            <Button type="primary" size="medium">
-              Оформить заказ
-            </Button>
-          </div>
-          :
-          <p className={`text text_type_main-default ml-5 ${styles.choice}`}>Выберите булку, чтобы сделать заказ</p>
-        }
+          {bunBurger._id ?
+            <div onClick={isOpenModal}>
+              {orderReq ?
+                <p className={`text text_type_main-default ml-5 ${styles.choice}`}>Идёт загрузка заказа...</p>
+              : 
+              <Button type="primary" size="medium">
+                Оформить заказ
+              </Button>
+              }
+            </div>
+            :
+            <p className={`text text_type_main-default ml-5 ${styles.choice}`}>Выберите булку, чтобы сделать заказ</p>
+          }
       </div>
 
     </section>

@@ -4,11 +4,13 @@ import { constructorReducer } from './constructorReducer';
 import { bunReducer } from './bunReducer';
 import { modalReducer } from './modalReducer';
 import { orderReducer } from './orderReducer';
+import { profileReducer } from './profileReducer';
 
 export const rootReducer = combineReducers({
   ingredientsReducer,
   constructorReducer,
   bunReducer,
   modalReducer,
-  orderReducer
+  orderReducer,
+  profileReducer
 });

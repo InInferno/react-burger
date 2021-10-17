@@ -3,7 +3,7 @@ import styles from './ingredient-card.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { cardPropTypes } from '../types/types';
 import { useDispatch, useSelector } from 'react-redux';
-import { addCartModal } from '../../services/actions';
+import { addCartModal } from '../../services/actions/modal-actions';
 import { useDrag } from "react-dnd";
 
 export default function IngredientCard({ card }) {
@@ -38,7 +38,9 @@ export default function IngredientCard({ card }) {
       ref={dragRef}
       style={{opacity: `${opacity}`}}
     >
-      <Counter count={counter(card._id)} size="default" />
+      {counter(card._id) > 0 && 
+        <Counter count={counter(card._id)} size="default" />
+      }
       <img src={card.image} alt="ingredient"/>
       <div className={`${styles.info} mt-1 mb-1`}>
       <p className="text text_type_digits-default mr-2">{card.price}</p>

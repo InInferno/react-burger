@@ -1,7 +1,7 @@
 import {
     ADD_CART_MODAL,
     DELETE_CART_MODAL
-} from '../actions';
+} from '../actions/action-types';
 
 const initialStateModal = {
     viewedIngredient: {}

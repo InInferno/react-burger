@@ -1,0 +1,30 @@
+.container {
+    width: 485px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+}
+
+.form div {
+    width: 100%;
+    text-align: right;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.info {
+    display: flex;
+}

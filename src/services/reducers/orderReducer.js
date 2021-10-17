@@ -4,7 +4,7 @@ import {
     GET_ORDER_ERROR,
     DELETE_ORDER_MODAL,
     ADD_ORDER_IDS
-} from '../actions';
+} from '../actions/action-types';
 
 const initialStateOrder = {
     orderReq: false,
