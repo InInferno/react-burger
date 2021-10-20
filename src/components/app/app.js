@@ -18,6 +18,9 @@ import ProtectedRoute from '../protected-route/protected-route';
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import BurgerContainer from '../../pages/burger-container/burger-container';
+import Feed from '../../pages/feed/feed';
+import Orders from '../../pages/orders/orders';
+import OrderDetails from '../order-details/order-details';
 
 function App() {
 
@@ -59,7 +62,16 @@ function App() {
           <Profile />
         </ProtectedRoute>
         <ProtectedRoute path="/profile/orders" exact>
-          <Profile />
+          <Orders />
+        </ProtectedRoute>
+        <ProtectedRoute path="/profile/orders/:id" exact>
+          <OrderDetails />
+        </ProtectedRoute>
+        <ProtectedRoute path="/feed" exact>
+          <Feed /> 
+        </ProtectedRoute>
+        <ProtectedRoute path="/feed/:id" exact>
+          <OrderDetails /> 
         </ProtectedRoute>
         <Route 
           path="/ingredients/:id" 
