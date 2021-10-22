@@ -6,8 +6,13 @@ import OrderStat from '../../components/order-stat/order-stat';
 export default function Feed() {
 
   return (
-    <div>
-      <OrderList />
+    <div className={`${styles.container} mt-10`}>
+      <div className={styles.box}>
+        <p className="text text_type_main-large mb-5">
+          Лента заказов
+        </p>
+        <OrderList />
+      </div>
       <OrderStat />
     </div>
   );

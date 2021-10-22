@@ -41,7 +41,7 @@ export default function IngredientCard({ card }) {
       {counter(card._id) > 0 && 
         <Counter count={counter(card._id)} size="default" />
       }
-      <img src={card.image} alt="ingredient"/>
+      <img src={card.image} alt="Ингредиент"/>
       <div className={`${styles.info} mt-1 mb-1`}>
       <p className="text text_type_digits-default mr-2">{card.price}</p>
       <CurrencyIcon type="primary"/>

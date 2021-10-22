@@ -4,6 +4,8 @@ import styles from './order-stat.module.css';
 export default function OrderStat() {
 
   return (
-    <div></div>
+    <div className={styles.container}>
+      
+    </div>
   )
 }
