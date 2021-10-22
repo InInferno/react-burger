@@ -6,7 +6,7 @@ import {
   useHistory
 } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { tokenFetch } from '../../services/actions/profile-actions';
+import { userFetch } from '../../services/actions/profile-actions';
 import { ingredientsFetchData } from '../../services/actions/ingredients-actions';
 import AppHeader from '../app-header/app-header';
 import Register from '../../pages/register/register';
@@ -32,7 +32,7 @@ function App() {
   
   useEffect(() => {
     dispatch(ingredientsFetchData());
-    dispatch(tokenFetch())
+    dispatch(userFetch());
   }, [dispatch])
 
   const closeModal = () => {

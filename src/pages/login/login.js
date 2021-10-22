@@ -1,12 +1,13 @@
 import React, { useRef, useState } from 'react';
 import styles from './login.module.css';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useLocation } from 'react-router-dom';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { loginFetch } from '../../services/actions/profile-actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 function Login() {
     const dispatch = useDispatch();
+    const location = useLocation();
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -30,9 +31,9 @@ function Login() {
     if (userName) {
         return (
           <Redirect
-            to={{
-              pathname: '/'
-            }}
+            to={
+                location.state?.from || '/' 
+            }
           />
         );
     }
