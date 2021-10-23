@@ -48,7 +48,6 @@
 
 .images {
     display: flex;
-    flex-direction: row-reverse;
 }
 
 .radius {
@@ -64,6 +63,18 @@
     background-clip: content-box, border-box;
     margin-right: -16px;
     position: relative;
+}
+
+.blackout:nth-child(6)::before {
+    content: '';
+    background: #2A2C2F;
+    opacity: .5;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 50%;
 }
 
 .image {
