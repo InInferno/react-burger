@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './profile.module.css';
-import { NavLink } from 'react-router-dom';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { logoutFetch, updateUserInfoFetch } from '../../services/actions/profile-actions';
 import { useDispatch, useSelector } from 'react-redux';
+import NavProfile from '../../components/nav-profile/nav-profile';
 
 function Profile() {
     const dispatch = useDispatch();
@@ -34,10 +34,6 @@ function Profile() {
         inputPasswordRef.current.disabled = !inputPasswordRef.current.disabled
     }
 
-    const onClickLogout = () => {
-        dispatch(logoutFetch())
-    }
-
     const saveHandled = (e) => {
         e.preventDefault();
         dispatch(updateUserInfoFetch(email, name, password))
@@ -52,32 +48,9 @@ function Profile() {
   return (
     <div className={styles.container}>
         <div className={styles.box}>
-            <nav className={`${styles.nav} mr-15 mt-20`}>
-                <NavLink 
-                    exact
-                    to='/profile' 
-                    className={`${styles.text} text text_type_main-medium text_color_inactive`}
-                    activeStyle={{color: "#fff"}}
-                >
-                    Профиль
-                </NavLink>
-                <NavLink 
-                    to='/profile/orders' 
-                    className={`${styles.text} text text_type_main-medium text_color_inactive`}
-                    activeStyle={{color: "#fff"}}
-                >
-                    История заказов
-                </NavLink>
-                <div 
-                    to='/profile' 
-                    className={`${styles.link}`}
-                    onClick={(() => onClickLogout())}
-                >
-                    <p className={`${styles.text}text text_type_main-medium text_color_inactive`}>
-                        Выход
-                    </p>
-                </div>
-            </nav>
+            <div className='mr-15 mt-20'>
+                <NavProfile />
+            </div>
             <form 
                 className={`${styles.form} mt-20`}
                 onSubmit={saveHandled}
