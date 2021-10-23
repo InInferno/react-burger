@@ -4,6 +4,8 @@ import styles from './order-details.module.css';
 export default function OrderDetails() {
 
   return (
-    <div></div>
+    <div>
+      
+    </div>
   )
 }
