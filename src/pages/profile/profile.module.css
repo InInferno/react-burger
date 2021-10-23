@@ -2,7 +2,6 @@
     width: 885px;
     margin: 0 auto;
     display: flex;
-    flex-direction: column;
 }
 
 .box {
@@ -27,10 +26,6 @@
 }
 
 .button {
-    display: flex;
-}
-
-.info {
     display: flex;
 }
 
