@@ -21,6 +21,7 @@
     display: flex;
     gap: 16px; 
     flex-direction: column;
+    padding: 0;
 }
 
 .card {
@@ -48,6 +49,7 @@
 
 .images {
     display: flex;
+    padding: 0;
 }
 
 .radius {

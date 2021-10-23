@@ -9,11 +9,11 @@ export default function OrderList() {
   
   return (
     <div className={`${styles.container} ${styles.scroll}`}>
-      <div className={`${styles.cards} mr-2`}>
+      <ul className={`${styles.cards} mr-2`}>
 
         {data.map((item, index) => {
           
-          return <div
+          return <li
             className={styles.card}
             key={index}
           >
@@ -23,28 +23,28 @@ export default function OrderList() {
             </div>
             <p className='text text_type_main-medium mt-6'>{item.name}</p>
             <div className={`${styles.order} mt-6`}>
-              <div className={styles.images}>
+              <ul className={styles.images}>
                 {item.images.map((image, index) => {
                   if (index < 6) { 
                     return (
-                      <div key={index} style={{zIndex: item.images.length - index}} className={`${styles.radius} ${item.images.length > 6 && index === 5 && styles.blackout}`}>
+                      <li key={index} style={{zIndex: item.images.length - index}} className={`${styles.radius} ${item.images.length > 6 && index === 5 && styles.blackout}`}>
                         <img className={`${styles.image}`} src={image} alt='Ингредиент' />
                         {item.images.length > 6 && index === 5 && 
                           <p className={`${styles.number} text text_type_digits-default`}>{`+${item.images.length - 6}`}</p>
                         }
-                      </div>
+                      </li>
                     )
                   }
                 })}
-              </div>
+              </ul>
               <div className={styles.price}>
                 <p className="text text_type_digits-medium mr-2">{item.price}</p>
                 <CurrencyIcon type="primary"/>
               </div>
             </div>
-          </div>
+          </li>
         })}
-      </div>
+      </ul>
     </div>
   )
 }

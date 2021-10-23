@@ -5,7 +5,6 @@ export default function OrderStat() {
 
   return (
     <div className={styles.container}>
-      
     </div>
   )
 }
