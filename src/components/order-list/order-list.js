@@ -10,9 +10,7 @@ export default function OrderList() {
   return (
     <div className={`${styles.container} ${styles.scroll}`}>
       <ul className={`${styles.cards} mr-2`}>
-
         {data.map((item, index) => {
-          
           return <li
             className={styles.card}
             key={index}

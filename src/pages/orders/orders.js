@@ -3,7 +3,6 @@ import styles from './orders.module.css';
 import OrderList from '../../components/order-list/order-list';
 import NavProfile from '../../components/nav-profile/nav-profile';
 
-
 export default function Orders() {
 
   return (
@@ -14,7 +13,7 @@ export default function Orders() {
           В этом разделе вы можете изменить свои персональные данные
         </p>
       </div>
-      <div className='mt-10'>
+      <div className={`${styles.box} mt-10`}>
         <OrderList />
       </div>
     </div>
