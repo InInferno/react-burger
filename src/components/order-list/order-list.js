@@ -22,7 +22,7 @@ export default function OrderList() {
             <p className='text text_type_main-medium mt-6'>{item.name}</p>
             <div className={`${styles.order} mt-6`}>
               <ul className={styles.images}>
-                {item.images.forEach((image, index) => {
+                {item.images.map((image, index) => {
                   if (index < 6) { 
                     return (
                       <li key={index} style={{zIndex: item.images.length - index}} className={`${styles.radius} ${item.images.length > 6 && index === 5 && styles.blackout}`}>
@@ -32,6 +32,8 @@ export default function OrderList() {
                         }
                       </li>
                     )
+                  } else {
+                    return null;
                   }
                 })}
               </ul>
