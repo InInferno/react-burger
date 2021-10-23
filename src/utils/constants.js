@@ -51,3 +51,10 @@ export const dataOrders = [
       price: '666',
     }
 ]
+
+export const dataOrdersNumbers = {
+  ready: ['034533', '034532', '034530', '034527', '034525'],
+  inWork: ['034533', '034532', '034530'],
+  totalOrders: '28752',
+  todayOrders: '138'
+}
