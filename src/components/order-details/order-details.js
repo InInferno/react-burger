@@ -28,14 +28,12 @@ export default function OrderDetails() {
     return counts[item] || 0;
   }
 
-  let flags = {};
-  let uniqueIngredients = [];
-  data.ingredients.forEach((item) => {
-    if (!flags[item._id]) {
-      flags[item._id] = true;
-      uniqueIngredients.push(item);
+  const uniqueIngredients = data.ingredients.reduce((acc, item) => {
+    if (!acc._id) {
+      acc[item._id] = item;
     }
-  })
+    return acc;
+  }, {});
 
   return (
     <div className={`${styles.container}`}>
@@ -45,7 +43,7 @@ export default function OrderDetails() {
       <p className='text text_type_main-medium mt-15'>Состав:</p>
       <div className={`${styles.box} ${styles.scroll}`}>
         <ul className={`${styles.list} mt-6`}>
-          {uniqueIngredients.map((item) => {
+          {Object.values(uniqueIngredients).map((item) => {
             return <li
               key={item._id}
               className={`${styles.card} mb-4`}
