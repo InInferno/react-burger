@@ -22,13 +22,13 @@ export default function OrderList() {
             <p className='text text_type_main-medium mt-6'>{item.name}</p>
             <div className={`${styles.order} mt-6`}>
               <ul className={styles.images}>
-                {item.images.map((image, index) => {
+                {item.ingredients.map((ingredient, index) => {
                   if (index < 6) { 
                     return (
-                      <li key={index} style={{zIndex: item.images.length - index}} className={`${styles.radius} ${item.images.length > 6 && index === 5 && styles.blackout}`}>
-                        <img className={`${styles.image}`} src={image} alt='Ингредиент' />
-                        {item.images.length > 6 && index === 5 && 
-                          <p className={`${styles.number} text text_type_digits-default`}>{`+${item.images.length - 6}`}</p>
+                      <li key={index} style={{zIndex: item.ingredients.length - index}} className={`${styles.radius} ${item.ingredients.length > 6 && index === 5 && styles.blackout}`}>
+                        <img className={`${styles.image}`} src={ingredient.image} alt='Ингредиент' />
+                        {item.ingredients.length > 6 && index === 5 && 
+                          <p className={`${styles.number} text text_type_digits-default`}>{`+${item.ingredients.length - 6}`}</p>
                         }
                       </li>
                     )
