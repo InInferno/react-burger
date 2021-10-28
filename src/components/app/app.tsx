@@ -22,10 +22,17 @@ import Feed from '../../pages/feed/feed';
 import Orders from '../../pages/orders/orders';
 import OrderDetails from '../order-details/order-details';
 
-function App() {
+const App: React.FC = () => {
 
+  interface ILocation {
+    hash: string;
+    pathname: string;
+    search: string;
+    state: any;
+  } 
+  
   const dispatch = useDispatch()
-  let location = useLocation();
+  let location: ILocation = useLocation();
   let history = useHistory();
   const action = history.action ==='PUSH' || history.action ==='REPLACE';
   const modalIngredientOpen = action && location.state && location.state.ingredientModal;

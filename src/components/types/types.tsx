@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { store } from '../../services/store';
 
 export const cardPropTypes = PropTypes.shape({
     _id: PropTypes.string.isRequired,
@@ -14,3 +15,21 @@ export const cardPropTypes = PropTypes.shape({
     image_large: PropTypes.string.isRequired,
     __v: PropTypes.number.isRequired
 });
+
+export type RootState = ReturnType<typeof store.getState>;
+
+export interface ICard {
+  calories: number;
+  carbohydrates: number;
+  fat: number;
+  image: string;
+  image_large: string;
+  image_mobile: string;
+  name: string;
+  price: number;
+  proteins: number;
+  type: string;
+  uuid: any;
+  __v: number;
+  _id: string;
+}
