@@ -4,7 +4,7 @@ import orderAccepted from '../../images/order-accepted.gif'
 import { useSelector } from 'react-redux';
 import { RootState, IOrderInfo } from '../../utils/types';
 
-const OrderInfo: React.FC = () =>  {
+const OrderInfo: React.FC = () => {
 
   const data = useSelector<RootState, IOrderInfo>(store => store.orderReducer.createdOrder)
 

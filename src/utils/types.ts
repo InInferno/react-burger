@@ -87,3 +87,11 @@ export interface IOrderInfo {
     price: number;
   };
 }
+
+export interface IOrderList {
+  id: string;
+  date: string;
+  name: string;
+  ingredients: Array<ICard>;
+  price: string;
+}

@@ -2,15 +2,16 @@ import React from 'react';
 import styles from './order-list.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { dataOrders } from '../../utils/constants'
+import { IOrderList } from '../../utils/types';
 
-export default function OrderList() {
+const OrderList: React.FC = () => {
 
   const data = dataOrders;
-  
+
   return (
     <div className={`${styles.container} ${styles.scroll}`}>
       <ul className={`${styles.cards} mr-2`}>
-        {data.map((item, index) => {
+        {data.map((item: IOrderList, index: number) => {
           return <li
             className={styles.card}
             key={index}
@@ -48,3 +49,5 @@ export default function OrderList() {
     </div>
   )
 }
+
+export default OrderList;
