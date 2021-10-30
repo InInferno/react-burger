@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { ReactNode } from 'react';
 import { store } from '../services/store';
 
 export const cardPropTypes = PropTypes.shape({
@@ -57,3 +58,7 @@ export interface IIngredientDetails {
   data: Array<ICard>;
 }
 
+export interface IModal {
+  children: ReactNode;
+  closeModal: () => void;
+}
