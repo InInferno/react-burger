@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './order-stat.module.css';
 import { dataOrdersNumbers } from '../../utils/constants'
 
-export default function OrderStat() {
+const OrderStat: React.FC = () => {
 
   const data = dataOrdersNumbers;
 
@@ -12,7 +12,7 @@ export default function OrderStat() {
         <div className={`${styles.work} mr-9`}>
           <p className='text text_type_main-medium'>Готовы:</p>
           <ul className={styles.list}>
-            {data.ready.map((item, index) => {
+            {data.ready.map((item: string, index: number) => {
               return <li key={index} className={`${styles.text} text text_type_digits-default`}>{item}</li>
             })}
           </ul>
@@ -37,3 +37,5 @@ export default function OrderStat() {
     </div>
   )
 }
+
+export default OrderStat;
