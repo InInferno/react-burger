@@ -1,40 +1,50 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, FormEvent } from 'react';
 import styles from './profile.module.css';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { updateUserInfoFetch } from '../../services/actions/profile-actions';
 import { useDispatch, useSelector } from 'react-redux';
 import NavProfile from '../../components/nav-profile/nav-profile';
+import { RootState } from '../../utils/types';
 
-function Profile() {
+const Profile: React.FC = () => {
     const dispatch = useDispatch();
-    const profileName = useSelector(store => store.profileReducer.name)
-    const profileEmail = useSelector(store => store.profileReducer.email)
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const profileName = useSelector<RootState, string>(store => store.profileReducer.name)
+    const profileEmail = useSelector<RootState, string>(store => store.profileReducer.email)
+    const [name, setName] = useState<string>('')
+    const [email, setEmail] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
 
     useEffect(() => {
         setName(`${profileName}`);
         setEmail(`${profileEmail}`);
     }, [setName, setEmail, profileName, profileEmail])
 
-    const inputNameRef = useRef(null)
-    const inputLoginRef = useRef(null)
-    const inputPasswordRef = useRef(null)
+    const inputNameRef = useRef<HTMLInputElement>(null)
+    const inputLoginRef = useRef<HTMLInputElement>(null)
+    const inputPasswordRef = useRef<HTMLInputElement>(null)
 
     const onIconClickName = () => {
-        inputNameRef.current.disabled = !inputNameRef.current.disabled
+        const current = inputNameRef.current;
+        if(current) {
+            current.disabled = !current.disabled;
+        }
     }
 
     const onIconClickLogin = () => {
-        inputLoginRef.current.disabled = !inputLoginRef.current.disabled
+        const current = inputLoginRef.current;
+        if (current) {
+            current.disabled = !current.disabled;
+        }
     }
 
     const onIconClickPassword = () => {
-        inputPasswordRef.current.disabled = !inputPasswordRef.current.disabled
+        const current = inputPasswordRef.current;
+        if (current) {
+            current.disabled = !current.disabled
+        }
     }
 
-    const saveHandled = (e) => {
+    const saveHandled = (e: FormEvent) => {
         e.preventDefault();
         dispatch(updateUserInfoFetch(email, name, password))
         setPassword('');

@@ -3,7 +3,7 @@ import styles from './orders.module.css';
 import OrderList from '../../components/order-list/order-list';
 import NavProfile from '../../components/nav-profile/nav-profile';
 
-const Orders: React.FC = () =>  {
+const Orders: React.FC = () => {
   return (
     <div className={styles.container}>
       <div className='mt-20'>
