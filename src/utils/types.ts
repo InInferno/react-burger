@@ -68,7 +68,7 @@ export interface IModalOverlay {
 }
 
 export interface IOrderInfo {
-  succuss: boolean;
+  success: boolean;
   name: string;
   order: {
     ingredients: Array<ICard>;

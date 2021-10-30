@@ -10,13 +10,14 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { deleteCartModal } from '../../services/actions/modal-actions';
 import { deleteOrderModal } from '../../services/actions/order-actions';
 import { useDispatch } from 'react-redux';
+import { RootState, IOrderInfo } from '../../utils/types';
 
-export default function BurgerContainer() {
+const BurgerContainer: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const isModalOrder = useSelector(store => store.orderReducer.createdOrder)
-
+  const isModalOrder = useSelector<RootState, IOrderInfo>(store => store.orderReducer.createdOrder)
+  
   const closeModal = () => {
     dispatch(deleteCartModal());
     dispatch(deleteOrderModal());
@@ -39,3 +40,5 @@ export default function BurgerContainer() {
     </main>
   )
 }
+
+export default BurgerContainer;
