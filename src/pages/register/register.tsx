@@ -1,21 +1,22 @@
-import React, { useRef, useState } from 'react';
+import React, { FormEvent, useRef, useState } from 'react';
 import styles from './register.module.css';
 import { Link, Redirect } from 'react-router-dom';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { registerFetch } from '../../services/actions/profile-actions';
 import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../utils/types';
 
-function Register() {
+const Register: React.FC = () => {
 
     const dispatch = useDispatch();
 
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [name, setName] = useState<string>('')
+    const [email, setEmail] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
 
-    const inputRef = useRef(null)
+    const inputRef = useRef<HTMLInputElement>(null)
 
-    const [passwordType, setPasswordType] = useState('password')
+    const [passwordType, setPasswordType] = useState<"password" | "text" | "email">('password')
     const onIconClick = () => {
         if(passwordType === 'password') {
             setPasswordType('text')
@@ -24,12 +25,12 @@ function Register() {
         }
     }
 
-    const registerHandler = (e) => {
+    const registerHandler = (e: FormEvent) => {
         e.preventDefault();
         dispatch(registerFetch(email, password, name));
     }
     
-    const userName = useSelector(store => store.profileReducer.name)
+    const userName = useSelector<RootState, string>(store => store.profileReducer.name)
     if (userName) {
         return (
           <Redirect
