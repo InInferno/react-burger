@@ -6,7 +6,7 @@ import { loginFetch } from '../../services/actions/profile-actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { ILocation, RootState } from '../../utils/types';
 
-const Login: React.FC = () =>  {
+const Login: React.FC = () => {
     
     const dispatch = useDispatch();
     const location: ILocation = useLocation();
