@@ -66,3 +66,24 @@ export interface IModal {
 export interface IModalOverlay {
   closeModal: () => void;
 }
+
+export interface IOrderInfo {
+  succuss: boolean;
+  name: string;
+  order: {
+    ingredients: Array<ICard>;
+    _id: string;
+    owner: {
+        name: string;
+        email: string;
+        createdAt: string;
+        updatedAt: string;
+    },
+    status: string;
+    name: string;
+    createdAt: string;
+    updatedAt: string;
+    number: number;
+    price: number;
+  };
+}
