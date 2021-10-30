@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { logoutFetch } from '../../services/actions/profile-actions';
 import { useDispatch } from 'react-redux';
 
-function NavProfile() {
+const NavProfile: React.FC = () => {
     const dispatch = useDispatch();
 
     const onClickLogout = () => {
@@ -29,7 +29,6 @@ function NavProfile() {
                 История заказов
             </NavLink>
             <div 
-                to='/profile' 
                 className={`${styles.link}`}
                 onClick={(() => onClickLogout())}
             >
