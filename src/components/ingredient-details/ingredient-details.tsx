@@ -4,16 +4,19 @@ import { useSelector } from 'react-redux';
 import {
     useParams
   } from "react-router-dom";
+import { RootState, ICard, IIngredientDetails } from '../../utils/types';
 
-export default function IngredientDetails() {
+const IngredientDetails: React.FC = () => {
     
-    const [data, setData] = useState('');
-    const { id } = useParams();
-    const cards = useSelector(store => store.ingredientsReducer.listAllIngredients)
+    const [data, setData] = useState<ICard>();
+    const { id }: {id: string} = useParams();
+    const cards = useSelector<RootState, IIngredientDetails>(store => store.ingredientsReducer.listAllIngredients)
     const loadIndredient = useCallback(
         () => {
-            const card = (cards.success ? cards.data.find(({ _id }) => _id === id) : {});
-            setData(card);
+            if(cards.success) {
+                const card: ICard | undefined = (cards.data.find(({ _id }) => _id === id));
+                setData(card);
+            }
         },
         [id, cards.success, cards.data]
     );
@@ -75,3 +78,5 @@ export default function IngredientDetails() {
     </div>
   )
 }
+
+export default IngredientDetails;

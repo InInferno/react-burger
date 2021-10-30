@@ -9,7 +9,7 @@ import { addIngredient, updateIngredients } from '../../services/actions/constru
 import { useDrop } from "react-dnd";
 import update from 'immutability-helper';
 import ConstructorCard from '../constructor-card/constructor-card';
-import { ICard, RootState } from '../types/types';
+import { ICard, RootState } from '../../utils/types';
 
 const BurgerConstructor: React.FC = () => {
 
@@ -54,7 +54,6 @@ const BurgerConstructor: React.FC = () => {
       }
     )
   }, [dataIngs, bunBurger, dispatch])
-
 
   const name = useSelector<RootState, string>(store => store.profileReducer.name);
 

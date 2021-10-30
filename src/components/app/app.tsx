@@ -21,16 +21,10 @@ import BurgerContainer from '../../pages/burger-container/burger-container';
 import Feed from '../../pages/feed/feed';
 import Orders from '../../pages/orders/orders';
 import OrderDetails from '../order-details/order-details';
+import { ILocation } from '../../utils/types';
 
 const App: React.FC = () => {
 
-  interface ILocation {
-    hash: string;
-    pathname: string;
-    search: string;
-    state: any;
-  } 
-  
   const dispatch = useDispatch()
   let location: ILocation = useLocation();
   let history = useHistory();

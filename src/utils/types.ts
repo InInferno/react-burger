@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { store } from '../../services/store';
+import { store } from '../services/store';
 
 export const cardPropTypes = PropTypes.shape({
     _id: PropTypes.string.isRequired,
@@ -29,7 +29,31 @@ export interface ICard {
   price: number;
   proteins: number;
   type: string;
-  uuid: any;
+  uuid: string;
   __v: number;
   _id: string;
 }
+
+export interface ILocation {
+  hash: string;
+  pathname: string;
+  search: string;
+  state: any;
+} 
+
+export interface IConstructorCard {
+  id: string;
+  index: number;
+  moveCard: (dragIndex: number, hoverIndex: number) => void;
+  constructorCard: ICard;
+} 
+
+export interface IIngredientCard {
+  card: ICard;
+}
+
+export interface IIngredientDetails {
+  success: boolean;
+  data: Array<ICard>;
+}
+

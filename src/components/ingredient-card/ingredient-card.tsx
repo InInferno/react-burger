@@ -1,13 +1,12 @@
 import React from 'react';
 import styles from './ingredient-card.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import { cardPropTypes } from '../types/types';
+import { ICard, IIngredientCard, RootState } from '../../utils/types';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCartModal } from '../../services/actions/modal-actions';
 import { useDrag } from "react-dnd";
 
-export default function IngredientCard({ card }) {
-
+const IngredientCard: React.FC<IIngredientCard> = ({ card }) =>  {
   const [{opacity}, dragRef] = useDrag({
     type: "ingredient",
     item: {card},
@@ -17,14 +16,14 @@ export default function IngredientCard({ card }) {
   });
 
   const dispatch = useDispatch();
-  const orderIds = useSelector(store => store.orderReducer.orderIds);
+  const orderIds = useSelector<RootState, Array<string>>(store => store.orderReducer.orderIds);
 
-  const openModal = (card) => {
+  const openModal = (card: ICard) => {
     dispatch(addCartModal(card))
   }
 
-  const counter = (item) => {
-    const counts = {};
+  const counter = (item: string) => {
+    const counts: any = {};
     for (const num of orderIds) {
       counts[num] = counts[num] ? counts[num] + 1 : 1;
     }
@@ -53,6 +52,4 @@ export default function IngredientCard({ card }) {
   )
 }
 
-IngredientCard.propTypes = {
-  card: cardPropTypes
-};
+export default IngredientCard;

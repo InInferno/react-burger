@@ -4,12 +4,13 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientCard from '../ingredient-card/ingredient-card'
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
+import { ICard, RootState } from '../../utils/types';
 
-export default function BurgerIngredients() {
+const BurgerIngredients: React.FC = () => {
 
   let location = useLocation();
 
-  const data = useSelector(store => store.ingredientsReducer.listAllIngredients.data);
+  const data = useSelector<RootState, Array<ICard>>(store => store.ingredientsReducer.listAllIngredients.data);
   
   const [current, setCurrent] = useState('bun');
   const typesIng = [
@@ -18,21 +19,21 @@ export default function BurgerIngredients() {
     {type: 'main', title: 'Начинки'}
   ];
 
-  const dataFilter = type => {
+  const dataFilter = (type: string) => {
     return data.filter(item => item.type === type)
   }
 
-  const setTab = (tab) => {
+  const setTab = (tab: string) => {
     setCurrent(tab);
     const element = document.getElementById(tab);
     if (element) element.scrollIntoView({ behavior: "smooth" });
   };
 
   const updateTabs = () => {
-    const containerTop = document.getElementById('container').getBoundingClientRect().top;
-    const bunTop = document.getElementById('bun').getBoundingClientRect().top;
-    const sauceTop = document.getElementById('sauce').getBoundingClientRect().top;
-    const mainTop = document.getElementById('main').getBoundingClientRect().top;
+    const containerTop = (document.getElementById('container') as HTMLDivElement).getBoundingClientRect().top;
+    const bunTop = (document.getElementById('bun') as HTMLDivElement).getBoundingClientRect().top;
+    const sauceTop = (document.getElementById('sauce') as HTMLDivElement).getBoundingClientRect().top;
+    const mainTop = (document.getElementById('main') as HTMLDivElement).getBoundingClientRect().top;
     if (bunTop >= containerTop && containerTop < sauceTop) {
       setCurrent('bun')
     } else if (sauceTop <= containerTop && containerTop < mainTop) {
@@ -65,7 +66,7 @@ export default function BurgerIngredients() {
               </p>
               <ul className={`${styles.cards} ml-4 mr-4`}>
                 {data && 
-                  dataFilter(item.type).map((card) => {
+                  dataFilter(item.type).map((card: ICard) => {
                     return (
                       <Link
                         className={styles.link}
@@ -75,7 +76,7 @@ export default function BurgerIngredients() {
                           state: { ingredientModal: location }
                         }}
                       >
-                        <IngredientCard key={card._id} card={card} />
+                        <IngredientCard card={card} />
                       </Link>
                     )
                   })
@@ -87,3 +88,5 @@ export default function BurgerIngredients() {
     </section>
   )
 }
+
+export default BurgerIngredients;
