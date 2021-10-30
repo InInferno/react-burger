@@ -3,7 +3,7 @@ import styles from './feed.module.css';
 import OrderList from '../../components/order-list/order-list';
 import OrderStat from '../../components/order-stat/order-stat';
 
-const Feed: React.FC = () =>  {
+const Feed: React.FC = () => {
 
   return (
     <div className={`${styles.container} mt-10`}>
