@@ -95,3 +95,25 @@ export interface IOrderList {
   ingredients: Array<ICard>;
   price: string;
 }
+
+export interface IRest {
+  exact?: boolean;
+  path: string;
+  children: ReactNode;
+  rest?: {
+    path: string;
+    exact: boolean,
+    location: {
+        pathname: string;
+        search: string;
+        hash: string;
+        key: string;
+    },
+    computedMatch: {
+        path: string;
+        url: string;
+        isExact: true,
+        params: any
+    }
+  }
+}
