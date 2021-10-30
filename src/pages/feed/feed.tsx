@@ -3,7 +3,7 @@ import styles from './feed.module.css';
 import OrderList from '../../components/order-list/order-list';
 import OrderStat from '../../components/order-stat/order-stat';
 
-export default function Feed() {
+const Feed: React.FC = () =>  {
 
   return (
     <div className={`${styles.container} mt-10`}>
@@ -17,3 +17,5 @@ export default function Feed() {
     </div>
   );
 }
+
+export default Feed;
