@@ -18,7 +18,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/bun-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/bun-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "160d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c8",
@@ -32,7 +33,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-03.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-03-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-03-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "260d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -46,7 +48,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "360d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733cc",
@@ -60,7 +63,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/sauce-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/sauce-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/sauce-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "460d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733cd",
@@ -74,7 +78,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/sauce-04.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/sauce-04-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/sauce-04-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "560d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733d0",
@@ -88,7 +93,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/mineral_rings.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/mineral_rings-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/mineral_rings-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "660d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733d0",
@@ -102,7 +108,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/mineral_rings.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/mineral_rings-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/mineral_rings-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "760d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -116,7 +123,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "860d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -130,7 +138,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "960d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -144,7 +153,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "060d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -158,7 +168,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "1160d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -172,7 +183,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "1260d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c6",
@@ -186,7 +198,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/bun-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/bun-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "1360d3b41abdacab0026a733c6",
         }
       ],
       price: '666',
@@ -208,7 +221,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/bun-01.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/bun-01-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/bun-01-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "1460d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c8",
@@ -222,7 +236,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-03.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-03-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-03-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "1560d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -236,7 +251,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "1660d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -250,7 +266,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "1760d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -264,7 +281,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "1860d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -278,7 +296,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "1960d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -292,7 +311,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "1060d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c7",
@@ -306,7 +326,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/bun-01.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/bun-01-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/bun-01-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "2160d3b41abdacab0026a733c6",
         }
       ],
       price: '1337',
@@ -328,7 +349,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/bun-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/bun-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "2260d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -342,7 +364,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "2360d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c6",
@@ -356,7 +379,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/bun-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/bun-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "2460d3b41abdacab0026a733c6",
         }
       ],
       price: '228',
@@ -378,7 +402,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/bun-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/bun-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "2560d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c8",
@@ -392,7 +417,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-03.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-03-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-03-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "2660d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -406,7 +432,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "2760d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -420,7 +447,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "2860d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -434,7 +462,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "2960d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -448,7 +477,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "3060d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -462,7 +492,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "3160d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -476,7 +507,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "3260d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c6",
@@ -490,7 +522,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/bun-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/bun-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "3360d3b41abdacab0026a733c6",
         }
       ],
       price: '42',
@@ -512,7 +545,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/bun-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/bun-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "3460d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c8",
@@ -526,7 +560,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-03.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-03-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-03-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "3560d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -540,7 +575,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "3660d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -554,7 +590,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "3760d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -568,7 +605,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "3860d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -582,7 +620,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "3960d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -596,7 +635,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "4060d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -610,7 +650,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "4160d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c6",
@@ -624,7 +665,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/bun-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/bun-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "4260d3b41abdacab0026a733c6",
         }
       ],
       price: '13',
@@ -646,7 +688,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/bun-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/bun-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "4360d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c8",
@@ -660,7 +703,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-03.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-03-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-03-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "4460d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -674,7 +718,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "4560d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -688,7 +733,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "4660d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -702,7 +748,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "4760d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -716,7 +763,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "4860d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -730,7 +778,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "4960d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -744,7 +793,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "5060d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c6",
@@ -758,7 +808,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/bun-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/bun-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "5160d3b41abdacab0026a733c6",
         }
       ],
       price: '777',
@@ -780,7 +831,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/bun-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/bun-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "5260d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c8",
@@ -794,7 +846,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-03.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-03-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-03-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "5360d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -808,7 +861,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "5460d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -822,7 +876,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "5560d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -836,7 +891,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "5660d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -850,7 +906,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "5760d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -864,7 +921,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "5860d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c9",
@@ -878,7 +936,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/meat-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/meat-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/meat-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "5960d3b41abdacab0026a733c6",
         },
         {
           "_id": "60d3b41abdacab0026a733c6",
@@ -892,7 +951,8 @@ export const dataOrders = [
           "image": "https://code.s3.yandex.net/react/code/bun-02.png",
           "image_mobile": "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
           "image_large": "https://code.s3.yandex.net/react/code/bun-02-large.png",
-          "__v": 0
+          "__v": 0,
+          "uuid": "6060d3b41abdacab0026a733c6",
         }
       ],
       price: '666',

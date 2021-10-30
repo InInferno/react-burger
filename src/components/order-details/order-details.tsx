@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import styles from './order-details.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { dataOrders } from '../../utils/constants';
+import { ICard } from '../../utils/types';
 
-export default function OrderDetails() {
+const OrderDetails: React.FC = () => {
 
   const data = dataOrders[0];
   const ingredientIds = [...data.ingredients.map(item => item._id)]
@@ -20,20 +21,21 @@ export default function OrderDetails() {
     )
   }, [data])
 
-  const counter = (item) => {
-    const counts = {};
+  const counter = (item: string) => {
+    const counts: any = {};
     for (const num of ingredientIds) {
       counts[num] = counts[num] ? counts[num] + 1 : 1;
     }
     return counts[item] || 0;
   }
 
-  const uniqueIngredients = data.ingredients.reduce((acc, item) => {
+  let uniqueIngredients = data.ingredients.reduce((acc: any, item: ICard) => {
     if (!acc._id) {
       acc[item._id] = item;
     }
     return acc;
   }, {});
+  uniqueIngredients = Object.values(uniqueIngredients);
 
   return (
     <div className={`${styles.container}`}>
@@ -43,7 +45,7 @@ export default function OrderDetails() {
       <p className='text text_type_main-medium mt-15'>Состав:</p>
       <div className={`${styles.box} ${styles.scroll}`}>
         <ul className={`${styles.list} mt-6`}>
-          {Object.values(uniqueIngredients).map((item) => {
+          {uniqueIngredients.map((item: ICard) => {
             return <li
               key={item._id}
               className={`${styles.card} mb-4`}
@@ -72,3 +74,5 @@ export default function OrderDetails() {
     </div>
   )
 }
+
+export default OrderDetails;
