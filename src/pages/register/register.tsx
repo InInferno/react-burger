@@ -16,7 +16,7 @@ const Register: React.FC = () => {
 
     const inputRef = useRef<HTMLInputElement>(null)
 
-    const [passwordType, setPasswordType] = useState<"password" | "text" | "email">('password')
+    const [passwordType, setPasswordType] = useState<"password" | "text">('password')
     const onIconClick = () => {
         if(passwordType === 'password') {
             setPasswordType('text')

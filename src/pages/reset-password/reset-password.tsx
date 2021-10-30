@@ -1,20 +1,21 @@
-import React, { useRef, useState } from 'react';
+import React, { FormEvent, useRef, useState } from 'react';
 import styles from './reset-password.module.css';
 import { Link, Redirect } from 'react-router-dom';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetPasswordFetch } from '../../services/actions/profile-actions';
+import { RootState } from '../../utils/types';
 
-function ResetPassword() {
+const ResetPassword: React.FC = () =>  {
 
     const dispatch = useDispatch();
 
-    const [password, setPassword] = useState('')
-    const [token, setToken] = useState('')
+    const [password, setPassword] = useState<string>('')
+    const [token, setToken] = useState<string>('')
 
     const inputRef = useRef(null)
 
-    const [passwordType, setPasswordType] = useState('password')
+    const [passwordType, setPasswordType] = useState<"password" | "text">('password')
     const onIconClick = () => {
         if(passwordType === 'password') {
             setPasswordType('text')
@@ -23,12 +24,14 @@ function ResetPassword() {
         }
     }
 
-    const resetHandler = (e) => {
+    const resetHandler = (e: FormEvent) => {
         e.preventDefault();
         dispatch(resetPasswordFetch(password, token));
     } 
 
-    const { name, passwordReseted, emailSent } = useSelector(store => store.profileReducer);
+    const name = useSelector<RootState, string>(store => store.profileReducer.name);
+    const passwordReseted = useSelector<RootState, boolean>(store => store.profileReducer.passwordReseted);
+    const emailSent = useSelector<RootState, boolean>(store => store.profileReducer.emailSent);
     if (name) {
         return (
           <Redirect
