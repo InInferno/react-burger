@@ -6,59 +6,59 @@ import { useDispatch, useSelector } from 'react-redux';
 import { resetPasswordFetch } from '../../services/actions/profile-actions';
 import { RootState } from '../../utils/types';
 
-const ResetPassword: React.FC = () =>  {
+const ResetPassword: React.FC = () => {
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const [password, setPassword] = useState<string>('')
-    const [token, setToken] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  const [token, setToken] = useState<string>('')
 
-    const inputRef = useRef(null)
+  const inputRef = useRef(null)
 
-    const [passwordType, setPasswordType] = useState<"password" | "text">('password')
-    const onIconClick = () => {
-        if(passwordType === 'password') {
-            setPasswordType('text')
-        } else {
-            setPasswordType('password')
-        }
-    }
+  const [passwordType, setPasswordType] = useState<"password" | "text">('password')
+  const onIconClick = () => {
+      if(passwordType === 'password') {
+          setPasswordType('text')
+      } else {
+          setPasswordType('password')
+      }
+  }
 
-    const resetHandler = (e: FormEvent) => {
-        e.preventDefault();
-        dispatch(resetPasswordFetch(password, token));
-    } 
+  const resetHandler = (e: FormEvent) => {
+      e.preventDefault();
+      dispatch(resetPasswordFetch(password, token));
+  } 
 
-    const name = useSelector<RootState, string>(store => store.profileReducer.name);
-    const passwordReseted = useSelector<RootState, boolean>(store => store.profileReducer.passwordReseted);
-    const emailSent = useSelector<RootState, boolean>(store => store.profileReducer.emailSent);
-    if (name) {
-        return (
-          <Redirect
-            to={{
-              pathname: '/'
-            }}
-          />
-        );
-    }
-    if (!emailSent) {
-        return (
-          <Redirect
-            to={{
-              pathname: '/forgot-password'
-            }}
-          />
-        );
-    }
-    if (passwordReseted) {
-        return (
-          <Redirect
-            to={{
-              pathname: '/login'
-            }}
-          />
-        );
-    }
+  const name = useSelector<RootState, string>(store => store.profileReducer.name);
+  const passwordReseted = useSelector<RootState, boolean>(store => store.profileReducer.passwordReseted);
+  const emailSent = useSelector<RootState, boolean>(store => store.profileReducer.emailSent);
+  if (name) {
+      return (
+        <Redirect
+          to={{
+            pathname: '/'
+          }}
+        />
+      );
+  }
+  if (!emailSent) {
+      return (
+        <Redirect
+          to={{
+            pathname: '/forgot-password'
+          }}
+        />
+      );
+  }
+  if (passwordReseted) {
+      return (
+        <Redirect
+          to={{
+            pathname: '/login'
+          }}
+        />
+      );
+  }
     
   return (
     <div className={styles.container}>
