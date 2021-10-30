@@ -62,3 +62,7 @@ export interface IModal {
   children: ReactNode;
   closeModal: () => void;
 }
+
+export interface IModalOverlay {
+  closeModal: () => void;
+}
