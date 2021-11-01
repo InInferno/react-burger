@@ -1,11 +1,12 @@
 import React from 'react';
-import styles from './order-details.module.css';
+import styles from './order-info.module.css';
 import orderAccepted from '../../images/order-accepted.gif'
 import { useSelector } from 'react-redux';
+import { RootState, IOrderInfo } from '../../utils/types';
 
-export default function OrderDetails() {
+const OrderInfo: React.FC = () => {
 
-  const data = useSelector(store => store.orderReducer.createdOrder)
+  const data = useSelector<RootState, IOrderInfo>(store => store.orderReducer.createdOrder)
 
   return (
     <div className={`${styles.container} pt-30 pr-25 pb-30 pl-25`}>
@@ -26,3 +27,5 @@ export default function OrderDetails() {
     </div> 
   )
 }
+
+export default OrderInfo;

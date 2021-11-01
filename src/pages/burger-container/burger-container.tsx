@@ -3,20 +3,21 @@ import styles from './burger-container.module.css';
 import BurgerIngredients from '../../components/burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../../components/burger-constructor/burger-constructor';
 import Modal from '../../components/modal/modal';
-import OrderDetails from '../../components/order-details/order-details';
+import OrderInfo from '../../components/order-info/order-info';
 import { useSelector } from 'react-redux';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { deleteCartModal } from '../../services/actions/modal-actions';
 import { deleteOrderModal } from '../../services/actions/order-actions';
 import { useDispatch } from 'react-redux';
+import { RootState, IOrderInfo } from '../../utils/types';
 
-export default function BurgerContainer() {
+const BurgerContainer: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const isModalOrder = useSelector(store => store.orderReducer.createdOrder)
-
+  const isModalOrder = useSelector<RootState, IOrderInfo>(store => store.orderReducer.createdOrder)
+  
   const closeModal = () => {
     dispatch(deleteCartModal());
     dispatch(deleteOrderModal());
@@ -25,7 +26,7 @@ export default function BurgerContainer() {
   return (
     <main className={styles.box}>      
       {isModalOrder.success &&
-        <Modal children={<OrderDetails />} closeModal={closeModal}/>
+        <Modal children={<OrderInfo />} closeModal={closeModal}/>
       }
       <h1 className="text text_type_main-large mt-10 mb-5">
         Соберите бургер
@@ -39,3 +40,5 @@ export default function BurgerContainer() {
     </main>
   )
 }
+
+export default BurgerContainer;

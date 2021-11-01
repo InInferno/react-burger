@@ -2,27 +2,10 @@
     width: 885px;
     margin: 0 auto;
     display: flex;
-    flex-direction: column;
 }
 
 .box {
     display: flex;
-}
-
-.nav {
-    width: 400px;
-    display: flex;
-    flex-direction: column;
-}
-
-.text {
-    line-height: 60px;
-    text-decoration: none;
-}
-
-.link:hover {
-    opacity: .7;
-    cursor: pointer;
 }
 
 .form {
@@ -43,10 +26,6 @@
 }
 
 .button {
-    display: flex;
-}
-
-.info {
     display: flex;
 }
 

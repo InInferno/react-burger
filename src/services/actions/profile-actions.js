@@ -361,22 +361,20 @@ export function userFetch() {
               "authorization": getCookie('accessToken')
             }
         })
-            .then(res => {
-                if (res.status === 403) {
-                    throw dispatch(tokenFetch(url))
-                } else if (res.status !== 200) {
-                    throw new Error(res.status)
-                }
-                return res.json()
-            })
-            .then(res => {
-                console.log(res)
-                dispatch(user(res))
-            })
-            .catch((err) => {
-                console.log(err)
-                dispatch(userError(err))
-            });
+        .then(res => res.ok ? res.json() : res.json().then((err) => Promise.reject(err)))
+        .then(res => {
+            console.log(res, 'Обновление информации о пользователе')
+            dispatch(user(res))
+        })
+        .catch(err => {
+            if (err.message === 'jwt expired') {
+                console.log(err, 'Обновление токена')
+                dispatch(tokenFetch())
+            } else {
+                console.log(err, 'Ошибка')
+                return Promise.reject(err);
+            }
+        })
     }
 }
 

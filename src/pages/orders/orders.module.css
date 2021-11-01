@@ -1,0 +1,15 @@
+.container {
+    width: 885px;
+    max-height: 740px;
+    margin: 0 auto;
+    display: flex;
+}
+
+.description {
+    width: 250px;
+}
+
+.box {
+    display: flex;
+    max-height: 900;
+}

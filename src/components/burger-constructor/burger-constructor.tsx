@@ -9,13 +9,14 @@ import { addIngredient, updateIngredients } from '../../services/actions/constru
 import { useDrop } from "react-dnd";
 import update from 'immutability-helper';
 import ConstructorCard from '../constructor-card/constructor-card';
+import { ICard, RootState } from '../../utils/types';
 
-export default function BurgerConstructor() {
+const BurgerConstructor: React.FC = () => {
 
   const dispatch = useDispatch();
   let history = useHistory();
 
-  const addIngredientInConstructor = (card) => {
+  const addIngredientInConstructor = (card: {card: ICard}) => {
     if(card.card.type === 'bun') {
       dispatch(addBun(card.card))
     } else {
@@ -25,21 +26,21 @@ export default function BurgerConstructor() {
 
   const [, dropTarget] = useDrop({
     accept: "ingredient",
-    drop(item) {
+    drop(item: {card: ICard}) {
       addIngredientInConstructor(item);
     },
   });
 
-  const dataIngs = useSelector(store => store.constructorReducer.ingredientsInConstructor);
-  const bunBurger = useSelector(store => store.bunReducer.bunInConstructor);
-  const orderIds = useSelector(store => store.orderReducer.orderIds);
-  const orderReq = useSelector(store => store.orderReducer.orderReq);
+  const dataIngs = useSelector<RootState, Array<ICard>>(store => store.constructorReducer.ingredientsInConstructor);
+  const bunBurger = useSelector<RootState, ICard>(store => store.bunReducer.bunInConstructor);
+  const orderIds = useSelector<RootState, Array<number>>(store => store.orderReducer.orderIds);
+  const orderReq = useSelector<RootState, Array<string>>(store => store.orderReducer.orderReq);
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
     dispatch(addOrderIds([
       bunBurger._id,
-      ...dataIngs.map(item => item._id),
+      ...dataIngs.map((item: ICard) => item._id),
       bunBurger._id
     ]))
 
@@ -47,15 +48,14 @@ export default function BurgerConstructor() {
       () => {
         const totalPrice = [
           ...Array(2).fill(bunBurger.price),
-          ...dataIngs.map(item => item.price)
+          ...dataIngs.map((item: ICard) => item.price)
         ].reduce((acc, price) => price ? acc + price : acc, 0);
         return totalPrice;
       }
     )
   }, [dataIngs, bunBurger, dispatch])
 
-
-  const { name } = useSelector(store => store.profileReducer);
+  const name = useSelector<RootState, string>(store => store.profileReducer.name);
 
   const isOpenModal = () => {
     name 
@@ -92,7 +92,7 @@ export default function BurgerConstructor() {
 
       {dataIngs.length >= 1 ?
         <ul className={ `${styles.container} ${styles.scroll} mt-4 mb-4`}>
-          {dataIngs.map((card, index)=> {
+          {dataIngs.map((card: ICard, index: number) => {
             return <ConstructorCard 
             constructorCard={card} 
             key={card.uuid} 
@@ -142,3 +142,5 @@ export default function BurgerConstructor() {
     </section>
   )
 }
+
+export default BurgerConstructor;

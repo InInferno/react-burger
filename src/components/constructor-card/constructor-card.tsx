@@ -7,24 +7,26 @@ import {
 } from '../../services/actions/action-types';
 import { deleteIngredient } from '../../services/actions/constructor-actions';
 import { useDrag, useDrop } from "react-dnd";
-import PropTypes from 'prop-types';
+import { ICard, IConstructorCard } from '../../utils/types';
+ 
+const ConstructorCard: React.FC<IConstructorCard> = ({ id, index, moveCard, constructorCard }) => {
 
-export default function ConstructorCard({ id, index, moveCard, constructorCard }) {
     const dispatch = useDispatch();
 
-    const removeIngredient = (card) => {
+    const removeIngredient = (card: ICard) => {
         dispatch(deleteIngredient(card))
     }
 
-    const ref = useRef(null);
+    const ref = useRef<HTMLLIElement>(null);
+    console.log(ref)
     const [{ handlerId }, drop] = useDrop({
         accept: UPDATE_INGREDIENTS,
         collect(monitor) {
             return {
                 handlerId: monitor.getHandlerId(),
             };
-        },
-        hover(item, monitor) {
+        }, 
+        hover(item: {index: number}, monitor: any) {
             if (!ref.current) {
                 return;
             }
@@ -60,7 +62,6 @@ export default function ConstructorCard({ id, index, moveCard, constructorCard }
 
     const opacity = isDragging ? 0 : 1;
     drag(drop(ref));
-
   return (
     <li
         className={`${styles.card}`}
@@ -79,23 +80,4 @@ export default function ConstructorCard({ id, index, moveCard, constructorCard }
   )
 }
 
-ConstructorCard.propTypes = {
-    id: PropTypes.string.isRequired,
-    index: PropTypes.number.isRequired,
-    moveCard: PropTypes.func.isRequired,
-    constructorCard: PropTypes.shape({
-            _id: PropTypes.string.isRequired,
-            name: PropTypes.string.isRequired,
-            type: PropTypes.string.isRequired,
-            proteins: PropTypes.number.isRequired,
-            fat: PropTypes.number.isRequired,
-            carbohydrates: PropTypes.number.isRequired,
-            calories: PropTypes.number.isRequired,
-            price: PropTypes.number.isRequired,
-            image: PropTypes.string.isRequired,
-            image_mobile: PropTypes.string.isRequired,
-            image_large: PropTypes.string.isRequired,
-            __v: PropTypes.number.isRequired,
-            uuid: PropTypes.string.isRequired
-        }).isRequired
-};
+export default ConstructorCard;
