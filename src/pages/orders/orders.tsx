@@ -13,7 +13,7 @@ const Orders: React.FC = () => {
         </p>
       </div>
       <div className={`${styles.box} mt-10`}>
-        <OrderList />
+        <OrderList url='profile/orders'/>
       </div>
     </div>
   );

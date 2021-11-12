@@ -30,10 +30,14 @@ const App: React.FC = () => {
   let history = useHistory();
   const action = history.action ==='PUSH' || history.action ==='REPLACE';
   const modalIngredientOpen = action && location.state && location.state.ingredientModal;
+  // const modalFeedDetailsOpen = action && location.state && location.state.feedDetailsModal;
+  const modalOrderDetailsOpen = action && location.state && location.state.orderDetailsModal;
   
   useEffect(() => {
     dispatch(ingredientsFetchData());
     dispatch(userFetch());
+    // console.log(modalFeedDetailsOpen)
+    // console.log(modalOrderDetailsOpen)
   }, [dispatch])
 
   const closeModal = () => {
@@ -65,15 +69,15 @@ const App: React.FC = () => {
         <ProtectedRoute path="/profile/orders" exact>
           <Orders />
         </ProtectedRoute>
-        <ProtectedRoute path="/profile/orders/:id" exact>
+        <ProtectedRoute path="/profile/orders/:id" >
           <OrderDetails />
         </ProtectedRoute>
-        <ProtectedRoute path="/feed" exact>
+        <Route path="/feed" exact>
           <Feed /> 
-        </ProtectedRoute>
-        <ProtectedRoute path="/feed/:id" exact>
+        </Route>
+        <Route path="/feed/:id">
           <OrderDetails /> 
-        </ProtectedRoute>
+        </Route>
         <Route 
           path="/ingredients/:id" 
           children={<IngredientDetails />} 
@@ -85,6 +89,34 @@ const App: React.FC = () => {
             <IngredientDetails />
           </Modal>
         </Route>
+      }
+      {/* {modalFeedDetailsOpen &&
+        <Route path="/feed/:id">
+          <Modal closeModal={closeModal}>
+            <OrderDetails />
+          </Modal>
+        </Route>
+      } */}
+      {/* {modalOrderDetailsOpen &&
+        <Route path="/profile/orders/:id">
+          <Modal closeModal={closeModal}>
+            <OrderDetails />
+          </Modal>
+        </Route>
+      } */}
+      {modalOrderDetailsOpen && 
+        <>
+        <Route path="/feed/:id">
+          <Modal closeModal={closeModal}>
+            <OrderDetails />
+          </Modal>
+        </Route>
+        <Route path="/profile/orders/:id">
+          <Modal closeModal={closeModal}>
+            <OrderDetails />
+          </Modal>
+        </Route>
+        </>
       }
     </>
   );

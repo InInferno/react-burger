@@ -11,7 +11,7 @@ const Feed: React.FC = () => {
         <p className="text text_type_main-large mb-5">
           Лента заказов
         </p>
-        <OrderList />
+        <OrderList url='feed'/>
       </div>
       <OrderStat />
     </div>

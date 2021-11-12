@@ -58,10 +58,10 @@ export interface IOrderInfo {
     ingredients: Array<ICard>;
     _id: string;
     owner: {
-        name: string;
-        email: string;
-        createdAt: string;
-        updatedAt: string;
+      name: string;
+      email: string;
+      createdAt: string;
+      updatedAt: string;
     },
     status: string;
     name: string;
@@ -88,16 +88,20 @@ export interface IRest {
     path: string;
     exact: boolean,
     location: {
-        pathname: string;
-        search: string;
-        hash: string;
-        key: string;
+      pathname: string;
+      search: string;
+      hash: string;
+      key: string;
     },
     computedMatch: {
-        path: string;
-        url: string;
-        isExact: true,
-        params: any
+      path: string;
+      url: string;
+      isExact: true,
+      params: any
     }
   }
+}
+
+export interface IOrderListComponent {
+  url: string;
 }

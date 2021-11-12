@@ -33,8 +33,8 @@ const BurgerContainer: React.FC = () => {
       </h1>
       <div className={styles.container}>
         <DndProvider backend={HTML5Backend}>
-            <BurgerIngredients />
-            <BurgerConstructor />
+          <BurgerIngredients />
+          <BurgerConstructor />
         </DndProvider> 
       </div>
     </main>
