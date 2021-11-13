@@ -105,3 +105,19 @@ export interface IRest {
 export interface IOrderListComponent {
   url: string;
 }
+
+export interface IOrderCard {
+  createdAt: string;
+  ingredients: Array<string>;
+  name: string;
+  number: number;
+  status: string;
+  updatedAt: string;
+  _id: string;
+}
+
+export interface IOrdersInfo {
+  total: number;
+  totalToday: number;
+  orders: Array<IOrderCard>
+}

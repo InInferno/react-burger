@@ -5,6 +5,7 @@ import { bunReducer } from './bunReducer';
 import { modalReducer } from './modalReducer';
 import { orderReducer } from './orderReducer';
 import { profileReducer } from './profileReducer';
+import { wsReducer } from './wsReducer';
 
 export const rootReducer = combineReducers({
   ingredientsReducer,
@@ -12,5 +13,6 @@ export const rootReducer = combineReducers({
   bunReducer,
   modalReducer,
   orderReducer,
-  profileReducer
+  profileReducer,
+  wsReducer
 });
