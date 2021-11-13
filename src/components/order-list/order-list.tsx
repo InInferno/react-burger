@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import styles from './order-list.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { dataOrders } from '../../utils/constants'
-import { IOrderList, IOrderListComponent } from '../../utils/types';
+import { IOrderInfo, IOrderList, IOrderListComponent, RootState } from '../../utils/types';
 import { Link, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { WS_CONNECTION_START } from '../../services/actions/action-types';
 import { wsGetMessage } from '../../services/actions/wsActions';
 
@@ -21,6 +21,9 @@ const OrderList: React.FC<IOrderListComponent> = ({url}) => {
       wsGetMessage();
     },
   [dispatch]);
+
+  const ordersInfo = useSelector<RootState, IOrderInfo>(store => store.wsReducer.ordersInfo)
+  console.log(ordersInfo)
 
   return (
     <div className={`${styles.container} ${styles.scroll}`}>
