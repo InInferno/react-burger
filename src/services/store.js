@@ -3,7 +3,7 @@ import { rootReducer } from './reducers';
 import thunk from 'redux-thunk';
 import { socketMiddleware } from './middleware/socketMiddleware';
 
-const wsUrl = 'wss://norma.nomoreparties.space/orders/all';
+const wsUrl = 'wss://norma.nomoreparties.space/orders';
 
 const composeEnhancers =
   typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__

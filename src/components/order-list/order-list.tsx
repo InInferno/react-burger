@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import Order from '../order/order';
 
 const OrderList: React.FC<IOrderListComponent> = ({url}) => {
-  
+
   const ordersInfo = useSelector<RootState, IOrdersInfo>(store => store.wsReducer.ordersInfo)
 
   return (

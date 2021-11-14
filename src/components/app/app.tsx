@@ -23,7 +23,6 @@ import Orders from '../../pages/orders/orders';
 import OrderDetails from '../order-details/order-details';
 import { ILocation } from '../../utils/types';
 import { WS_CONNECTION_START } from '../../services/actions/action-types';
-import { wsGetMessage } from '../../services/actions/wsActions';
 
 const App: React.FC = () => {
 
@@ -32,14 +31,11 @@ const App: React.FC = () => {
   let history = useHistory();
   const action = history.action ==='PUSH' || history.action ==='REPLACE';
   const modalIngredientOpen = action && location.state && location.state.ingredientModal;
-  // const modalFeedDetailsOpen = action && location.state && location.state.feedDetailsModal;
   const modalOrderDetailsOpen = action && location.state && location.state.orderDetailsModal;
   
   useEffect(() => {
     dispatch(ingredientsFetchData());
     dispatch(userFetch());
-    // console.log(modalFeedDetailsOpen)
-    // console.log(modalOrderDetailsOpen)
   }, [dispatch])
 
   const closeModal = () => {
@@ -49,7 +45,6 @@ const App: React.FC = () => {
   useEffect(
     () => {
       dispatch({ type: WS_CONNECTION_START });
-      wsGetMessage();
     },
   [dispatch]);
 
@@ -99,20 +94,6 @@ const App: React.FC = () => {
           </Modal>
         </Route>
       }
-      {/* {modalFeedDetailsOpen &&
-        <Route path="/feed/:id">
-          <Modal closeModal={closeModal}>
-            <OrderDetails />
-          </Modal>
-        </Route>
-      } */}
-      {/* {modalOrderDetailsOpen &&
-        <Route path="/profile/orders/:id">
-          <Modal closeModal={closeModal}>
-            <OrderDetails />
-          </Modal>
-        </Route>
-      } */}
       {modalOrderDetailsOpen && 
         <>
         <Route path="/feed/:id">

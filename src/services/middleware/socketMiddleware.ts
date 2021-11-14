@@ -1,4 +1,5 @@
 import type { Middleware, MiddlewareAPI } from 'redux';
+import { getCookie } from '../../utils/cookie';
 
 import { 
   WS_CONNECTION_START, 
@@ -6,11 +7,13 @@ import {
   WS_CONNECTION_SUCCESS,
   WS_CONNECTION_CLOSED,
   WS_CONNECTION_ERROR,
-  WS_GET_MESSAGE
+  WS_GET_MESSAGE,
+  WS_CONNECTION_START_USER
 } from '../actions/action-types';
 
 const wsActions = {
   wsInit: WS_CONNECTION_START,
+  wsInitUser: WS_CONNECTION_START_USER,
   wsSendMessage: WS_SEND_MESSAGE,
   onOpen: WS_CONNECTION_SUCCESS,
   onClose: WS_CONNECTION_CLOSED,
@@ -26,11 +29,17 @@ export const socketMiddleware = (wsUrl: string): Middleware => {
 
       const { dispatch } = store;
       const { type, payload } = action;
-      const { wsInit, wsSendMessage, onOpen, onClose, onError, onMessage } = wsActions;
-      
+      const { wsInit, wsInitUser, wsSendMessage, onOpen, onClose, onError, onMessage } = wsActions;
+      const accessToken: string | undefined = getCookie('accessToken');
+      const token = accessToken && accessToken.split(" ")[1];
+
       if (type === wsInit) {
-        socket = new WebSocket(`${wsUrl}`);
+        socket = new WebSocket(`${wsUrl}/all`);
       }
+      if (type === wsInitUser) {
+        socket = new WebSocket(`${wsUrl}?token=${token}`);
+      }
+
       if (socket) {
         socket.onopen = event => {
           dispatch({ type: onOpen, payload: event });
