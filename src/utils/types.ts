@@ -121,3 +121,8 @@ export interface IOrdersInfo {
   totalToday: number;
   orders: Array<IOrderCard>
 }
+
+export interface IOrder {
+  url: string;
+  orderInfo: IOrderCard;
+}

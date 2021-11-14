@@ -18,7 +18,7 @@ const OrderStat: React.FC = () => {
       <div className={`${styles.box} mt-15 mb-6`}>
         <div className={`${styles.work} mr-10`}>
           <p className='text text_type_main-medium'>Готовы:</p>
-          {ready && <ul className={styles.list} style={{gridTemplateColumns: `repeat(${Math.floor(ready.length / 10)}, 1fr)` }}>
+          {ready && <ul className={styles.list}>
              {ready.map((item: number, index: number) => {
               return <li key={index} className={`${styles.text} text text_type_digits-default`}>{item}</li>
             })}
@@ -26,7 +26,7 @@ const OrderStat: React.FC = () => {
         </div>
         <div className={`${styles.work} ml-2`}>
           <p className='text text_type_main-medium'>В работе:</p>
-          {inWork && <ul className={styles.list} style={{gridTemplateColumns: `repeat(${Math.floor(inWork.length / 10)}, 1fr)` }}>
+          {inWork && <ul className={styles.list}>
             {inWork.map((item, index) => {
               return <li key={index} className="text text_type_digits-default">{item}</li>
             })}  
