@@ -22,6 +22,8 @@ import Feed from '../../pages/feed/feed';
 import Orders from '../../pages/orders/orders';
 import OrderDetails from '../order-details/order-details';
 import { ILocation } from '../../utils/types';
+import { WS_CONNECTION_START } from '../../services/actions/action-types';
+import { wsGetMessage } from '../../services/actions/wsActions';
 
 const App: React.FC = () => {
 
@@ -43,6 +45,13 @@ const App: React.FC = () => {
   const closeModal = () => {
     history.goBack();
   }
+
+  useEffect(
+    () => {
+      dispatch({ type: WS_CONNECTION_START });
+      wsGetMessage();
+    },
+  [dispatch]);
 
   return (
     <>

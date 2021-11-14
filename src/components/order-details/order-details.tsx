@@ -1,70 +1,70 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './order-details.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import { dataOrders } from '../../utils/constants';
-import { ICard, IOrderList } from '../../utils/types';
+import { ICard, IOrderCard, IOrdersInfo, IUniqueIngredientsObj, RootState } from '../../utils/types';
 import { useParams } from 'react-router';
+import { useSelector } from 'react-redux';
 
 const OrderDetails: React.FC = () => {
 
-  const [data, setData] = useState<IOrderList>();
-  const [ingredients, setIngredients] = useState<Array<ICard>>();
-  const [ingredientIds, setIngredientIds] = useState<Array<string>>();
-  const params = useParams<{id: string}>();
+  const dataOrders = useSelector<RootState, IOrdersInfo>(store => store.wsReducer.ordersInfo)
+  const ingredients = useSelector<RootState, Array<ICard>>(store => store.ingredientsReducer.listAllIngredients.data)
 
-  const loadIndredient = useCallback(
-    () => {
-      const card: IOrderList | undefined = (dataOrders.find(({ id }) => id === params.id));
-      setData(card);
-      setIngredients(card && card.ingredients)
-      setIngredientIds(card && card.ingredients.map((item: ICard ) => item._id))
-    },
-    [params]
-  );
+  const [data, setData] = useState<IOrderCard>();
+  const params = useParams<{id: string}>();
 
   useEffect(
     () => {
-      loadIndredient();
+      setData(dataOrders.orders && dataOrders.orders.find(({ _id }: {_id: string}) => _id === params.id))
     },
-    [params.id, loadIndredient]
+    [params.id, data, dataOrders]
   );
 
-  const [totalPrice, setTotalPrice] = useState(0);
-  useEffect(() => {
-    setTotalPrice(
-      () => {
-        if(ingredients) {
-          const totalPrice = [
-            ...ingredients.map(item => item.price)
-          ].reduce((acc: any, price: number) => price ? acc + price : acc, 0);
-          return totalPrice;
-        }
+  const date = data && new Date(data.createdAt)
+  .toLocaleString("ru", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    hour: "numeric",
+    minute: "numeric",
+    timeZoneName: "short"
+  })
+
+  const orderIngs = 
+  data?.ingredients.reduce(
+    (acc: Array<ICard | undefined>, orderId: string) => {
+      for(let i = 0; i < ingredients.length; i++) {
+        if(ingredients[i]._id === orderId) {
+          acc.push(ingredients[i])
+        } 
       }
-    )
-  }, [ingredients])
+      return acc;
+  }, []);
+
+  let uniqueIngredientsObj = 
+  orderIngs && orderIngs.reduce((acc: IUniqueIngredientsObj, item: ICard | undefined) => {
+    if (!acc._id && item) {
+      acc[item._id] = item;
+    }
+    return acc;
+  }, {});
+  const uniqueIngredients = uniqueIngredientsObj && Object.values(uniqueIngredientsObj);
+
+  const totalPrice = orderIngs && orderIngs.reduce((acc: number, item: ICard | undefined) => item && item.price ? acc + item.price : acc, 0);
 
   const counter = (item: string) => {
     const counts: any = {};
-    if(ingredientIds) {
-      for (const num of ingredientIds) {
+    if(data?.ingredients) {
+      for (const num of data?.ingredients) {
         counts[num] = counts[num] ? counts[num] + 1 : 1;
       }
     }
     return counts[item] || 0;
   }
 
-  let uniqueIngredients = 
-  ingredients && ingredients.reduce((acc: any, item: ICard) => {
-    if (!acc._id) {
-      acc[item._id] = item;
-    }
-    return acc;
-  }, {});
-  if(ingredients) uniqueIngredients = Object.values(uniqueIngredients);
-
   return (
     <div className={`${styles.container}`}>
-      <p className={`text text_type_digits-default mt-20 ${styles.id}`}>{data && data.id}</p>
+      <p className={`text text_type_digits-default mt-20 ${styles.id}`}>#{data && data.number}</p>
       <p className='text text_type_main-medium mt-10'>{data && data.name}</p>
       <p className={`${styles.status} text text_type_main-default mt-3`}>Выполнен</p>
       <p className='text text_type_main-medium mt-15'>Состав:</p>
@@ -88,9 +88,9 @@ const OrderDetails: React.FC = () => {
             </li>
           })}
         </ul>
-      </div>    
+      </div>
       <div className={`${styles.info} mt-10`}>
-        <p className='text text_type_main-default text_color_inactive'>{data && data.date}</p>
+        <p className='text text_type_main-default text_color_inactive'>{date}</p>
         <div className={styles.price}>
           <p className='text text_type_digits-default mr-2'>{totalPrice}</p>
           <CurrencyIcon type="primary"/>

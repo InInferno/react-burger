@@ -72,14 +72,6 @@ export interface IOrderInfo {
   };
 }
 
-export interface IOrderList {
-  id: string;
-  date: string;
-  name: string;
-  ingredients: Array<ICard>;
-  price: string;
-}
-
 export interface IRest {
   exact?: boolean;
   path: string;
@@ -125,4 +117,8 @@ export interface IOrdersInfo {
 export interface IOrder {
   url: string;
   orderInfo: IOrderCard;
+}
+
+export interface IUniqueIngredientsObj {
+  [key: string]: ICard;
 }

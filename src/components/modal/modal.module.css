@@ -1,6 +1,6 @@
 .modal {
     position: absolute;
-    top: 20%;
+    top: 15%;
     left: 30%;
     display: flex;
     z-index: 1;
@@ -11,6 +11,7 @@
     border-radius: 40px;
     min-width: 500px;
     min-height: 450px;
+    padding: 0 30px 30px 30px;
 }
 
 .icon {
