@@ -9,6 +9,7 @@ import { url } from '../../utils/constants';
 import { getCookie } from '../../utils/cookie';
 import { addBun } from './bun-actions';
 import { updateIngredients } from './constructor-actions';
+import { AppDispatch, ICard } from '../../utils/types';
 
 export function getOrderRequest() {
     return {
@@ -16,7 +17,7 @@ export function getOrderRequest() {
         orderReq: true
     };
 }
-export function getOrderSuccess(res) {
+export function getOrderSuccess(res: {success: string; data: Array<ICard>}) {
     if (res && res.success) {
         return {
             type: GET_ORDER_SUCCESS,
@@ -25,24 +26,23 @@ export function getOrderSuccess(res) {
     }
 }
 export function getOrderError() {
-    return function(dispatch) {
-        dispatch({
-            type: GET_ORDER_ERROR
-        });
+    return {
+        type: GET_ORDER_ERROR
     }
 }
-export function orderFetchData(orderIds) { 
-    return (dispatch) => {
+
+export function orderFetchData(orderIds: Array<string>) { 
+    return (dispatch: AppDispatch) => {
         dispatch(getOrderRequest());
         fetch(`${url}/orders`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json;charset=utf-8',
-              "authorization": getCookie('accessToken')
+              "authorization": getCookie('accessToken') || 'null'
             },
             body: JSON.stringify({"ingredients": orderIds})
         })
-            .then(res => {
+            .then((res: any) => {
                 if (res.status !== 200) {
                     throw new Error(res.status)
                 }
@@ -67,7 +67,7 @@ export function deleteOrderModal() {
     }
 }
 
-export function addOrderIds(res) {
+export function addOrderIds(res: Array<string>) {
     return {
         type: ADD_ORDER_IDS,
         orderIds: res

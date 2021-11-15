@@ -33,7 +33,7 @@ const BurgerConstructor: React.FC = () => {
 
   const dataIngs = useSelector<RootState, Array<ICard>>(store => store.constructorReducer.ingredientsInConstructor);
   const bunBurger = useSelector<RootState, ICard>(store => store.bunReducer.bunInConstructor);
-  const orderIds = useSelector<RootState, Array<number>>(store => store.orderReducer.orderIds);
+  const orderIds = useSelector<RootState, Array<string>>(store => store.orderReducer.orderIds);
   const orderReq = useSelector<RootState, Array<string>>(store => store.orderReducer.orderReq);
   const [totalPrice, setTotalPrice] = useState(0);
 
