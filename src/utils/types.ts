@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import { store } from '../services/store';
 
 export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 
 export interface ICard {
   calories: number;

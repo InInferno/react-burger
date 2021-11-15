@@ -4,9 +4,10 @@ import {
     GET_INGREDIENTS_ERROR
 } from './action-types'
 import { url } from '../../utils/constants';
+import { AppDispatch, ICard } from '../../utils/types';
 
-export function getIngredients(res) {
-    return function(dispatch) {
+export function getIngredients(res: {success: string; data: Array<ICard>}) {
+    return function(dispatch: AppDispatch) {
         dispatch({
             type: GET_INGREDIENTS_REQUEST,
             listAllIngredientsReq: true
@@ -20,16 +21,15 @@ export function getIngredients(res) {
     }
 }
 export function getIngredientsError() {
-    return function(dispatch) {
-        dispatch({
-            type: GET_INGREDIENTS_ERROR
-        });
+    return {
+        type: GET_INGREDIENTS_ERROR
     }
 }
+
 export function ingredientsFetchData() { 
-    return (dispatch) => {
+    return (dispatch: AppDispatch) => {
         fetch(`${url}/ingredients`)
-            .then(res => {
+            .then((res: any) => {
                 if (res.status !== 200) {
                     throw new Error(res.status)
                 }

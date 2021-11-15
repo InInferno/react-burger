@@ -24,14 +24,14 @@ export const wsConnectionClosed = () => {
     };
 };
 
-export const wsGetMessage = message => {
+export const wsGetMessage = (message: any) => {
     return {
         type: WS_GET_MESSAGE,
         payload: message
     };
 };
 
-export const wsSendMessage = message => {
+export const wsSendMessage = (message: any)  => {
     return {
         type: WS_SEND_MESSAGE,
         payload: message
