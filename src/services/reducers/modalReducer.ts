@@ -1,3 +1,4 @@
+import { ICard } from '../../utils/types';
 import {
     ADD_CART_MODAL,
     DELETE_CART_MODAL
@@ -7,7 +8,7 @@ const initialStateModal = {
     viewedIngredient: {}
 };
   
-export const modalReducer = (state = initialStateModal, action) => {
+export const modalReducer = (state = initialStateModal, action: {type: string; viewedIngredient: ICard;}) => {
     switch (action.type) {
         case ADD_CART_MODAL:
             return {

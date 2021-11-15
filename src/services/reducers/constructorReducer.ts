@@ -1,3 +1,4 @@
+import { ICard } from '../../utils/types';
 import {
     ADD_INGREDIENT,
     DELETE_INGREDIENT,
@@ -7,8 +8,8 @@ import {
 const initialStateConstructor = {
     ingredientsInConstructor: []
 };
-  
-export const constructorReducer = (state = initialStateConstructor, action) => {
+
+export const constructorReducer = (state = initialStateConstructor, action: {type: string; ingredientsInConstructor: Array<ICard>; ingredient: ICard}) => {
     switch (action.type) {
         case ADD_INGREDIENT:
         return { 
@@ -21,7 +22,7 @@ export const constructorReducer = (state = initialStateConstructor, action) => {
         return {
             ...state, 
             ingredientsInConstructor: [
-            ...state.ingredientsInConstructor.filter(ingredient => ingredient.uuid !== action.ingredient.uuid)
+            ...state.ingredientsInConstructor.filter((ingredient: {uuid: string}) => ingredient.uuid !== action.ingredient.uuid)
             ]
         }; 
         case UPDATE_INGREDIENTS:

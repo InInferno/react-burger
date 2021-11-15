@@ -18,7 +18,7 @@ const ConstructorCard: React.FC<IConstructorCard> = ({ id, index, moveCard, cons
     }
 
     const ref = useRef<HTMLLIElement>(null);
-    console.log(ref)
+
     const [{ handlerId }, drop] = useDrop({
         accept: UPDATE_INGREDIENTS,
         collect(monitor) {

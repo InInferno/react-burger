@@ -1,3 +1,4 @@
+import { ICard } from '../../utils/types';
 import {
     GET_INGREDIENTS_REQUEST, 
     GET_INGREDIENTS_SUCCESS, 
@@ -9,8 +10,8 @@ const initialStateIngredients = {
     listAllIngredientsError: false,
     listAllIngredients: []
 };
-  
-export const ingredientsReducer = (state = initialStateIngredients, action) => {
+
+export const ingredientsReducer = (state = initialStateIngredients, action: {type: string; listAllIngredients: Array<ICard>;}) => {
     switch (action.type) {
         case GET_INGREDIENTS_REQUEST: {
             return {

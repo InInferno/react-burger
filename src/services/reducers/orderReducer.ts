@@ -1,3 +1,4 @@
+import { IOrderInfo } from '../../utils/types';
 import {
     GET_ORDER_REQUEST,
     GET_ORDER_SUCCESS,
@@ -13,7 +14,7 @@ const initialStateOrder = {
     orderIds: []
 };
   
-export const orderReducer = (state = initialStateOrder, action) => {
+export const orderReducer = (state = initialStateOrder, action: {type: string; createdOrder: IOrderInfo; orderIds: Array<string>}) => {
     switch (action.type) {
         case GET_ORDER_REQUEST: {
             return {
@@ -22,6 +23,7 @@ export const orderReducer = (state = initialStateOrder, action) => {
             };
         }
         case GET_ORDER_SUCCESS: {
+            console.log('action.createdOrder', action.createdOrder);
             return { 
                 ...state, 
                 orderError: false,

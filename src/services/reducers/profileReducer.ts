@@ -48,8 +48,8 @@ const initialStateProfile = {
     name: '',
     email: ''
 };
-  
-export const profileReducer = (state = initialStateProfile, action) => {
+
+export const profileReducer = (state = initialStateProfile, action: {type: string; name: string; email: string; }) => {
     switch (action.type) {
 
         case GET_REGISTER_REQUEST: {
