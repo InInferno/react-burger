@@ -33,9 +33,10 @@ import {
 } from './action-types';
 import { setCookie, getCookie } from '../../utils/cookie';
 import { url } from '../../utils/constants';
+import { AppDispatch } from '../../utils/types';
 
-export function login(res) {
-    return function(dispatch) {
+export function login(res: {success: string; user: {email: string; name: string;}}) {
+    return function(dispatch: AppDispatch) {
         dispatch({
             type: GET_LOGIN_REQUEST,
             loginReq: true
@@ -50,14 +51,12 @@ export function login(res) {
     }
 }
 export function loginError() {
-    return function(dispatch) {
-        dispatch({
-            type: GET_LOGIN_ERROR
-        });
+    return {
+        type: GET_LOGIN_ERROR
     }
 }
-export function loginFetch(email, password) { 
-    return (dispatch) => {
+export function loginFetch(email: string, password: string) { 
+    return (dispatch: AppDispatch) => {
         fetch(`${url}/auth/login`, {
             method: 'POST',
             headers: {
@@ -65,9 +64,9 @@ export function loginFetch(email, password) {
             },
             body: JSON.stringify({"email": email, "password": password})
         })
-            .then(res => {
+            .then((res) => {
                 if (res.status !== 200) {
-                    throw new Error(res.status)
+                    throw new Error(`${res.status}`)
                 }
                 return res.json()
             })
@@ -79,13 +78,13 @@ export function loginFetch(email, password) {
             })
             .catch((err) => {
                 console.log('err', err)
-                dispatch(loginError(err))
+                dispatch(loginError())
             });
     }
 }
 
-export function register(res) {
-    return function(dispatch) {
+export function register(res: {success: string; user: {email: string; name: string;}}) {
+    return function(dispatch: AppDispatch) {
         dispatch({
             type: GET_REGISTER_REQUEST,
             registerReq: true
@@ -100,14 +99,12 @@ export function register(res) {
     }
 }
 export function registerError() {
-    return function(dispatch) {
-        dispatch({
-            type: GET_REGISTER_ERROR
-        });
+    return {
+        type: GET_REGISTER_ERROR
     }
 }
-export function registerFetch(email, password, name) { 
-    return (dispatch) => {
+export function registerFetch(email: string, password: string, name: string) { 
+    return (dispatch: AppDispatch) => {
         fetch(`${url}/auth/register`, {
             method: 'POST',
             headers: {
@@ -115,10 +112,10 @@ export function registerFetch(email, password, name) {
             },
             body: JSON.stringify({"email": email, "password": password, "name": name })
         })
-            .then(res => {
+            .then((res) => {
                 console.log(JSON.stringify({"email": email, "password": password, "name": name }))
                 if (res.status !== 200) {
-                    throw new Error(res.status)
+                    throw new Error(`${res.status}`)
                 }
                 return res.json()
             })
@@ -130,13 +127,13 @@ export function registerFetch(email, password, name) {
             })
             .catch((err) => {
                 console.log('err', err)
-                dispatch(registerError(err))
+                dispatch(registerError())
             });
     }
 }
 
-export function getForgotPassword(res) {
-    return function(dispatch) {
+export function getForgotPassword(res: {success: boolean, message: string}) {
+    return function(dispatch: AppDispatch) {
         dispatch({
             type: GET_FORGOT_REQUEST,
             resetPasswordReq: true
@@ -150,14 +147,12 @@ export function getForgotPassword(res) {
     }
 }
 export function getForgotError() {
-    return function(dispatch) {
-        dispatch({
-            type: GET_FORGOT_ERROR
-        });
+    return {
+        type: GET_FORGOT_ERROR
     }
 }
-export function resetForgotFetch(email) { 
-    return (dispatch) => {
+export function resetForgotFetch(email: string) { 
+    return (dispatch: AppDispatch) => {
         fetch(`${url}/password-reset`, {
             method: 'POST',
             headers: {
@@ -165,9 +160,9 @@ export function resetForgotFetch(email) {
             },
             body: JSON.stringify({"email": email})
         })
-            .then(res => {
+            .then((res) => {
                 if (res.status !== 200) {
-                    throw new Error(res.status)
+                    throw new Error(`${res.status}`)
                 }
                 return res.json()
             })
@@ -182,8 +177,8 @@ export function resetForgotFetch(email) {
     }
 }
 
-export function getResetPassword(res) {
-    return function(dispatch) {
+export function getResetPassword(res: {success: boolean, message: string}) {
+    return function(dispatch: AppDispatch) {
         dispatch({
             type: GET_RESET_PASSWORD_REQUEST,
             resetPasswordReq: true
@@ -197,14 +192,12 @@ export function getResetPassword(res) {
     }
 }
 export function getResetPasswordError() {
-    return function(dispatch) {
-        dispatch({
-            type: GET_RESET_PASSWORD_ERROR
-        });
+    return {
+        type: GET_RESET_PASSWORD_ERROR
     }
 }
-export function resetPasswordFetch(password, token) { 
-    return (dispatch) => {
+export function resetPasswordFetch(password: string, token: string) { 
+    return (dispatch: AppDispatch) => {
         fetch(`${url}/password-reset/reset`, {
             method: 'POST',
             headers: {
@@ -212,9 +205,9 @@ export function resetPasswordFetch(password, token) {
             },
             body: JSON.stringify({"password": password, "token": token})
         })
-            .then(res => {
+            .then((res) => {
                 if (res.status !== 200) {
-                    throw new Error(res.status)
+                    throw new Error(`${res.status}`)
                 }
                 return res.json()
             })
@@ -229,8 +222,8 @@ export function resetPasswordFetch(password, token) {
     }
 }
 
-export function logout(res) {
-    return function(dispatch) {
+export function logout(res: {success: boolean, message: string}) {
+    return function(dispatch: AppDispatch) {
         dispatch({
             type: GET_LOGOUT_REQUEST,
             logoutReq: true
@@ -245,14 +238,12 @@ export function logout(res) {
     }
 }
 export function logoutError() {
-    return function(dispatch) {
-        dispatch({
-            type: GET_LOGOUT_ERROR
-        });
+    return {
+        type: GET_LOGOUT_ERROR
     }
 }
 export function logoutFetch() { 
-    return (dispatch) => {
+    return (dispatch: AppDispatch) => {
         fetch(`${url}/auth/logout`, {
             method: 'POST',
             headers: {
@@ -260,9 +251,9 @@ export function logoutFetch() {
             },
             body: JSON.stringify({"token": getCookie('refreshToken')})
         })
-            .then(res => {
+            .then((res) => {
                 if (res.status !== 200) {
-                    throw new Error(res.status)
+                    throw new Error(`${res.status}`)
                 }
                 return res.json()
             })
@@ -279,8 +270,8 @@ export function logoutFetch() {
     }
 }
 
-export function token(res) {
-    return function(dispatch) {
+export function token(res: {success: boolean, message: string}) {
+    return function(dispatch: AppDispatch) {
         dispatch({
             type: GET_TOKEN_REQUEST,
             tokenReq: true
@@ -293,14 +284,12 @@ export function token(res) {
     }
 }
 export function tokenError() {
-    return function(dispatch) {
-        dispatch({
-            type: GET_TOKEN_ERROR
-        });
+    return {
+        type: GET_TOKEN_ERROR
     }
 }
 export function tokenFetch() { 
-    return (dispatch) => {
+    return (dispatch: AppDispatch) => {
         fetch(`${url}/auth/token`, {
             method: 'POST',
             headers: {
@@ -308,9 +297,9 @@ export function tokenFetch() {
             },
             body: JSON.stringify({"token": getCookie('refreshToken')})
         })
-            .then(res => {
+            .then((res) => {
                 if (res.status !== 200) {
-                    throw new Error(res.status)
+                    throw new Error(`${res.status}`)
                 }
                 return res.json()
             })
@@ -318,18 +307,18 @@ export function tokenFetch() {
                 setCookie('accessToken', res.accessToken);
                 setCookie('refreshToken', res.refreshToken);
                 dispatch(token(res))
-            }).then(res => {
-                dispatch(userFetch(url))
+            }).then(() => {
+                dispatch(userFetch())
             })
             .catch((err) => {
                 console.log('Пользователь не авторизован', err)
-                dispatch(tokenError(err))
+                dispatch(tokenError())
             });
     }
 }
 
-export function user(res) {
-    return function(dispatch) {
+export function user(res: {success: boolean, message: string, user: {name: string; email: string;}}) {
+    return function(dispatch: AppDispatch) {
         dispatch({
             type: GET_USER_REQUEST,
             tokenReq: true
@@ -345,20 +334,18 @@ export function user(res) {
     }
 }
 export function userError() {
-    return function(dispatch) {
-        dispatch({
-            type: GET_USER_ERROR,
-            isAuthenticated: false
-        });
+    return {
+        type: GET_USER_ERROR,
+        isAuthenticated: false
     }
 }
 export function userFetch() { 
-    return (dispatch) => {
+    return (dispatch: AppDispatch) => {
         fetch(`${url}/auth/user`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json;charset=utf-8',
-              "authorization": getCookie('accessToken')
+              "authorization": getCookie('accessToken') || 'null'
             }
         })
         .then(res => res.ok ? res.json() : res.json().then((err) => Promise.reject(err)))
@@ -378,8 +365,8 @@ export function userFetch() {
     }
 }
 
-export function updateUserInfo(res) {
-    return function(dispatch) {
+export function updateUserInfo(res: {success: boolean, message: string}) {
+    return function(dispatch: AppDispatch) {
         dispatch({
             type: GET_UPD_USER_REQUEST,
             updateUserReq: true
@@ -392,16 +379,14 @@ export function updateUserInfo(res) {
     }
 }
 export function updateUserInfoError() {
-    return function(dispatch) {
-        dispatch({
-            type: GET_UPD_USER_ERROR
-        });
+    return {
+        type: GET_UPD_USER_ERROR
     }
 }
-export function updateUserInfoFetch(email, name, password) {
+export function updateUserInfoFetch(email: string, name: string, password: string) {
     
-    return (dispatch) => {
-        let body = {};
+    return (dispatch: AppDispatch) => {
+        let body: {email?: string; name?: string; password?: string} = {};
         if(email) {
             body.email = email;
         } if(name) {
@@ -414,13 +399,13 @@ export function updateUserInfoFetch(email, name, password) {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json;charset=utf-8',
-              "authorization": getCookie('accessToken')
+              "authorization": getCookie('accessToken') || 'null'
             },
             body: JSON.stringify(body)
         })
-            .then(res => {
+            .then((res) => {
                 if (res.status !== 200) {
-                    throw new Error(res.status)
+                    throw new Error(`${res.status}`)
                 }
                 return res.json()
             })
@@ -430,7 +415,7 @@ export function updateUserInfoFetch(email, name, password) {
             })
             .catch((err) => {
                 console.log(err)
-                dispatch(updateUserInfoError(err))
+                dispatch(updateUserInfoError())
             });
     }
 }
