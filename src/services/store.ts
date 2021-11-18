@@ -3,12 +3,15 @@ import { rootReducer } from './reducers';
 import thunk from 'redux-thunk';
 import { socketMiddleware } from './middleware/socketMiddleware';
 
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
+}
+
 const wsUrl = 'wss://norma.nomoreparties.space/orders';
 
-const composeEnhancers =
-  typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
-    : compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const enhancer = composeEnhancers(
   applyMiddleware(

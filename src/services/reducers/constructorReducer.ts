@@ -4,12 +4,17 @@ import {
     DELETE_INGREDIENT,
     UPDATE_INGREDIENTS
 } from '../actions/action-types';
+import { TApplicationActions } from '../../utils/types';
 
-const initialStateConstructor = {
+type TConstructorState = {
+    ingredientsInConstructor: Array<ICard>;
+} 
+
+const initialStateConstructor: TConstructorState = {
     ingredientsInConstructor: []
 };
 
-export const constructorReducer = (state = initialStateConstructor, action: {type: string; ingredientsInConstructor: Array<ICard>; ingredient: ICard}) => {
+export const constructorReducer = (state = initialStateConstructor, action: TApplicationActions): TConstructorState => {
     switch (action.type) {
         case ADD_INGREDIENT:
         return { 

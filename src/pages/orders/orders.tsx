@@ -9,11 +9,9 @@ const Orders: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(
-    () => {
-      dispatch({ type: WS_CONNECTION_START_USER });
-    },
-  [dispatch]);
+  useEffect(() => {
+    dispatch({ type: WS_CONNECTION_START_USER });
+  },[dispatch]);
 
   return (
     <div className={styles.container}>

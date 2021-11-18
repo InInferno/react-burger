@@ -6,15 +6,23 @@ import {
     DELETE_ORDER_MODAL,
     ADD_ORDER_IDS
 } from '../actions/action-types';
+import { TApplicationActions } from '../../utils/types';
 
-const initialStateOrder = {
+type TOrderState = {
+    orderReq: boolean;
+    orderError: boolean;
+    createdOrder: IOrderInfo | null;
+    orderIds: Array<string>;
+} 
+
+const initialStateOrder: TOrderState = {
     orderReq: false,
     orderError: false,
-    createdOrder: {},
+    createdOrder: null,
     orderIds: []
 };
-  
-export const orderReducer = (state = initialStateOrder, action: {type: string; createdOrder: IOrderInfo; orderIds: Array<string>}) => {
+
+export const orderReducer = (state = initialStateOrder, action: TApplicationActions): TOrderState => {
     switch (action.type) {
         case GET_ORDER_REQUEST: {
             return {

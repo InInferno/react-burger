@@ -5,12 +5,19 @@ import {
   WS_GET_MESSAGE
 } from '../actions/action-types';
 
-const initialState = {
-  wsConnected: false,
-  ordersInfo: []
-};
+type TWsState = {
+  wsConnected: boolean;
+  ordersInfo: any;
+  error: any;
+}
 
-export const wsReducer = (state = initialState, action: any) => {
+const initialState: TWsState = {
+  wsConnected: false,
+  ordersInfo: [],
+  error: undefined
+};
+  
+export const wsReducer = (state = initialState, action: any): TWsState => {
   switch (action.type) {
     case WS_CONNECTION_SUCCESS:
       return {

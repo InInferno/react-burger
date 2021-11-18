@@ -2,16 +2,31 @@ import React, { useEffect, useState } from 'react';
 import styles from './order-details.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { ICard, IOrderCard, IOrdersInfo, IUniqueIngredientsObj, RootState } from '../../utils/types';
-import { useParams } from 'react-router';
-import { useSelector } from 'react-redux';
+import { useLocation, useParams } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { WS_CONNECTION_START, WS_CONNECTION_START_USER } from '../../services/actions/action-types';
+import { ILocation } from '../../utils/types';
 
 const OrderDetails: React.FC = () => {
+
+  let location: ILocation = useLocation();
 
   const dataOrders = useSelector<RootState, IOrdersInfo>(store => store.wsReducer.ordersInfo)
   const ingredients = useSelector<RootState, Array<ICard>>(store => store.ingredientsReducer.listAllIngredients.data)
 
   const [data, setData] = useState<IOrderCard>();
   const params = useParams<{id: string}>();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if(location.state.orderDetailsModal.pathname === '/feed') {
+      dispatch({ type: WS_CONNECTION_START });
+    } else if (location.state.orderDetailsModal.pathname === '/profile/orders') {
+      dispatch({ type: WS_CONNECTION_START_USER });
+    }
+    
+  }, [dispatch, location]);
 
   useEffect(
     () => {

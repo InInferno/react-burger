@@ -3,12 +3,17 @@ import {
     ADD_CART_MODAL,
     DELETE_CART_MODAL
 } from '../actions/action-types';
+import { TApplicationActions } from '../../utils/types';
 
-const initialStateModal = {
-    viewedIngredient: {}
+type TModalState = {
+    viewedIngredient: ICard | null;
+}
+
+const initialStateModal: TModalState = {
+    viewedIngredient: null
 };
   
-export const modalReducer = (state = initialStateModal, action: {type: string; viewedIngredient: ICard;}) => {
+export const modalReducer = (state = initialStateModal, action: TApplicationActions): TModalState => {
     switch (action.type) {
         case ADD_CART_MODAL:
             return {

@@ -22,7 +22,6 @@ import Feed from '../../pages/feed/feed';
 import Orders from '../../pages/orders/orders';
 import OrderDetails from '../order-details/order-details';
 import { ILocation } from '../../utils/types';
-import { WS_CONNECTION_START } from '../../services/actions/action-types';
 
 const App: React.FC = () => {
 
@@ -42,16 +41,10 @@ const App: React.FC = () => {
     history.goBack();
   }
 
-  useEffect(
-    () => {
-      dispatch({ type: WS_CONNECTION_START });
-    },
-  [dispatch]);
-
   return (
     <>
       <AppHeader />
-      <Switch location={modalIngredientOpen || location}>
+      <Switch location={modalIngredientOpen || modalOrderDetailsOpen || location}>
         <Route path="/" exact>
           <BurgerContainer />
         </Route>
@@ -70,10 +63,10 @@ const App: React.FC = () => {
         <ProtectedRoute path="/profile" exact>
           <Profile />
         </ProtectedRoute>
-        <ProtectedRoute path="/profile/orders" exact>
+        <ProtectedRoute path="/profile/orders">
           <Orders />
         </ProtectedRoute>
-        <ProtectedRoute path="/profile/orders/:id" >
+        <ProtectedRoute path="/profile/orders/:id">
           <OrderDetails />
         </ProtectedRoute>
         <Route path="/feed" exact>

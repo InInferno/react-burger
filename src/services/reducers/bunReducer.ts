@@ -2,12 +2,17 @@ import { ICard } from '../../utils/types';
 import {
     ADD_BUN
 } from '../actions/action-types';
+import { TApplicationActions } from '../../utils/types';
 
-const initialStateBun = {
-    bunInConstructor: {}
+interface TBunState {
+    bunInConstructor: ICard | null;
+} 
+
+const initialStateBun: TBunState = {
+    bunInConstructor: null
 }
 
-export const bunReducer = (state = initialStateBun, action: {bunInConstructor: ICard, type: string}) => {
+export const bunReducer = (state = initialStateBun, action: TApplicationActions): TBunState => {
     switch (action.type) {
         case ADD_BUN:
             return {
@@ -17,5 +22,5 @@ export const bunReducer = (state = initialStateBun, action: {bunInConstructor: I
         default: {
             return state;
         }
-    }
+    } 
 };

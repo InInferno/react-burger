@@ -32,12 +32,13 @@ const BurgerConstructor: React.FC = () => {
   });
 
   const dataIngs = useSelector<RootState, Array<ICard>>(store => store.constructorReducer.ingredientsInConstructor);
-  const bunBurger = useSelector<RootState, ICard>(store => store.bunReducer.bunInConstructor);
+  const bunBurger = useSelector<RootState, ICard | null>(store => store.bunReducer.bunInConstructor);
   const orderIds = useSelector<RootState, Array<string>>(store => store.orderReducer.orderIds);
-  const orderReq = useSelector<RootState, Array<string>>(store => store.orderReducer.orderReq);
+  const orderReq = useSelector<RootState, boolean>(store => store.orderReducer.orderReq);
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
+    bunBurger &&
     dispatch(addOrderIds([
       bunBurger._id,
       ...dataIngs.map((item: ICard) => item._id),
@@ -47,7 +48,7 @@ const BurgerConstructor: React.FC = () => {
     setTotalPrice(
       () => {
         const totalPrice = [
-          ...Array(2).fill(bunBurger.price),
+          ...Array(2).fill(bunBurger && bunBurger.price),
           ...dataIngs.map((item: ICard) => item.price)
         ].reduce((acc, price) => price ? acc + price : acc, 0);
         return totalPrice;
@@ -78,7 +79,7 @@ const BurgerConstructor: React.FC = () => {
 
   return (
     <section ref={dropTarget} className={styles.box}>
-      {bunBurger._id && 
+      {bunBurger &&
         <div className="ml-10 pl-9">
         <ConstructorElement
         type="top"
@@ -109,7 +110,7 @@ const BurgerConstructor: React.FC = () => {
         </p>
       }
       
-      {bunBurger._id && 
+      {bunBurger && 
         <div className="ml-10 pl-9">
         <ConstructorElement
         type="bottom"
@@ -124,7 +125,7 @@ const BurgerConstructor: React.FC = () => {
       <div className={`${styles.info} mt-10`}>
         <p className="text text_type_digits-medium mr-2">{totalPrice}</p>
         <CurrencyIcon type="primary"/>
-          {bunBurger._id ?
+          {bunBurger ?
             <div onClick={isOpenModal}>
               {orderReq ?
                 <p className={`text text_type_main-default ml-5 ${styles.choice}`}>Идёт загрузка заказа...</p>

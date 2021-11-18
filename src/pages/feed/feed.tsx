@@ -9,11 +9,9 @@ const Feed: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(
-    () => {
-      dispatch({ type: WS_CONNECTION_START });
-    },
-  [dispatch]);
+  useEffect(() => {
+    dispatch({ type: WS_CONNECTION_START });
+  }, [dispatch]);
 
   return (
     <div className={`${styles.container} mt-10`}>

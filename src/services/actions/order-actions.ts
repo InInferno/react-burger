@@ -9,27 +9,50 @@ import { url } from '../../utils/constants';
 import { getCookie } from '../../utils/cookie';
 import { addBun } from './bun-actions';
 import { updateIngredients } from './constructor-actions';
-import { AppDispatch, ICard } from '../../utils/types';
+import { AppDispatch, IOrderInfo } from '../../utils/types';
 
-export function getOrderRequest() {
-    return {
-        type: GET_ORDER_REQUEST,
-        orderReq: true
-    };
+export interface IGetOrderRequestAction {
+    readonly type: typeof GET_ORDER_REQUEST;
+    readonly orderReq: boolean;
 }
-export function getOrderSuccess(res: {success: string; data: Array<ICard>}) {
-    if (res && res.success) {
-        return {
-            type: GET_ORDER_SUCCESS,
-            createdOrder: res
-        };
-    }
+
+export interface IGetOrderSuccessAction {
+    readonly type: typeof GET_ORDER_SUCCESS;
+    readonly createdOrder: IOrderInfo;
 }
-export function getOrderError() {
-    return {
-        type: GET_ORDER_ERROR
-    }
+
+export interface IGetOrderErrorAction {
+    readonly type: typeof GET_ORDER_ERROR;
 }
+
+export interface IDeleteOrderErrorAction {
+    readonly type: typeof DELETE_ORDER_MODAL;
+    readonly createdOrder: null;
+}
+
+export interface IAddOrderIdsErrorAction {
+    readonly type: typeof ADD_ORDER_IDS;
+    readonly orderIds: Array<string>;
+}
+
+export type TOrderActions = 
+| IGetOrderRequestAction
+| IGetOrderSuccessAction
+| IGetOrderErrorAction
+| IDeleteOrderErrorAction
+| IAddOrderIdsErrorAction;
+
+export const getOrderRequest = (): IGetOrderRequestAction => ({
+    type: GET_ORDER_REQUEST,
+    orderReq: true
+})
+export const getOrderSuccess = (res: IOrderInfo): IGetOrderSuccessAction => ({
+    type: GET_ORDER_SUCCESS,
+    createdOrder: res
+})
+export const getOrderError = (): IGetOrderErrorAction => ({
+    type: GET_ORDER_ERROR
+})
 
 export function orderFetchData(orderIds: Array<string>) { 
     return (dispatch: AppDispatch) => {
@@ -51,7 +74,7 @@ export function orderFetchData(orderIds: Array<string>) {
             .then(ings => {
                 dispatch(getOrderSuccess(ings))
                 dispatch((updateIngredients([])));
-                dispatch(addBun({}));
+                dispatch(addBun(null));
             })
             .catch((err) => {
                 console.log(err)
@@ -60,16 +83,12 @@ export function orderFetchData(orderIds: Array<string>) {
     }
 }
 
-export function deleteOrderModal() {
-    return {
-        type: DELETE_ORDER_MODAL,
-        createdOrder: {}
-    }
-}
+export const deleteOrderModal = (): IDeleteOrderErrorAction => ({
+    type: DELETE_ORDER_MODAL,
+    createdOrder: null
+})
 
-export function addOrderIds(res: Array<string>) {
-    return {
-        type: ADD_ORDER_IDS,
-        orderIds: res
-    }
-}
+export const addOrderIds = (res: Array<string>): IAddOrderIdsErrorAction => ({
+    type: ADD_ORDER_IDS,
+    orderIds: res
+})
