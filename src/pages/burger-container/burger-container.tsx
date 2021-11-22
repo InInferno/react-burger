@@ -16,7 +16,7 @@ const BurgerContainer: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const isModalOrder = useSelector<RootState, IOrderInfo>(store => store.orderReducer.createdOrder)
+  const isModalOrder = useSelector<RootState, IOrderInfo | null>(store => store.orderReducer.createdOrder)
   
   const closeModal = () => {
     dispatch(deleteCartModal());
@@ -25,7 +25,7 @@ const BurgerContainer: React.FC = () => {
 
   return (
     <main className={styles.box}>      
-      {isModalOrder.success &&
+      {isModalOrder && isModalOrder.success &&
         <Modal children={<OrderInfo />} closeModal={closeModal}/>
       }
       <h1 className="text text_type_main-large mt-10 mb-5">
@@ -33,8 +33,8 @@ const BurgerContainer: React.FC = () => {
       </h1>
       <div className={styles.container}>
         <DndProvider backend={HTML5Backend}>
-            <BurgerIngredients />
-            <BurgerConstructor />
+          <BurgerIngredients />
+          <BurgerConstructor />
         </DndProvider> 
       </div>
     </main>

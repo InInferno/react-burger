@@ -21,12 +21,9 @@ const IngredientDetails: React.FC = () => {
         [id, cards.success, cards.data]
     );
 
-    useEffect(
-        () => {
-            loadIndredient();
-        },
-        [id, loadIndredient]
-    );
+    useEffect(() => {
+        loadIndredient();
+    },[id, loadIndredient]);
 
   return (
     <div className={`${styles.container} pt-10 pr-10 pb-15 pl-10`}>

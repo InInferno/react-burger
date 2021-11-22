@@ -2,10 +2,10 @@ export const url = 'https://norma.nomoreparties.space/api';
 
 export const dataOrders = [
     {
-      id: '#111111',
-      date: 'Сегодня, 16:20 i-GMT+3',
-      name: 'Death Start Starship Main бургер',
-      ingredients: [
+      "id": '111111',
+      "date": 'Сегодня, 16:20 i-GMT+3',
+      "name": 'Death Start Starship Main бургер',
+      "ingredients": [
         {
           "_id": "60d3b41abdacab0026a733c6",
           "name": "Краторная булка N-200i",
@@ -202,13 +202,13 @@ export const dataOrders = [
           "uuid": "1360d3b41abdacab0026a733c6",
         }
       ],
-      price: '666',
+      "price": '666',
     },
     {
-      id: '#222222',
-      date: 'Сегодня, 16:20 i-GMT+3',
-      name: 'Interstellar бургер',
-      ingredients: [
+      "id": '222222',
+      "date": 'Сегодня, 16:20 i-GMT+3',
+      "name": 'Interstellar бургер',
+      "ingredients": [
         {
           "_id": "60d3b41abdacab0026a733c7",
           "name": "Флюоресцентная булка R2-D3",
@@ -330,13 +330,13 @@ export const dataOrders = [
           "uuid": "2160d3b41abdacab0026a733c6",
         }
       ],
-      price: '1337',
+      "price": '1337',
     },
     {
-      id: '#333333',
-      date: 'Сегодня, 16:20 i-GMT+3',
-      name: 'Black Hole Singularity острый бургер',
-      ingredients: [
+      "id": '333333',
+      "date": 'Сегодня, 16:20 i-GMT+3',
+      "name": 'Black Hole Singularity острый бургер',
+      "ingredients": [
         {
           "_id": "60d3b41abdacab0026a733c6",
           "name": "Краторная булка N-200i",
@@ -383,13 +383,13 @@ export const dataOrders = [
           "uuid": "2460d3b41abdacab0026a733c6",
         }
       ],
-      price: '228',
+      "price": '228',
     },
     {
-      id: '#444444',
-      date: 'Сегодня, 16:20 i-GMT+3',
-      name: 'Supernova Infinity бургер',
-      ingredients: [
+      "id": '444444',
+      "date": 'Сегодня, 16:20 i-GMT+3',
+      "name": 'Supernova Infinity бургер',
+      "ingredients": [
         {
           "_id": "60d3b41abdacab0026a733c6",
           "name": "Краторная булка N-200i",
@@ -526,13 +526,13 @@ export const dataOrders = [
           "uuid": "3360d3b41abdacab0026a733c6",
         }
       ],
-      price: '42',
+      "price": '42',
     },
     {
-      id: '#555555',
-      date: 'Сегодня, 16:20 i-GMT+3',
-      name: 'Death Start Starship Main бургер',
-      ingredients: [
+      "id": '555555',
+      "date": 'Сегодня, 16:20 i-GMT+3',
+      "name": 'Death Start Starship Main бургер',
+      "ingredients": [
         {
           "_id": "60d3b41abdacab0026a733c6",
           "name": "Краторная булка N-200i",
@@ -669,13 +669,13 @@ export const dataOrders = [
           "uuid": "4260d3b41abdacab0026a733c6",
         }
       ],
-      price: '13',
+      "price": '13',
     },
     {
-      id: '#666666',
-      date: 'Сегодня, 16:20 i-GMT+3',
-      name: 'Death Start Starship Main бургер',
-      ingredients: [
+      "id": '666666',
+      "date": 'Сегодня, 16:20 i-GMT+3',
+      "name": 'Death Start Starship Main бургер',
+      "ingredients": [
         {
           "_id": "60d3b41abdacab0026a733c6",
           "name": "Краторная булка N-200i",
@@ -812,13 +812,13 @@ export const dataOrders = [
           "uuid": "5160d3b41abdacab0026a733c6",
         }
       ],
-      price: '777',
+      "price": '777',
     },
     {
-      id: '#777777',
-      date: 'Сегодня, 16:20 i-GMT+3',
-      name: 'Death Start Starship Main бургер',
-      ingredients: [
+      "id": '777777',
+      "date": 'Сегодня, 16:20 i-GMT+3',
+      "name": 'Death Start Starship Main бургер',
+      "ingredients": [
         {
           "_id": "60d3b41abdacab0026a733c6",
           "name": "Краторная булка N-200i",
@@ -955,7 +955,7 @@ export const dataOrders = [
           "uuid": "6060d3b41abdacab0026a733c6",
         }
       ],
-      price: '666',
+      "price": '666',
     }
 ]
 

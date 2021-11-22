@@ -30,6 +30,7 @@ const App: React.FC = () => {
   let history = useHistory();
   const action = history.action ==='PUSH' || history.action ==='REPLACE';
   const modalIngredientOpen = action && location.state && location.state.ingredientModal;
+  const modalOrderDetailsOpen = action && location.state && location.state.orderDetailsModal;
   
   useEffect(() => {
     dispatch(ingredientsFetchData());
@@ -43,7 +44,7 @@ const App: React.FC = () => {
   return (
     <>
       <AppHeader />
-      <Switch location={modalIngredientOpen || location}>
+      <Switch location={modalIngredientOpen || modalOrderDetailsOpen || location}>
         <Route path="/" exact>
           <BurgerContainer />
         </Route>
@@ -62,18 +63,18 @@ const App: React.FC = () => {
         <ProtectedRoute path="/profile" exact>
           <Profile />
         </ProtectedRoute>
-        <ProtectedRoute path="/profile/orders" exact>
+        <ProtectedRoute path="/profile/orders">
           <Orders />
         </ProtectedRoute>
-        <ProtectedRoute path="/profile/orders/:id" exact>
+        <ProtectedRoute path="/profile/orders/:id">
           <OrderDetails />
         </ProtectedRoute>
-        <ProtectedRoute path="/feed" exact>
+        <Route path="/feed" exact>
           <Feed /> 
-        </ProtectedRoute>
-        <ProtectedRoute path="/feed/:id" exact>
+        </Route>
+        <Route path="/feed/:id">
           <OrderDetails /> 
-        </ProtectedRoute>
+        </Route>
         <Route 
           path="/ingredients/:id" 
           children={<IngredientDetails />} 
@@ -85,6 +86,20 @@ const App: React.FC = () => {
             <IngredientDetails />
           </Modal>
         </Route>
+      }
+      {modalOrderDetailsOpen && 
+        <>
+        <Route path="/feed/:id">
+          <Modal closeModal={closeModal}>
+            <OrderDetails />
+          </Modal>
+        </Route>
+        <Route path="/profile/orders/:id">
+          <Modal closeModal={closeModal}>
+            <OrderDetails />
+          </Modal>
+        </Route>
+        </>
       }
     </>
   );

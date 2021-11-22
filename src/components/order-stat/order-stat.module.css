@@ -1,5 +1,5 @@
 .container {
-    max-width: 580px;
+    max-width: 600px;
     display: flex;
     flex-direction: column;
 }
@@ -15,10 +15,15 @@
 }
 
 .list {
+    list-style-type: none;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    padding: 0;
-    list-style-type: none;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin: 0;
+    max-width: 310px;
+    height: 290px;
 }
 
 .info {

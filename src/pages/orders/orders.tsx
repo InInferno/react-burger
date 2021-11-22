@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './orders.module.css';
 import OrderList from '../../components/order-list/order-list';
 import NavProfile from '../../components/nav-profile/nav-profile';
+import { useDispatch } from 'react-redux';
+import { WS_CONNECTION_START_USER } from '../../services/actions/action-types';
 
 const Orders: React.FC = () => {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({ type: WS_CONNECTION_START_USER });
+  },[dispatch]);
+
   return (
     <div className={styles.container}>
       <div className='mt-20'>
@@ -13,7 +22,7 @@ const Orders: React.FC = () => {
         </p>
       </div>
       <div className={`${styles.box} mt-10`}>
-        <OrderList />
+        <OrderList url='profile/orders'/>
       </div>
     </div>
   );

@@ -24,8 +24,33 @@ import {
     GET_UPD_USER_SUCCESS,
     GET_UPD_USER_ERROR
 } from '../actions/action-types';
+import { TApplicationActions } from '../../utils/types';
 
-const initialStateProfile = {
+type TProfileState = {
+    loginReq: boolean;
+    loginError: boolean;
+    registerReq: boolean;
+    registerError: boolean;
+    forgotReq: boolean;
+    forgotError: boolean;
+    emailSent: boolean;
+    passwordReseted: boolean;
+    resetPasswordReq: boolean;
+    resetPasswordError: boolean;
+    logoutReq: boolean;
+    logoutError: boolean;
+    isAuthenticated: boolean;
+    tokenReq: boolean;
+    tokenError: boolean;
+    userReq: boolean;
+    userError: boolean;
+    updateUserReq: boolean;
+    updateUserError: boolean;
+    name: string;
+    email: string;
+} 
+
+const initialStateProfile: TProfileState = {
     loginReq: false,
     loginError: false,
     registerReq: false,
@@ -48,8 +73,8 @@ const initialStateProfile = {
     name: '',
     email: ''
 };
-  
-export const profileReducer = (state = initialStateProfile, action) => {
+
+export const profileReducer = (state = initialStateProfile, action: TApplicationActions): TProfileState => {
     switch (action.type) {
 
         case GET_REGISTER_REQUEST: {
@@ -86,7 +111,7 @@ export const profileReducer = (state = initialStateProfile, action) => {
                 ...state, 
                 loginError: false,
                 name: action.name,
-                email: action.email, 
+                email: action.email,
                 loginReq: false 
             };
         }

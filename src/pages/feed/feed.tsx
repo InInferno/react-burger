@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './feed.module.css';
 import OrderList from '../../components/order-list/order-list';
 import OrderStat from '../../components/order-stat/order-stat';
+import { useDispatch } from 'react-redux';
+import { WS_CONNECTION_START } from '../../services/actions/action-types';
 
 const Feed: React.FC = () => {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({ type: WS_CONNECTION_START });
+  }, [dispatch]);
 
   return (
     <div className={`${styles.container} mt-10`}>
@@ -11,7 +19,7 @@ const Feed: React.FC = () => {
         <p className="text text_type_main-large mb-5">
           Лента заказов
         </p>
-        <OrderList />
+        <OrderList url='feed'/>
       </div>
       <OrderStat />
     </div>

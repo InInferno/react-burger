@@ -1,16 +1,24 @@
+import { ICard } from '../../utils/types';
 import {
     GET_INGREDIENTS_REQUEST, 
     GET_INGREDIENTS_SUCCESS, 
     GET_INGREDIENTS_ERROR
 } from '../actions/action-types';
+import { TApplicationActions } from '../../utils/types';
 
-const initialStateIngredients = {
+type TIngredientsState = {
+    listAllIngredientsReq: boolean;
+    listAllIngredientsError: boolean;
+    listAllIngredients: {success: boolean; data: Array<ICard>};
+} 
+
+const initialStateIngredients: TIngredientsState = {
     listAllIngredientsReq: false,
     listAllIngredientsError: false,
-    listAllIngredients: []
+    listAllIngredients: {success: false, data: []}
 };
-  
-export const ingredientsReducer = (state = initialStateIngredients, action) => {
+
+export const ingredientsReducer = (state = initialStateIngredients, action: TApplicationActions): TIngredientsState => {
     switch (action.type) {
         case GET_INGREDIENTS_REQUEST: {
             return {
