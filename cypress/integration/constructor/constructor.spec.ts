@@ -1,3 +1,5 @@
+import React from 'react';
+
 describe('app works correctly', function() {
     before(function() {
         cy.visit('http://localhost:3000');
