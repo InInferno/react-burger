@@ -494,7 +494,7 @@ export function userFetch() {
                 dispatch(tokenFetch())
             } else {
                 console.log(err, 'Ошибка')
-                return Promise.reject(err);
+                // return Promise.reject(err);
             }
         })
     }

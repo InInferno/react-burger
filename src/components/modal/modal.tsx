@@ -23,8 +23,8 @@ const Modal: React.FC<IModal> = ({children, closeModal}) => {
     <>
       <ModalOverlay closeModal={closeModal}/>
       <div className={styles.modal}>
-          <div className={styles.icon} onClick={closeModal}>
-              <CloseIcon type="primary"/>
+          <div id="modal" className={styles.icon} onClick={closeModal}>
+            <CloseIcon type="primary"/>
           </div>
           {children}
       </div>
