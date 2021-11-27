@@ -1,4 +1,3 @@
-import { any } from 'cypress/types/bluebird';
 import {
     WS_CONNECTION_SUCCESS,
     WS_CONNECTION_ERROR,
@@ -27,8 +26,8 @@ export interface IWsGetMessageAction {
 }
 
 export interface IWsSendMessageAction {
-    readonly type?: typeof WS_SEND_MESSAGE;
-    readonly payload?: any;
+    readonly type: typeof WS_SEND_MESSAGE;
+    readonly payload: any;
 }
 
 export type TWsActions = 
