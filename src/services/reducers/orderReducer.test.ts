@@ -2,7 +2,7 @@ import * as types from "../actions/action-types";
 import { orderReducer } from "./orderReducer";
 import { v4 as uuidv4 } from 'uuid';
 
-describe('ingredients reducer', () => {
+describe('order reducer', () => {
   const ingredient = {
     _id: "60d3b41abdacab0026a733cd",
     name: "Соус фирменный Space Sauce",

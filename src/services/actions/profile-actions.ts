@@ -67,7 +67,7 @@ export interface IRegisterErrorAction {
 
 export interface IForgotReqAction {
     readonly type: typeof GET_FORGOT_REQUEST;
-    readonly resetPasswordReq: boolean;
+    readonly forgotReq: boolean;
 }
 
 export interface IForgotAction {
@@ -123,7 +123,7 @@ export interface ITokenErrorAction {
 
 export interface IUserReqAction {
     readonly type: typeof GET_USER_REQUEST;
-    readonly tokenReq: boolean;
+    readonly userReq: boolean;
 }
 
 export interface IUserAction {
@@ -274,7 +274,7 @@ export function registerFetch(email: string, password: string, name: string) {
 
 export const getForgotPasswordReq = (boolean: boolean): IForgotReqAction => ({
     type: GET_FORGOT_REQUEST,
-    resetPasswordReq: boolean
+    forgotReq: boolean
 })
 export const getForgotPassword: AppThunk = (res: {success: boolean, message: string}) => (dispatch: AppDispatch) => {
     if (res && res.success) {
@@ -455,7 +455,7 @@ export function tokenFetch() {
 
 export const userReq = (boolean: boolean): IUserReqAction => ({
     type: GET_USER_REQUEST,
-    tokenReq: boolean
+    userReq: boolean
 })
 export const user: AppThunk = (res: {success: boolean, message: string, user: {name: string; email: string;}}) => (dispatch: AppDispatch) => {
     if (res && res.success) {

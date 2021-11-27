@@ -34,15 +34,6 @@ describe('ingredients reducer', () => {
     uuid: uuidv4()
   }
 
-  it('should return the initial state', () => {
-    expect(ingredientsReducer(undefined, {})).toEqual(
-      {
-        listAllIngredientsReq: false,
-        listAllIngredientsError: false,
-        listAllIngredients: {success: false, data: []}
-      }
-    )
-  })
   it('should handle GET_INGREDIENTS_REQUEST', () => {
     expect(
       ingredientsReducer({

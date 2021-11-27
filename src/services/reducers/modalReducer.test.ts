@@ -2,7 +2,7 @@ import * as types from "../actions/action-types";
 import { modalReducer } from "./modalReducer";
 import { v4 as uuidv4 } from 'uuid';
 
-describe('ingredients reducer', () => {
+describe('modal reducer', () => {
   const ingredient = {
     _id: "60d3b41abdacab0026a733cd",
     name: "Соус фирменный Space Sauce",
@@ -19,13 +19,6 @@ describe('ingredients reducer', () => {
     uuid: uuidv4()
   }
 
-  it('should return the initial state', () => {
-    expect(modalReducer(undefined, {})).toEqual(
-      {
-        viewedIngredient: null
-      }
-    )
-  })
   it('should handle ADD_CART_MODAL', () => {
     expect(
       modalReducer({

@@ -40,13 +40,6 @@ describe('constructor reducer', () => {
     ingredientsInConstructor: [ingOne, ingTwo]
   };
 
-  it('should return the initial state', () => {
-    expect(constructorReducer(undefined, {})).toEqual(
-      {
-        ingredientsInConstructor: []
-      }
-    )
-  })
   it('should handle ADD_INGREDIENT', () => {
     expect(
       constructorReducer(initialStateConstructor, {
