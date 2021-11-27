@@ -31,7 +31,6 @@ export const orderReducer = (state = initialStateOrder, action: TApplicationActi
             };
         }
         case GET_ORDER_SUCCESS: {
-            console.log('action.createdOrder', action.createdOrder);
             return { 
                 ...state, 
                 orderError: false,
