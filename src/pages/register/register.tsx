@@ -3,8 +3,7 @@ import styles from './register.module.css';
 import { Link, Redirect } from 'react-router-dom';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { registerFetch } from '../../services/actions/profile-actions';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../utils/types';
+import { useDispatch, useSelector } from '../../services/hooks';
 
 const Register: React.FC = () => {
 
@@ -30,7 +29,7 @@ const Register: React.FC = () => {
         dispatch(registerFetch(email, password, name));
     }
     
-    const userName = useSelector<RootState, string>(store => store.profileReducer.name)
+    const userName = useSelector(store => store.profileReducer.name)
     if (userName) {
         return (
           <Redirect

@@ -1,15 +1,15 @@
 import React from 'react';
 import styles from './order.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { RootState, ICard, IOrder } from '../../utils/types';
+import { ICard, IOrder } from '../../utils/types';
 import { Link, useLocation } from 'react-router-dom';
-import {  useSelector } from 'react-redux';
+import {  useSelector } from '../../services/hooks';
 
 const Order: React.FC<IOrder> = ({url, orderInfo}) => {
 
   let location = useLocation();
 
-  const ingredients = useSelector<RootState, Array<ICard>>(store => store.ingredientsReducer.listAllIngredients.data)
+  const ingredients = useSelector(store => store.ingredientsReducer.listAllIngredients.data)
 
   const orderIngs = 
   orderInfo.ingredients && orderInfo.ingredients.reduce(

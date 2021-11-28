@@ -4,19 +4,17 @@ import BurgerIngredients from '../../components/burger-ingredients/burger-ingred
 import BurgerConstructor from '../../components/burger-constructor/burger-constructor';
 import Modal from '../../components/modal/modal';
 import OrderInfo from '../../components/order-info/order-info';
-import { useSelector } from 'react-redux';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { deleteCartModal } from '../../services/actions/modal-actions';
 import { deleteOrderModal } from '../../services/actions/order-actions';
-import { useDispatch } from 'react-redux';
-import { RootState, IOrderInfo } from '../../utils/types';
+import { useDispatch, useSelector } from '../../services/hooks';
 
 const BurgerContainer: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const isModalOrder = useSelector<RootState, IOrderInfo | null>(store => store.orderReducer.createdOrder)
+  const isModalOrder = useSelector(store => store.orderReducer.createdOrder)
   
   const closeModal = () => {
     dispatch(deleteCartModal());

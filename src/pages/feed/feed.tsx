@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styles from './feed.module.css';
 import OrderList from '../../components/order-list/order-list';
 import OrderStat from '../../components/order-stat/order-stat';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../services/hooks';
 import { WS_CONNECTION_CLOSED, WS_CONNECTION_START } from '../../services/actions/action-types';
 
 const Feed: React.FC = () => {

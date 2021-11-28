@@ -2,14 +2,13 @@ import React, { useEffect, useRef, useState, FormEvent } from 'react';
 import styles from './profile.module.css';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { updateUserInfoFetch } from '../../services/actions/profile-actions';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../services/hooks';
 import NavProfile from '../../components/nav-profile/nav-profile';
-import { RootState } from '../../utils/types';
 
 const Profile: React.FC = () => {
     const dispatch = useDispatch();
-    const profileName = useSelector<RootState, string>(store => store.profileReducer.name)
-    const profileEmail = useSelector<RootState, string>(store => store.profileReducer.email)
+    const profileName = useSelector(store => store.profileReducer.name)
+    const profileEmail = useSelector(store => store.profileReducer.email)
     const [name, setName] = useState<string>('')
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')

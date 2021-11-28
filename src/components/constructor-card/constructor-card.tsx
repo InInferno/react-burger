@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import styles from './constructor-card.module.css';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../services/hooks';
 import {  
     UPDATE_INGREDIENTS 
 } from '../../services/actions/action-types';

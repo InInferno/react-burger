@@ -1,15 +1,15 @@
 import React from 'react';
 import styles from './order-stat.module.css';
-import { useSelector } from 'react-redux';
-import { IOrdersInfo, RootState } from '../../utils/types';
+import { useSelector } from '../../services/hooks';
+import { IOrderCard } from '../../utils/types';
 
 const OrderStat: React.FC = () => {
 
-  const ordersInfo = useSelector<RootState, IOrdersInfo>(store => store.wsReducer.ordersInfo)
-  const ready = ordersInfo.orders && [...ordersInfo.orders.filter(item => 
+  const ordersInfo = useSelector(store => store.wsReducer.ordersInfo)
+  const ready = ordersInfo.orders && [...ordersInfo.orders.filter((item: IOrderCard) => 
     item.status === 'done' && item.status
   )].map(item => item.number)
-  const inWork = ordersInfo.orders && [...ordersInfo.orders.filter(item => 
+  const inWork = ordersInfo.orders && [...ordersInfo.orders.filter((item: IOrderCard) => 
     item.status !== 'done' && item.status
   )].map(item => item.number)
 
@@ -27,7 +27,7 @@ const OrderStat: React.FC = () => {
         <div className={`${styles.work} ml-2`}>
           <p className='text text_type_main-medium'>В работе:</p>
           {inWork && <ul className={styles.list}>
-            {inWork.map((item, index) => {
+            {inWork.map((item: IOrderCard, index: number) => {
               return <li key={index} className="text text_type_digits-default">{item}</li>
             })}  
           </ul>}

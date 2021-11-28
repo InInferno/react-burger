@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './ingredient-card.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import { ICard, IIngredientCard, RootState } from '../../utils/types';
-import { useDispatch, useSelector } from 'react-redux';
+import { ICard, IIngredientCard } from '../../utils/types';
+import { useDispatch, useSelector } from '../../services/hooks';
 import { addCartModal } from '../../services/actions/modal-actions';
 import { useDrag } from "react-dnd";
 
@@ -16,7 +16,7 @@ const IngredientCard: React.FC<IIngredientCard> = ({ card }) =>  {
   });
 
   const dispatch = useDispatch();
-  const orderIds = useSelector<RootState, Array<string>>(store => store.orderReducer.orderIds);
+  const orderIds = useSelector(store => store.orderReducer.orderIds);
 
   const openModal = (card: ICard) => {
     dispatch(addCartModal(card))

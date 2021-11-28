@@ -1,10 +1,10 @@
 import { Route, Redirect } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { RootState, IRest } from '../../utils/types';
+import { useSelector } from '../../services/hooks';
+import { IRest } from '../../utils/types';
 
 const ProtectedRoute: React.FC<IRest> = ({ children, ...rest }) => {
 
-  const userName = useSelector<RootState, string>(store => store.profileReducer.name)
+  const userName = useSelector(store => store.profileReducer.name)
 
   return (
     <Route

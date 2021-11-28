@@ -2,9 +2,8 @@ import React, { FormEvent, useRef, useState } from 'react';
 import styles from './reset-password.module.css';
 import { Link, Redirect } from 'react-router-dom';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../services/hooks';
 import { resetPasswordFetch } from '../../services/actions/profile-actions';
-import { RootState } from '../../utils/types';
 
 const ResetPassword: React.FC = () => {
 
@@ -29,9 +28,9 @@ const ResetPassword: React.FC = () => {
       dispatch(resetPasswordFetch(password, token));
   } 
 
-  const name = useSelector<RootState, string>(store => store.profileReducer.name);
-  const passwordReseted = useSelector<RootState, boolean>(store => store.profileReducer.passwordReseted);
-  const emailSent = useSelector<RootState, boolean>(store => store.profileReducer.emailSent);
+  const name = useSelector(store => store.profileReducer.name);
+  const passwordReseted = useSelector(store => store.profileReducer.passwordReseted);
+  const emailSent = useSelector(store => store.profileReducer.emailSent);
   if (name) {
       return (
         <Redirect
