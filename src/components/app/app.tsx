@@ -63,12 +63,12 @@ const App: React.FC = () => {
         <ProtectedRoute path="/profile" exact>
           <Profile />
         </ProtectedRoute>
-        <ProtectedRoute path="/profile/orders">
+        <ProtectedRoute path="/profile/orders" exact>
           <Orders />
         </ProtectedRoute>
-        <ProtectedRoute path="/profile/orders/:id">
+        <Route path="/profile/orders/:id">
           <OrderDetails />
-        </ProtectedRoute>
+        </Route>
         <Route path="/feed" exact>
           <Feed /> 
         </Route>
