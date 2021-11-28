@@ -4,7 +4,7 @@ import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components
 import { ICard, IOrderCard, IOrdersInfo, IUniqueIngredientsObj, RootState } from '../../utils/types';
 import { useLocation, useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import { WS_CONNECTION_START, WS_CONNECTION_START_USER } from '../../services/actions/action-types';
+import { WS_CONNECTION_CLOSED, WS_CONNECTION_START, WS_CONNECTION_START_USER } from '../../services/actions/action-types';
 import { ILocation } from '../../utils/types';
 
 const OrderDetails: React.FC = () => {
@@ -25,7 +25,9 @@ const OrderDetails: React.FC = () => {
     } else if (location.state.orderDetailsModal.pathname === '/profile/orders') {
       dispatch({ type: WS_CONNECTION_START_USER });
     }
-    
+    return () => {
+      dispatch({ type: WS_CONNECTION_CLOSED });
+    }
   }, [dispatch, location]);
 
   useEffect(
