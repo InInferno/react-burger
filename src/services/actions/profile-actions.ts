@@ -193,36 +193,35 @@ export const login: AppThunk = (res: {success: string; user: {email: string; nam
 export const loginError = (): ILoginErrorAction => ({
     type: GET_LOGIN_ERROR
 })
-export function loginFetch(email: string, password: string) { 
-    return (dispatch: AppDispatch) => {
-        dispatch(loginReq(true));
-        fetch(`${url}/auth/login`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: JSON.stringify({"email": email, "password": password})
+
+export const loginFetch: AppThunk = (email: string, password: string) => (dispatch: AppDispatch) => {
+    dispatch(loginReq(true));
+    fetch(`${url}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify({"email": email, "password": password})
+    })
+        .then((res) => {
+            if (res.status !== 200) {
+                throw new Error(`${res.status}`)
+            }
+            return res.json()
         })
-            .then((res) => {
-                if (res.status !== 200) {
-                    throw new Error(`${res.status}`)
-                }
-                return res.json()
-            })
-            .then(res => {
-                console.log(res)
-                dispatch(login(res))
-                setCookie('accessToken', res.accessToken);
-                setCookie('refreshToken', res.refreshToken);
-                dispatch(loginReq(false));
-            })
-            .catch((err) => {
-                dispatch(loginReq(false));
-                console.log('err', err)
-                dispatch(loginError())
-            });
-    }
-}
+        .then(res => {
+            console.log(res)
+            dispatch(login(res))
+            setCookie('accessToken', res.accessToken);
+            setCookie('refreshToken', res.refreshToken);
+            dispatch(loginReq(false));
+        })
+        .catch((err) => {
+            dispatch(loginReq(false));
+            console.log('err', err)
+            dispatch(loginError())
+        });
+};
 
 export const registerReq = (boolean: boolean): IRegisterReqAction => ({
     type: GET_REGISTER_REQUEST,
@@ -240,8 +239,8 @@ export const register: AppThunk = (res: {success: string; user: {email: string; 
 export const registerError = (): IRegisterErrorAction => ({
     type: GET_REGISTER_ERROR
 })
-export function registerFetch(email: string, password: string, name: string) { 
-    return (dispatch: AppDispatch) => {
+export const registerFetch: AppThunk = (email: string, password: string, name: string) =>  
+    (dispatch: AppDispatch) => {
         dispatch(registerReq(true));
         fetch(`${url}/auth/register`, {
             method: 'POST',
@@ -270,7 +269,6 @@ export function registerFetch(email: string, password: string, name: string) {
                 dispatch(registerError())
             });
     }
-}
 
 export const getForgotPasswordReq = (boolean: boolean): IForgotReqAction => ({
     type: GET_FORGOT_REQUEST,
@@ -287,8 +285,8 @@ export const getForgotPassword: AppThunk = (res: {success: boolean, message: str
 export const getForgotError = (): IForgotErrorAction => ({
     type: GET_FORGOT_ERROR
 })
-export function resetForgotFetch(email: string) { 
-    return (dispatch: AppDispatch) => {
+export const resetForgotFetch: AppThunk = (email: string) => 
+    (dispatch: AppDispatch) => {
         dispatch(getForgotPasswordReq(true));
         fetch(`${url}/password-reset`, {
             method: 'POST',
@@ -314,7 +312,6 @@ export function resetForgotFetch(email: string) {
                 dispatch(getForgotError())
             });
     }
-}
 
 export const getResetPasswordReq = (boolean: boolean): IResetReqAction => ({
     type: GET_RESET_PASSWORD_REQUEST,
@@ -331,8 +328,8 @@ export const getResetPassword: AppThunk = (res: {success: boolean, message: stri
 export const getResetPasswordError = (): IResetErrorAction => ({
     type: GET_RESET_PASSWORD_ERROR
 })
-export function resetPasswordFetch(password: string, token: string) { 
-    return (dispatch: AppDispatch) => {
+export const resetPasswordFetch: AppThunk = (password: string, token: string) =>  
+    (dispatch: AppDispatch) => {
         dispatch(getResetPasswordReq(true));
         fetch(`${url}/password-reset/reset`, {
             method: 'POST',
@@ -358,7 +355,6 @@ export function resetPasswordFetch(password: string, token: string) {
                 dispatch(getResetPasswordError())
             });
     }
-}
 
 export const logoutReq = (boolean: boolean): ILogoutReqAction => ({
     type: GET_LOGOUT_REQUEST,
@@ -376,8 +372,8 @@ export const logout: AppThunk = (res: {success: boolean, message: string}) => (d
 export const logoutError = (): ILogoutErrorAction => ({
     type: GET_LOGOUT_ERROR
 })
-export function logoutFetch() { 
-    return (dispatch: AppDispatch) => {
+export const logoutFetch: AppThunk = () =>  
+    (dispatch: AppDispatch) => {
         dispatch(logoutReq(true));
         fetch(`${url}/auth/logout`, {
             method: 'POST',
@@ -405,7 +401,6 @@ export function logoutFetch() {
                 dispatch(logoutError())
             });
     }
-}
 
 export const tokenReq = (boolean: boolean): ITokenReqAction => ({
     type: GET_TOKEN_REQUEST,
@@ -421,8 +416,8 @@ export const token: AppThunk = (res: {success: boolean, message: string}) => (di
 export const tokenError = (): ITokenErrorAction => ({
     type: GET_TOKEN_ERROR
 })
-export function tokenFetch() { 
-    return (dispatch: AppDispatch) => {
+export const tokenFetch: AppThunk = () =>  
+    (dispatch: AppDispatch) => {
         dispatch(tokenReq(true));
         fetch(`${url}/auth/token`, {
             method: 'POST',
@@ -451,7 +446,6 @@ export function tokenFetch() {
                 dispatch(tokenError())
             });
     }
-}
 
 export const userReq = (boolean: boolean): IUserReqAction => ({
     type: GET_USER_REQUEST,
@@ -471,8 +465,8 @@ export const userError = (): IUserErrorAction => ({
     type: GET_USER_ERROR,
     isAuthenticated: false
 })
-export function userFetch() { 
-    return (dispatch: AppDispatch) => {
+export const userFetch: AppThunk = () => 
+    (dispatch: AppDispatch) => {
         dispatch(userReq(true));
         fetch(`${url}/auth/user`, {
             method: 'GET',
@@ -498,7 +492,6 @@ export function userFetch() {
             }
         })
     }
-}
 
 export const updateUserReq = (boolean: boolean): IUpdUserReqAction => ({
     type: GET_UPD_USER_REQUEST,
@@ -514,9 +507,8 @@ export const updateUserInfo: AppThunk = (res: {success: boolean, message: string
 export const updateUserInfoError = (): IUpdUserErrorAction => ({
     type: GET_UPD_USER_ERROR
 })
-export function updateUserInfoFetch(email: string, name: string, password: string) {
-    
-    return (dispatch: AppDispatch) => {
+export const updateUserInfoFetch: AppThunk = (email: string, name: string, password: string) =>
+    (dispatch: AppDispatch) => {
         let body: {email?: string; name?: string; password?: string} = {};
         if(email) {
             body.email = email;
@@ -551,4 +543,3 @@ export function updateUserInfoFetch(email: string, name: string, password: strin
                 dispatch(updateUserInfoError())
             });
     }
-}
