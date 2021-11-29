@@ -5,7 +5,7 @@ import {
   useLocation,
   useHistory
 } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../services/hooks';
 import { userFetch } from '../../services/actions/profile-actions';
 import { ingredientsFetchData } from '../../services/actions/ingredients-actions';
 import AppHeader from '../app-header/app-header';
@@ -63,12 +63,12 @@ const App: React.FC = () => {
         <ProtectedRoute path="/profile" exact>
           <Profile />
         </ProtectedRoute>
-        <ProtectedRoute path="/profile/orders">
+        <ProtectedRoute path="/profile/orders" exact>
           <Orders />
         </ProtectedRoute>
-        <ProtectedRoute path="/profile/orders/:id">
+        <Route path="/profile/orders/:id">
           <OrderDetails />
-        </ProtectedRoute>
+        </Route>
         <Route path="/feed" exact>
           <Feed /> 
         </Route>

@@ -45,24 +45,22 @@ export function getIngredientsError() {
     }
 }
 
-export function ingredientsFetchData() { 
-    return (dispatch: AppDispatch) => {
-        dispatch(getIngredientsReq(true));
-        fetch(`${url}/ingredients`)
-            .then((res: any) => {
-                if (res.status !== 200) {
-                    throw new Error(res.status)
-                }
-                return res.json()
-            })
-            .then(ings=> {
-                dispatch(getIngredientsReq(false));
-                dispatch(getIngredientsSuccess(ings))
-            })
-            .catch((err) => {
-                console.log(err)
-                dispatch(getIngredientsReq(false));
-                dispatch(getIngredientsError())
-            });
-    }
-}
+export const ingredientsFetchData: AppThunk = () => (dispatch: AppDispatch) => {
+    dispatch(getIngredientsReq(true));
+    fetch(`${url}/ingredients`)
+        .then((res: any) => {
+            if (res.status !== 200) {
+                throw new Error(res.status)
+            }
+            return res.json()
+        })
+        .then(ings=> {
+            dispatch(getIngredientsReq(false));
+            dispatch(getIngredientsSuccess(ings))
+        })
+        .catch((err) => {
+            console.log(err)
+            dispatch(getIngredientsReq(false));
+            dispatch(getIngredientsError())
+        });
+};

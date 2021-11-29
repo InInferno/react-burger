@@ -3,8 +3,7 @@ import styles from './forgot-password.module.css';
 import { Link, Redirect } from 'react-router-dom';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { resetForgotFetch } from '../../services/actions/profile-actions';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../utils/types';
+import { useDispatch, useSelector } from '../../services/hooks';
 
 const ForgorPassword: React.FC = () => {
 
@@ -26,8 +25,8 @@ const ForgorPassword: React.FC = () => {
     dispatch(resetForgotFetch(email))
   }
 
-  const emailSent = useSelector<RootState, boolean>(store => store.profileReducer.emailSent);
-  const name = useSelector<RootState, string>(store => store.profileReducer.name);
+  const emailSent = useSelector(store => store.profileReducer.emailSent);
+  const name = useSelector(store => store.profileReducer.name);
 
   if (emailSent) {
       return (

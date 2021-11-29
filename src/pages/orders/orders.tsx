@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import styles from './orders.module.css';
 import OrderList from '../../components/order-list/order-list';
 import NavProfile from '../../components/nav-profile/nav-profile';
-import { useDispatch } from 'react-redux';
-import { WS_CONNECTION_START_USER } from '../../services/actions/action-types';
+import { useDispatch } from '../../services/hooks';
+import { WS_CONNECTION_CLOSED, WS_CONNECTION_START_USER } from '../../services/actions/action-types';
 
 const Orders: React.FC = () => {
 
@@ -11,6 +11,9 @@ const Orders: React.FC = () => {
 
   useEffect(() => {
     dispatch({ type: WS_CONNECTION_START_USER });
+    return () => {
+      dispatch({ type: WS_CONNECTION_CLOSED });
+    }
   },[dispatch]);
 
   return (

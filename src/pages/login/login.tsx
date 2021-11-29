@@ -3,8 +3,8 @@ import styles from './login.module.css';
 import { Link, Redirect, useLocation } from 'react-router-dom';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { loginFetch } from '../../services/actions/profile-actions';
-import { useDispatch, useSelector } from 'react-redux';
-import { ILocation, RootState } from '../../utils/types';
+import { useDispatch, useSelector } from '../../services/hooks';
+import { ILocation } from '../../utils/types';
 
 const Login: React.FC = () => {
     
@@ -29,7 +29,7 @@ const Login: React.FC = () => {
         dispatch(loginFetch(email, password));
     }
 
-    const userName = useSelector<RootState, string>(store => store.profileReducer.name)
+    const userName = useSelector(store => store.profileReducer.name)
     if (userName) {
         return (
             <Redirect

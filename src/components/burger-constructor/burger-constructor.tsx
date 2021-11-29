@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import styles from './burger-constructor.module.css';
 import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../services/hooks';
 import { useHistory } from 'react-router-dom';
 import { orderFetchData, addOrderIds } from '../../services/actions/order-actions';
 import { addBun } from '../../services/actions/bun-actions';
@@ -9,7 +9,7 @@ import { addIngredient, updateIngredients } from '../../services/actions/constru
 import { useDrop } from "react-dnd";
 import update from 'immutability-helper';
 import ConstructorCard from '../constructor-card/constructor-card';
-import { ICard, RootState } from '../../utils/types';
+import { ICard } from '../../utils/types';
 
 const BurgerConstructor: React.FC = () => {
 
@@ -31,10 +31,10 @@ const BurgerConstructor: React.FC = () => {
     },
   });
 
-  const dataIngs = useSelector<RootState, Array<ICard>>(store => store.constructorReducer.ingredientsInConstructor);
-  const bunBurger = useSelector<RootState, ICard | null>(store => store.bunReducer.bunInConstructor);
-  const orderIds = useSelector<RootState, Array<string>>(store => store.orderReducer.orderIds);
-  const orderReq = useSelector<RootState, boolean>(store => store.orderReducer.orderReq);
+  const dataIngs = useSelector(store => store.constructorReducer.ingredientsInConstructor);
+  const bunBurger = useSelector(store => store.bunReducer.bunInConstructor);
+  const orderIds = useSelector(store => store.orderReducer.orderIds);
+  const orderReq = useSelector(store => store.orderReducer.orderReq);
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const BurgerConstructor: React.FC = () => {
     )
   }, [dataIngs, bunBurger, dispatch])
 
-  const name = useSelector<RootState, string>(store => store.profileReducer.name);
+  const name = useSelector(store => store.profileReducer.name);
 
   const isOpenModal = () => {
     name 

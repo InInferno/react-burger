@@ -1,16 +1,16 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import styles from './ingredient-details.module.css';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/hooks';
 import {
     useParams
   } from "react-router-dom";
-import { RootState, ICard, IIngredientDetails } from '../../utils/types';
+import { ICard } from '../../utils/types';
 
 const IngredientDetails: React.FC = () => {
     
     const [data, setData] = useState<ICard>();
     const { id }: {id: string} = useParams();
-    const cards = useSelector<RootState, IIngredientDetails>(store => store.ingredientsReducer.listAllIngredients)
+    const cards = useSelector(store => store.ingredientsReducer.listAllIngredients)
     const loadIndredient = useCallback(
         () => {
             if(cards.success) {

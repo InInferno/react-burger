@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import styles from './burger-ingredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientCard from '../ingredient-card/ingredient-card'
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/hooks';
 import { Link, useLocation } from 'react-router-dom';
-import { ICard, RootState } from '../../utils/types';
+import { ICard } from '../../utils/types';
 
 const BurgerIngredients: React.FC = () => {
 
   let location = useLocation();
 
-  const data = useSelector<RootState, Array<ICard>>(store => store.ingredientsReducer.listAllIngredients.data);
+  const data = useSelector(store => store.ingredientsReducer.listAllIngredients.data);
   
   const [current, setCurrent] = useState('bun');
   const typesIng = [

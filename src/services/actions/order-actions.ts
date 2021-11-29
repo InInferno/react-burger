@@ -9,7 +9,7 @@ import { url } from '../../utils/constants';
 import { getCookie } from '../../utils/cookie';
 import { addBun } from './bun-actions';
 import { updateIngredients } from './constructor-actions';
-import { AppDispatch, IOrderInfo } from '../../utils/types';
+import { AppDispatch, AppThunk, IOrderInfo } from '../../utils/types';
 
 export interface IGetOrderRequestAction {
     readonly type: typeof GET_ORDER_REQUEST;
@@ -54,34 +54,32 @@ export const getOrderError = (): IGetOrderErrorAction => ({
     type: GET_ORDER_ERROR
 })
 
-export function orderFetchData(orderIds: Array<string>) { 
-    return (dispatch: AppDispatch) => {
-        dispatch(getOrderRequest());
-        fetch(`${url}/orders`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json;charset=utf-8',
-              "authorization": getCookie('accessToken') || 'null'
-            },
-            body: JSON.stringify({"ingredients": orderIds})
+export const orderFetchData: AppThunk = (orderIds: Array<string>) => (dispatch: AppDispatch) => {
+    dispatch(getOrderRequest());
+    fetch(`${url}/orders`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          "authorization": getCookie('accessToken') || 'null'
+        },
+        body: JSON.stringify({"ingredients": orderIds})
+    })
+        .then((res: any) => {
+            if (res.status !== 200) {
+                throw new Error(res.status)
+            }
+            return res.json()
         })
-            .then((res: any) => {
-                if (res.status !== 200) {
-                    throw new Error(res.status)
-                }
-                return res.json()
-            })
-            .then(ings => {
-                dispatch(getOrderSuccess(ings))
-                dispatch((updateIngredients([])));
-                dispatch(addBun(null));
-            })
-            .catch((err) => {
-                console.log(err)
-                dispatch(getOrderError())
-            });
-    }
-}
+        .then(ings => {
+            dispatch(getOrderSuccess(ings))
+            dispatch((updateIngredients([])));
+            dispatch(addBun(null));
+        })
+        .catch((err) => {
+            console.log(err)
+            dispatch(getOrderError())
+        });
+};
 
 export const deleteOrderModal = (): IDeleteOrderErrorAction => ({
     type: DELETE_ORDER_MODAL,
