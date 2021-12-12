@@ -1,6 +1,6 @@
 # React Burger (react-burger)
 
-Ссылка: [Pokemons](https://ininferno.github.io/react-burger/ "Магазин космических бургеров")
+Ссылка: [React Burger](https://ininferno.github.io/react-burger/ "Магазин космических бургеров")
 Версия: v. 0.0.1
 
 ### Технологии: 
